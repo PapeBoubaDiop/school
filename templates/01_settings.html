@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENSAE - Gestion des comptes</title>
+  <link rel="shortcut icon" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="main-wrapper">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <a href="{%static 'index'%}" class="logo"><img src="assets/img/logo.png" alt="Logo"></a>
+        <a href="{%static 'index'%}" class="logo logo-small"><img src="assets/img/logo-small.png" width="30" height="30" alt="Logo"></a>
+      </div>
+      <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
+      <div class="top-nav-search">
+        <form><input type="text" class="form-control" placeholder="Recherche..."><button class="btn" type="submit"><i class="fas fa-search"></i></button></form>
+      </div>
+      <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
+      <ul class="nav user-menu">
+        <li class="nav-item dropdown has-arrow">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Admin"></a>
+          <div class="dropdown-menu">
+            <div class="user-header">
+              <div class="avatar avatar-sm"><img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle"></div>
+              <div class="user-text"><h6>Responsable Filière</h6><p class="text-muted mb-0">Administrateur</p></div>
+            </div>
+            <a class="dropdown-item" href="profile.html">Mon profil</a>
+            <a class="dropdown-item" href="login.html">Déconnexion</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+          <ul>
+            <li class="menu-title"><span>Menu</span></li>
+            <li>
+              <a href="{%static 'index'%}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+            </li>
+            <li class="submenu">
+              <a href="#"><i class="fas fa-book-open"></i> <span>Matières</span> <span class="menu-arrow"></span></a>
+              <ul>
+                <li class="submenu">
+                  <a href="#"><span>Semestres</span> <span class="menu-arrow"></span></a>
+                  <ul>
+                    <li><a href="01_add-semestre.html">Ajouter un semestre</a></li>
+                    <li><a href="01_semestres.html">Liste des semestres</a></li>
+                    <!-- <li><a href="modifier-semestre.html">Modifier un semestre</a></li> -->
+                  </ul>
+                </li>
+                <li class="submenu">
+                  <a href="#"><span>Modules</span> <span class="menu-arrow"></span></a>
+                  <ul>
+                    <li><a href="01_add-module.html">Ajouter un module</a></li>
+                    <li><a href="01_modules.html">Liste des modules</a></li>
+                    <!-- <li><a href="modifier-module.html">Modifier un module</a></li> -->
+                  </ul>
+                </li>
+                <li class="submenu">
+                  <a href="#"><span>Matières</span> <span class="menu-arrow"></span></a>
+                  <ul>
+                    <li><a href="01_add-subject.html">Ajouter une matière</a></li>
+                    <li><a href="01_subjects.html">Liste des matières</a></li>
+                    <!-- <li><a href="01_edit-subject.html">Modifier une matière</a></li> -->
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span> <span class="menu-arrow"></span></a>
+              <ul>
+                  <li><a href="01_add-teacher.html">Ajouter un Professeur</a></li>
+                <li><a href="01_teachers.html">Liste des Professeurs</a></li>
+                <!-- <li><a href="01_edit-teacher.html">Modifier un Professeur</a></li> -->
+                <!-- <li><a href="01_teacher-details.html">Voir un Professeur</a></li> -->
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><i class="fas fa-user-graduate"></i> <span>Étudiants</span> <span class="menu-arrow"></span></a>
+              <ul>
+                <li><a href="01_add-student.html">Ajouter un Étudiant</a></li>
+                <li><a href="01_students.html">Liste des Étudiants</a></li>
+                <!-- <li><a href="modifier-etudiant.html">Modifier un Étudiant</a></li> -->
+                <!-- <li><a href="voir-etudiant.html">Voir un Étudiant</a></li> -->
+              </ul>
+            </li>
+            <li>
+            <a href="01_event.html"><i class="fas fa-calendar-day"></i> <span>Événements</span></a>
+            </li>
+            <li>
+              <a href="01_exam.html"><i class="fas fa-clipboard-list"></i> <span>Examens</span></a>
+            </li>
+                <li class="menu-title">
+                    <span>Gestion des comptes</span>
+                </li>
+            <li class="active">
+                <a href="01_settings.html"><i class="fas fa-shield-alt"></i> <span> Authentification </span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="page-wrapper">
+      <div class="content container-fluid">
+        <div class="page-header">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="page-title">Gestion des comptes</h3>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{%static 'index'%}">Dashboard</a></li>
+                <li class="breadcrumb-item active">Comptes utilisateurs</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card card-table">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover datatable">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nom d'utilisateur</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>État</th>
+                        <th class="text-right">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>U001</td>
+                        <td>admin</td>
+                        <td>admin@ensae.sn</td>
+                        <td>Administrateur</td>
+                        <td><span class="badge badge-success">Activé</span></td>
+                        <td class="text-right">
+                          <button class="btn btn-sm btn-warning">Désactiver</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>U002</td>
+                        <td>enseignant1</td>
+                        <td>enseignant1@ensae.sn</td>
+                        <td>Professeur</td>
+                        <td><span class="badge badge-danger">Désactivé</span></td>
+                        <td class="text-right">
+                          <button class="btn btn-sm btn-success">Activer</button>
+                        </td>
+                      </tr>
+                      <!-- autres comptes -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- Footer -->
+      <footer class="text-center mt-4 mb-3">
+        <p>&copy; 2025 ENSAE - Plateforme de gestion académique</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery-3.6.0.min.js"></script>
+  <script src="assets/js/popper.min.js"></script>
+  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/plugins/datatables/datatables.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

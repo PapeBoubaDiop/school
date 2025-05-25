@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENSAE - Événements</title>
+
+  <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+  <!-- ✅ FullCalendar v6 CSS via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="main-wrapper">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <a href="{% url 'index' %}" class="logo"><img src="{% static 'assets/img/logo.png' %}" alt="Logo"></a>
+        <a href="{% url 'index' %}" class="logo logo-small"><img src="{% static 'assets/img/logo-small.png' %}" width="30" height="30" alt="Logo"></a>
+      </div>
+      <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
+      <div class="top-nav-search">
+        <form>
+          <input type="text" class="form-control" placeholder="Recherche...">
+          <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
+      <ul class="nav user-menu">
+        <li class="nav-item dropdown has-arrow">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+            <img class="rounded-circle" src="{% static 'assets/img/profiles/avatar-01.jpg' %}" width="31" alt="Admin">
+          </a>
+          <div class="dropdown-menu">
+            <div class="user-header">
+              <div class="avatar avatar-sm">
+                <img src="{% static 'assets/img/profiles/avatar-01.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
+              </div>
+              <div class="user-text">
+                <h6>Responsable Filière</h6>
+                <p class="text-muted mb-0">Administrateur</p>
+              </div>
+            </div>
+            <a class="dropdown-item" href="profile.html">Mon profil</a>
+            <a class="dropdown-item" href="login.html">Déconnexion</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+          <ul>
+            <li class="menu-title"><span>Menu</span></li>
+            <li><a href="{% url 'index' %}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
+            <li class="submenu active">
+              <a href="#"><i class="fas fa-calendar-day"></i> <span>Événements</span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="page-wrapper">
+      <div class="content container-fluid">
+        <div class="page-header">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="page-title">Événements</h3>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'index' %}">Dashboard</a></li>
+                <li class="breadcrumb-item active">Événements</li>
+              </ul>
+            </div>
+            <div class="col-auto text-end">
+              <a href="{% url 'ajouter_examen' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Ajouter</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calendrier -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <div id="calendar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="text-center mt-4 mb-3">
+        <p>&copy; 2025 ENSAE - Plateforme de gestion académique</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Scripts JS -->
+  <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'assets/js/popper.min.js' %}"></script>
+  <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+  <script src="{% static 'assets/js/script.js' %}"></script>
+
+  <!-- ✅ FullCalendar JS via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const calendarEl = document.getElementById('calendar');
+
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'fr',
+        events: "{% url 'events_json' %}",
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        eventDidMount: function (info) {
+          if (info.event.extendedProps.description) {
+            const titleEl = info.el.querySelector('.fc-event-title');
+            if (titleEl) {
+              titleEl.innerHTML += "<br><small>" + info.event.extendedProps.description + "</small>";
+            }
+          }
+        }
+      });
+
+      calendar.render();
+    });
+  </script>
+</body>
+</html>

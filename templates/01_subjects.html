@@ -1,0 +1,207 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENSAE - Liste des matières</title>
+  <link rel="shortcut icon" href="{%static 'assets/img/favicon.png'%}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <link rel="stylesheet" href="{%static 'assets/plugins/bootstrap/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="{%static 'assets/plugins/fontawesome/css/fontawesome.min.css'%}">
+  <link rel="stylesheet" href="{%static 'assets/plugins/fontawesome/css/all.min.css'%}">
+  <link rel="stylesheet" href="{%static 'assets/plugins/datatables/datatables.min.css'%}">
+  <link rel="stylesheet" href="{%static 'assets/css/style.css'%}">
+</head>
+<body>
+  <div class="main-wrapper">
+
+    <!-- Header (à personnaliser selon votre projet) -->
+    <div class="header">
+      <div class="header-left">
+        <a href="{%url 'index'%}" class="logo"><img src="{% static 'assets/img/logo.png'%}" alt="Logo"></a>
+        <a href="{%url 'index'%}" class="logo logo-small"><img src="{% static 'assets/img/logo-small.png'%}" width="30" height="30" alt="Logo"></a>
+      </div>
+      <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
+      <div class="top-nav-search">
+        <form><input type="text" class="form-control" placeholder="Recherche..."><button class="btn" type="submit"><i class="fas fa-search"></i></button></form>
+      </div>
+      <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
+      <ul class="nav user-menu">
+        <li class="nav-item dropdown has-arrow">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+            <img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Admin">
+          </a>
+          <div class="dropdown-menu">
+            <div class="user-header">
+              <div class="avatar avatar-sm"><img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle"></div>
+              <div class="user-text">
+                <h6>Responsable Filière</h6>
+                <p class="text-muted mb-0">Administrateur</p>
+              </div>
+            </div>
+            <a class="dropdown-item" href="profile.html">Mon profil</a>
+            <a class="dropdown-item" href="login.html">Déconnexion</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+ <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+          <ul>
+            <li class="menu-title"><span>Menu</span></li>
+            <li>
+              <a href="{%url 'index'%}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+            </li>
+            <li class="active">
+              <a href="#"><i class="fas fa-book-open"></i> <span>Matières</span> <span class="menu-arrow"></span></a>
+              <ul>
+                <li class="submenu">
+                  <a href="#"><span>Semestres</span> <span class="menu-arrow"></span></a>
+                  <ul>
+                    <li><a href="01_add-semestre.html">Ajouter un semestre</a></li>
+                    <li><a href="01_semestres.html">Liste des semestres</a></li>
+                    <!-- <li><a href="modifier-semestre.html">Modifier un semestre</a></li> -->
+                  </ul>
+                </li>
+                <li class="submenu">
+                  <a href="#"><span>Modules</span> <span class="menu-arrow"></span></a>
+                  <ul>
+                    <li><a href="{%url 'ajouter_module'%}">Ajouter un module</a></li>
+                    <li><a href="{%url 'liste_modules'%}">Liste des modules</a></li>
+                    <!-- <li><a href="modifier-module.html">Modifier un module</a></li> -->
+                  </ul>
+                </li>
+                <li class="active">
+                  <a href="#"><span>Matières</span> <span class="menu-arrow"></span></a>
+                  <ul>
+                    <li><a href="{% url 'ajouter_matiere'%}">Ajouter une matière</a></li>
+                    <li><a href="{% url 'liste_matieres'%}" class="active">Liste des matières</a></li>
+                    <!-- <li class="active"><a href="01_edit-subject.html">Modifier une matière</a></li> -->
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span> <span class="menu-arrow"></span></a>
+              <ul>
+                  <li><a href="01_add-teacher.html">Ajouter un Professeur</a></li>
+                <li><a href="01_teachers.html">Liste des Professeurs</a></li>
+                <!-- <li><a href="01_edit-teacher.html">Modifier un Professeur</a></li> -->
+                <!-- <li><a href="01_teacher-details.html">Voir un Professeur</a></li> -->
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><i class="fas fa-user-graduate"></i> <span>Étudiants</span> <span class="menu-arrow"></span></a>
+              <ul>
+                <li><a href="01_add-student.html">Ajouter un Étudiant</a></li>
+                <li><a href="01_students.html">Liste des Étudiants</a></li>
+                <!-- <li><a href="modifier-etudiant.html">Modifier un Étudiant</a></li> -->
+                <!-- <li><a href="voir-etudiant.html">Voir un Étudiant</a></li> -->
+              </ul>
+            </li>
+            <li>
+            <a href="01_event.html"><i class="fas fa-calendar-day"></i> <span>Événements</span></a>
+            </li>
+            <li>
+              <a href="01_exam.html"><i class="fas fa-clipboard-list"></i> <span>Examens</span></a>
+            </li>
+                <li class="menu-title">
+                    <span>Gestion des comptes</span>
+                </li>
+            <li>
+                <a href="01_settings.html"><i class="fas fa-shield-alt"></i> <span> Authentification </span></a>
+            </li>
+          </ul>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="page-wrapper">
+      <div class="content container-fluid">
+
+        <div class="page-header">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="page-title">Liste des matières</h3>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{%static 'index'%}">Dashboard</a></li>
+                <li class="breadcrumb-item active">Matières</li>
+              </ul>
+            </div>
+            <!-- <div class="col-auto text-right">
+              <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Exporter</a>
+              <a href="ajouter-matiere.html" class="btn btn-primary"><i class="fas fa-plus"></i> Ajouter</a>
+            </div> -->
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card card-table">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover table-center mb-0 datatable">
+                    <thead>
+                      <tr>
+                        <th>Matière</th>
+                        <th>Classe</th>
+                        <th>Module</th>
+                        <th class="text-right">Action</th>
+                      </tr>
+                    </thead>
+   <tbody>
+  {% for matiere in matieres %}
+  <tr>
+    <td>
+      <h2>
+        <a>{{ matiere.nom }}</a>
+      </h2>
+    </td>
+    <td>{{ matiere.classe.nom }}</td>
+    <td>{{ matiere.module.nom }}</td>
+    <td class="text-right">
+      <div class="actions">
+        <a href="{% url 'edit_matiere' matiere.id %}" class="btn btn-sm bg-success-light mr-2">
+          <i class="fas fa-pen"></i>
+        </a>
+        <a href="{% url 'supprimer_matiere' matiere.id %}" class="btn btn-sm bg-danger-light"
+          onclick="return confirm('Voulez-vous vraiment supprimer cette matière ?');">
+          <i class="fas fa-trash"></i>
+        </a>
+      </div>
+    </td>
+  </tr>
+                      {% empty %}
+                    <tr><td colspan="8" class="text-center text-muted">Aucun professeur enregistré</td></tr>
+                    {% endfor %}
+</tbody>
+
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <footer class="text-center mt-4 mb-3">
+        <p>&copy; 2025 ENSAE - Plateforme de gestion académique</p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="{% static 'assets/js/jquery-3.6.0.min.js'%}"></script>
+  <script src="{% static 'assets/js/popper.min.js'%}"></script>
+  <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js'%}"></script>
+  <script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
+  <script src="{% static 'assets/plugins/datatables/datatables.min.js'%}"></script>
+  <script src="{% static 'assets/js/script.js'%}"></script>
+</body>
+</html>
