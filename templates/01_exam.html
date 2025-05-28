@@ -1,16 +1,17 @@
+{%load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ENSAE - Examens</title>
-  <link rel="shortcut icon" href="assets/img/favicon.png">
+  <link rel="shortcut icon" href="{% static 'responsable_filiere/assets/img/favicon.png' %}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/datatables/datatables.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/css/style.css' %}">
 </head>
 <body>
   <div class="main-wrapper">
@@ -18,11 +19,11 @@
     <!-- Header -->
     <div class="header">
       <div class="header-left">
-        <a href="{static 'index'%}" class="logo">
-          <img src="assets/img/logo.png" alt="Logo">
+        <a href="{% url 'index' %}" class="logo">
+          <img src="{% static 'responsable_filiere/assets/img/logo.png' %}" alt="Logo">
         </a>
-        <a href="{static 'index'%}" class="logo logo-small">
-          <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+        <a href="{% url 'index' %}" class="logo logo-small">
+          <img src="{% static 'responsable_filiere/assets/img/logo-small.png' %}" alt="Logo" width="30" height="30">
         </a>
       </div>
       <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
@@ -36,20 +37,20 @@
       <ul class="nav user-menu">
         <li class="nav-item dropdown has-arrow">
           <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-            <img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Admin">
+            <img class="rounded-circle" src="{% static 'responsable_filiere/assets/img/profiles/avatar-01.jpg' %}" width="31" alt="Admin">
           </a>
           <div class="dropdown-menu">
             <div class="user-header">
               <div class="avatar avatar-sm">
-                <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+                <img src="{% static 'responsable_filiere/assets/img/profiles/avatar-01.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
               </div>
               <div class="user-text">
                 <h6>Responsable Filière</h6>
                 <p class="text-muted mb-0">Administrateur</p>
               </div>
             </div>
-            <a class="dropdown-item" href="profile.html">Mon profil</a>
-            <a class="dropdown-item" href="login.html">Déconnexion</a>
+            <a class="dropdown-item" href="{% static 'responsable_filiere/profile.html' %}">Mon profil</a>
+            <a class="dropdown-item" href="{% static 'responsable_filiere/login.html' %}">Déconnexion</a>
           </div>
         </li>
       </ul>
@@ -62,7 +63,7 @@
           <ul>
             <li class="menu-title"><span>Menu</span></li>
             <li>
-              <a href="{static 'index'%}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+              <a href="{% url 'index' %}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
             </li>
             <li class="submenu">
               <a href="#"><i class="fas fa-book-open"></i> <span>Matières</span> <span class="menu-arrow"></span></a>
@@ -70,25 +71,22 @@
                 <li class="submenu">
                   <a href="#"><span>Semestres</span> <span class="menu-arrow"></span></a>
                   <ul>
-                    <li><a href="01_add-semestre.html">Ajouter un semestre</a></li>
-                    <li><a href="01_semestres.html">Liste des semestres</a></li>
-                    <!-- <li><a href="modifier-semestre.html">Modifier un semestre</a></li> -->
+                    <li><a href="{% static 'responsable_filiere/01_add-semestre.html' %}">Ajouter un semestre</a></li>
+                    <li><a href="{% static 'responsable_filiere/01_semestres.html' %}">Liste des semestres</a></li>
                   </ul>
                 </li>
                 <li class="submenu">
                   <a href="#"><span>Modules</span> <span class="menu-arrow"></span></a>
                   <ul>
-                    <li><a href="01_add-module.html">Ajouter un module</a></li>
-                    <li><a href="liste-modules.html">Liste des modules</a></li>
-                    <!-- <li><a href="modifier-module.html">Modifier un module</a></li> -->
+                    <li><a href="{% static 'responsable_filiere/01_add-module.html' %}">Ajouter un module</a></li>
+                    <li><a href="{% static 'responsable_filiere/liste-modules.html' %}">Liste des modules</a></li>
                   </ul>
                 </li>
                 <li class="submenu">
                   <a href="#"><span>Matières</span> <span class="menu-arrow"></span></a>
                   <ul>
-                    <li><a href="01_add-subject.html">Ajouter une matière</a></li>
-                    <li><a href="01_subjects.html">Liste des matières</a></li>
-                    <!-- <li><a href="01_edit-subject.html">Modifier une matière</a></li> -->
+                    <li><a href="{% static 'responsable_filiere/01_add-subject.html' %}">Ajouter une matière</a></li>
+                    <li><a href="{% static 'responsable_filiere/01_subjects.html' %}">Liste des matières</a></li>
                   </ul>
                 </li>
               </ul>
@@ -96,39 +94,33 @@
             <li class="submenu">
               <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span> <span class="menu-arrow"></span></a>
               <ul>
-                  <li><a href="01_add-teacher.html">Ajouter un Professeur</a></li>
-                <li><a href="01_teachers.html">Liste des Professeurs</a></li>
-                <!-- <li><a href="01_edit-teacher.html">Modifier un Professeur</a></li> -->
-                <!-- <li><a href="01_teacher-details.html">Voir un Professeur</a></li> -->
+                <li><a href="{% static 'responsable_filiere/01_add-teacher.html' %}">Ajouter un Professeur</a></li>
+                <li><a href="{% static 'responsable_filiere/01_teachers.html' %}">Liste des Professeurs</a></li>
               </ul>
             </li>
             <li class="submenu">
               <a href="#"><i class="fas fa-user-graduate"></i> <span>Étudiants</span> <span class="menu-arrow"></span></a>
               <ul>
-                <li><a href="01_add-student.html">Ajouter un Étudiant</a></li>
-                <li><a href="01_students.html">Liste des Étudiants</a></li>
-                <!-- <li><a href="modifier-etudiant.html">Modifier un Étudiant</a></li> -->
-                <!-- <li><a href="voir-etudiant.html">Voir un Étudiant</a></li> -->
+                <li><a href="{% static 'responsable_filiere/01_add-student.html' %}">Ajouter un Étudiant</a></li>
+                <li><a href="{% static 'responsable_filiere/01_students.html' %}">Liste des Étudiants</a></li>
               </ul>
             </li>
             <li>
-            <a href="01_event.html"><i class="fas fa-calendar-day"></i> <span>Événements</span></a>
+              <a href="{% static 'responsable_filiere/01_event.html' %}"><i class="fas fa-calendar-day"></i> <span>Événements</span></a>
             </li>
             <li class="active">
-              <a href="01_exam.html"><i class="fas fa-clipboard-list"></i> <span>Examens</span></a>
+              <a href="{% url 'examens' %}"><i class="fas fa-clipboard-list"></i> <span>Examens</span></a>
             </li>
-                <li class="menu-title">
-                    <span>Gestion des comptes</span>
-                </li>
+            <li class="menu-title">
+              <span>Gestion des comptes</span>
+            </li>
             <li>
-                <a href="01_settings.html"><i class="fas fa-shield-alt"></i> <span> Authentification </span></a>
+              <a href="{% static 'responsable_filiere/01_settings.html' %}"><i class="fas fa-shield-alt"></i> <span> Authentification </span></a>
             </li>
-          </ul>
           </ul>
         </div>
       </div>
     </div>
-
 
     <!-- Page Content -->
     <div class="page-wrapper">
@@ -139,12 +131,12 @@
             <div class="col">
               <h3 class="page-title">Examens</h3>
               <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{static 'index'%}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'index' %}">Dashboard</a></li>
                 <li class="breadcrumb-item active">Liste des Examens</li>
               </ul>
             </div>
             <div class="col-auto float-right ml-auto">
-              <a href="01_add-exam.html" class="btn btn-primary"><i class="fas fa-plus"></i> Ajouter</a>
+              <a href="{% url 'ajouter_examen' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Ajouter</a>
             </div>
           </div>
         </div>
@@ -168,36 +160,30 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td><strong>Test Continu</strong></td>
-                        <td>AS1</td>
-                        <td>Statistiques</td>
-                        <td>09:00</td>
-                        <td>11:00</td>
-                        <td>14 Mai 2025</td>
-                        <td class="text-right">
-                          <div class="actions">
-                            <a href="01_edit-exam.html" class="btn btn-sm bg-success-light mr-2"><i class="fas fa-pen"></i></a>
-                            <a href="#" class="btn btn-sm bg-danger-light"><i class="fas fa-trash"></i></a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><strong>Examen final</strong></td>
-                        <td>AS2</td>
-                        <td>Économie</td>
-                        <td>13:00</td>
-                        <td>15:00</td>
-                        <td>21 Juin 2025</td>
-                        <td class="text-right">
-                          <div class="actions">
-                            <a href="01_edit-exam.html" class="btn btn-sm bg-success-light mr-2"><i class="fas fa-pen"></i></a>
-                            <a href="#" class="btn btn-sm bg-danger-light"><i class="fas fa-trash"></i></a>
-                          </div>
-                        </td>
-                      </tr>
-                      <!-- Vous pouvez ajouter d'autres lignes d'examen ici -->
-                    </tbody>
+  {% for exam in examens %}
+    {% for classe in exam.evenement.classes_concernees.all %}
+      <tr>
+        <td><strong>{{ exam.evenement.titre }}</strong></td>
+        <td>{{ classe.nom }}</td>
+        <td>{{ exam.matiere.nom }}</td>
+        <td>{{ exam.evenement.heure_debut|time:"H:i" }}</td>
+        <td>{{ exam.evenement.heure_de_fin|time:"H:i" }}</td>
+        <td>{{ exam.evenement.date|date:"d M Y" }}</td>
+        <td class="text-right">
+          <div class="actions">
+            <a href="{% url 'edit_examen' exam.id %}   " class="btn btn-sm bg-success-light mr-2"><i class="fas fa-pen"></i></a>
+            <a href="#" class="btn btn-sm bg-danger-light"><i class="fas fa-trash"></i></a>
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+  {% empty %}
+    <tr>
+      <td colspan="7" class="text-center text-muted">Aucun examen programmé.</td>
+    </tr>
+  {% endfor %}
+</tbody>
+
                   </table>
                 </div>
               </div>
@@ -215,11 +201,11 @@
   </div>
 
   <!-- Scripts -->
-  <script src="assets/js/jquery-3.6.0.min.js"></script>
-  <script src="assets/js/popper.min.js"></script>
-  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-  <script src="assets/plugins/datatables/datatables.min.js"></script>
-  <script src="assets/js/script.js"></script>
+  <script src="{% static 'responsable_filiere/assets/js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/js/popper.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/plugins/datatables/datatables.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/js/script.js' %}"></script>
 </body>
 </html>

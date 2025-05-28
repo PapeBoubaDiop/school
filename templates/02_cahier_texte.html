@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENSAE - Cahier de texte</title>
+  <link rel="shortcut icon" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .lesson-card { 
+      border-left: 4px solid #007bff; 
+      transition: all 0.3s ease;
+    }
+    .lesson-card:hover { 
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+      transform: translateY(-2px);
+    }
+    .date-badge { 
+      position: absolute; 
+      top: 15px; 
+      right: 15px; 
+      font-size: 0.8em;
+    }
+    .subject-badge {
+      font-size: 0.9em;
+      padding: 4px 12px;
+    }
+    .add-lesson-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    .modal-backdrop.show {
+      opacity: 0.8;
+    }
+    .form-floating > label {
+      color: #6c757d;
+    }
+    .lesson-content {
+      line-height: 1.6;
+    }
+    .homework-section {
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 10px;
+    }
+    .action-buttons {
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-wrapper">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <a href="02_index.html" class="logo">
+          <img src="assets/img/logo.png" alt="Logo">
+        </a>
+        <a href="02_index.html" class="logo logo-small">
+          <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+        </a>
+      </div>
+      <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
+      <div class="top-nav-search">
+        <form>
+          <input type="text" class="form-control" placeholder="Rechercher dans le cahier...">
+          <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
+      <ul class="nav user-menu">
+        <li class="nav-item dropdown has-arrow">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+            <img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Admin">
+          </a>
+          <div class="dropdown-menu">
+            <div class="user-header">
+              <div class="avatar avatar-sm">
+                <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+              </div>
+              <div class="user-text">
+                <h6>Responsable AS1</h6>
+                <p class="text-muted mb-0">Responsable de classe</p>
+              </div>
+            </div>
+            <a class="dropdown-item" href="profile.html">Mon profil</a>
+            <a class="dropdown-item" href="login.html">Déconnexion</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+          <ul>
+            <li class="menu-title"><span>Menu</span></li>
+            <li><a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
+            <li><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
+            <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
+            <li><a href="02_etudiants.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
+            <li><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
+            <li class="active"><a href="02_cahier_texte.html"><i class="fas fa-book"></i> <span>Cahier de texte</span></a></li>
+            <li><a href="02_devoir_projet.html"><i class="fas fa-clipboard-list"></i> <span>Devoirs & Projets</span></a></li>
+            <li><a href="02_emploi_temps.html"><i class="fas fa-calendar-alt"></i> <span>Emploi du temps</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="page-wrapper">
+      <div class="content container-fluid">
+        <div class="page-header">
+          <div class="row">
+            <div class="col-sm-8">
+              <h3 class="page-title">Cahier de texte - Classe AS1</h3>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="02_index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active">Cahier de texte</li>
+              </ul>
+            </div>
+            <div class="col-sm-4 text-right">
+              <div class="btn-group">
+                <button class="btn btn-outline-primary btn-sm" onclick="exportCahier()">
+                  <i class="fas fa-download"></i> Exporter
+                </button>
+                <a href="02_ajouter_lecon.html"><button class="btn btn-primary btn-sm">
+                  <i class="fas fa-plus"></i> Nouvelle leçon
+                </button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Liste des leçons -->
+        <div class="row">
+          <div class="col-12">
+            <!-- Leçon 1 -->
+            <div class="card lesson-card mb-3">
+              <div class="card-body position-relative">
+                <span class="badge badge-primary date-badge">22 Mai 2025</span>
+                <div class="d-flex align-items-start mb-3">
+                  <span class="badge badge-success subject-badge mr-3">Mathématiques</span>
+                  <div class="flex-grow-1">
+                    <h5 class="mb-1">Fonctions logarithmiques et exponentielles</h5>
+                    <small class="text-muted">
+                      <i class="fas fa-clock"></i> 08:00 - 10:00  | 
+                      <i class="fas fa-user"></i> M. Dupont  | 
+                      <i class="fas fa-map-marker-alt"></i> Salle 204
+                    </small>
+                  </div>
+                  <div class="action-buttons">
+                    <a href="02_modifier_lecon.html" class="btn btn-sm btn-outline-primary mr-2" onclick="editLesson(1)">
+                      <i class="fas fa-edit"></i> Modifier
+                    </a>
+                    <button class="btn btn-sm btn-outline-danger" onclick="deleteLesson(1)">
+                      <i class="fas fa-trash"></i> Supprimer
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="lesson-content">
+                  <h6><i class="fas fa-book-open text-primary"></i> Contenu de la leçon :</h6>
+                  <p class="mb-3">
+                    Introduction aux fonctions logarithmiques et exponentielles. Étude des propriétés fondamentales :
+                    continuité, dérivabilité, limites. Résolution d'équations et d'inéquations.
+                  </p>
+                  
+                  <div class="homework-section">
+                    <h6><i class="fas fa-clipboard-list text-warning"></i> Travail à faire :</h6>
+                    <ul class="mb-0">
+                      <li>Exercices 15 à 20 page 87 du manuel</li>
+                      <li>Apprendre les propriétés des logarithmes (cours)</li>
+                      <li>Préparer l'interrogation du 29 mai sur les dérivées</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Leçon 2 -->
+            <div class="card lesson-card mb-3">
+              <div class="card-body position-relative">
+                <span class="badge badge-secondary date-badge">21 Mai 2025</span>
+                <div class="d-flex align-items-start mb-3">
+                  <span class="badge badge-info subject-badge mr-3">Statistiques</span>
+                  <div class="flex-grow-1">
+                    <h5 class="mb-1">Tests statistiques paramétriques</h5>
+                    <small class="text-muted">
+                      <i class="fas fa-clock"></i> 14:00 - 16:00  | 
+                      <i class="fas fa-user"></i> Mme Martin  | 
+                      <i class="fas fa-map-marker-alt"></i> Salle 105
+                    </small>
+                  </div>
+                  <div class="action-buttons">
+                    <a href="02_modifier_lecon.html" class="btn btn-sm btn-outline-primary mr-2" onclick="editLesson(2)">
+                      <i class="fas fa-edit"></i> Modifier
+                    </a>
+                    <button class="btn btn-sm btn-outline-danger" onclick="deleteLesson(2)">
+                      <i class="fas fa-trash"></i> Supprimer
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="lesson-content">
+                  <h6><i class="fas fa-book-open text-primary"></i> Contenu de la leçon :</h6>
+                  <p class="mb-3">
+                    Révision des tests de Student, test de conformité et test de comparaison. 
+                    Application pratique avec le logiciel R sur des jeux de données réels.
+                  </p>
+                  
+                  <div class="homework-section">
+                    <h6><i class="fas fa-clipboard-list text-warning"></i> Travail à faire :</h6>
+                    <ul class="mb-0">
+                      <li>TD n°8 : analyse du dataset "ventes_automobiles.csv"</li>
+                      <li>Installer R et RStudio pour le prochain cours</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Leçon 3 -->
+            <div class="card lesson-card mb-3">
+              <div class="card-body position-relative">
+                <span class="badge badge-secondary date-badge">20 Mai 2025</span>
+                <div class="d-flex align-items-start mb-3">
+                  <span class="badge badge-danger subject-badge mr-3">Anglais</span>
+                  <div class="flex-grow-1">
+                    <h5 class="mb-1">Business English - Presentations</h5>
+                    <small class="text-muted">
+                      <i class="fas fa-clock"></i> 10:15 - 12:15  | 
+                      <i class="fas fa-user"></i> Mme Johnson  | 
+                      <i class="fas fa-map-marker-alt"></i> Salle 301
+                    </small>
+                  </div>
+                  <div class="action-buttons">
+                    <a href="02_modifier_lecon.html" class="btn btn-sm btn-outline-primary mr-2" onclick="editLesson(3)">
+                      <i class="fas fa-edit"></i> Modifier
+                    </a>
+                    <button class="btn btn-sm btn-outline-danger" onclick="deleteLesson(3)">
+                      <i class="fas fa-trash"></i> Supprimer
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="lesson-content">
+                  <h6><i class="fas fa-book-open text-primary"></i> Contenu de la leçon :</h6>
+                  <p class="mb-3">
+                    Techniques de présentation orale en anglais professionnel. Structuration d'un exposé, 
+                    gestion du stress, interaction avec l'audience. Exercices pratiques en groupe.
+                  </p>
+                  
+                  <div class="homework-section">
+                    <h6><i class="fas fa-clipboard-list text-warning"></i> Travail à faire :</h6>
+                    <ul class="mb-0">
+                      <li>Préparer une présentation de 5 minutes sur un sujet libre</li>
+                      <li>Vocabulaire chapitre 7 : "Business communication"</li>
+                      <li>Reading comprehension p.95-97</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="row mt-4">
+          <div class="col-12 d-flex justify-content-center">
+            <nav>
+              <ul class="pagination">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">Précédent</a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Suivant</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="text-center mt-4 mb-3">
+        <p>© 2025 ENSAE - Gestion classe Analyse Statistique</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Bouton flottant d'ajout -->
+  <button class="btn btn-primary add-lesson-btn d-md-none" data-toggle="modal" data-target="#addLessonModal">
+    <i class="fas fa-plus fa-lg"></i>
+  </button>
+
+  <!-- Modal d'ajout de leçon -->
+  <div class="modal fade" id="addLessonModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="fas fa-plus-circle text-primary"></i> Nouvelle leçon
+          </h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="addLessonForm">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="date" class="form-control" id="lessonDate" required>
+                  <label for="lessonDate">Date de la leçon</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <select class="form-control" id="lessonSubject" required>
+                    <option value="">Sélectionner une matière</option>
+                    <option value="maths">Mathématiques</option>
+                    <option value="stats">Statistiques</option>
+                    <option value="eco">Économie</option>
+                    <option value="anglais">Anglais</option>
+                    <option value="info">Informatique</option>
+                  </select>
+                  <label for="lessonSubject">Matière</label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-floating mb-3">
+                  <input type="time" class="form-control" id="lessonStartTime" required>
+                  <label for="lessonStartTime">Heure de début</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-floating mb-3">
+                  <input type="time" class="form-control" id="lessonEndTime" required>
+                  <label for="lessonEndTime">Heure de fin</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="lessonRoom" placeholder="Ex: Salle 204">
+                  <label for="lessonRoom">Salle</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="lessonTeacher" placeholder="Ex: M. Dupont">
+                  <label for="lessonTeacher">Professeur</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="lessonTitle" placeholder="Ex: Les fonctions logarithmiques" required>
+                  <label for="lessonTitle">Titre de la leçon</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-floating mb-3">
+              <textarea class="form-control" id="lessonContent" style="height: 120px" placeholder="Décrivez le contenu de la leçon..." required></textarea>
+              <label for="lessonContent">Contenu de la leçon</label>
+            </div>
+
+            <div class="form-floating mb-3">
+              <textarea class="form-control" id="lessonHomework" style="height: 100px" placeholder="Exercices, lectures, préparations..."></textarea>
+              <label for="lessonHomework">Travail à faire (optionnel)</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" onclick="saveLesson()">
+            <i class="fas fa-save"></i> Enregistrer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery-3.6.0.min.js"></script>
+  <script src="assets/js/popper.min.js"></script>
+  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/script.js"></script>
+
+  <script>
+    // Variables pour stocker les leçons
+    let lessons = [
+      {
+        id: 1,
+        date: '2025-05-22',
+        subject: 'Mathématiques',
+        title: 'Fonctions logarithmiques et exponentielles',
+        teacher: 'M. Dupont',
+        time: '08:00 - 10:00',
+        room: 'Salle 204',
+        content: 'Introduction aux fonctions logarithmiques et exponentielles. Étude des propriétés fondamentales : continuité, dérivabilité, limites. Résolution d\'équations et d\'inéquations.',
+        homework: 'Exercices 15 à 20 page 87 du manuel\nApprendre les propriétés des logarithmes (cours)\nPréparer l\'interrogation du 29 mai sur les dérivées'
+      }
+    ];
+
+    function saveLesson() {
+      const form = document.getElementById('addLessonForm');
+      const formData = new FormData(form);
+      
+      // Validation basique
+      const requiredFields = ['lessonDate', 'lessonSubject', 'lessonTitle', 'lessonContent'];
+      let isValid = true;
+      
+      requiredFields.forEach(field => {
+        const input = document.getElementById(field);
+        if (!input.value.trim()) {
+          input.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          input.classList.remove('is-invalid');
+        }
+      });
+
+      if (!isValid) {
+        alert('Veuillez remplir tous les champs obligatoires.');
+        return;
+      }
+
+      // Simulation de sauvegarde
+      const lessonData = {
+        id: Date.now(),
+        date: document.getElementById('lessonDate').value,
+        subject: document.getElementById('lessonSubject').options[document.getElementById('lessonSubject').selectedIndex].text,
+        title: document.getElementById('lessonTitle').value,
+        teacher: document.getElementById('lessonTeacher').value,
+        time: document.getElementById('lessonStartTime').value + ' - ' + document.getElementById('lessonEndTime').value,
+        room: document.getElementById('lessonRoom').value,
+        content: document.getElementById('lessonContent').value,
+        homework: document.getElementById('lessonHomework').value
+      };
+
+      // Ajouter à la liste (simulation)
+      lessons.push(lessonData);
+      
+      // Fermer le modal
+      $('#addLessonModal').modal('hide');
+      
+      // Réinitialiser le formulaire
+      form.reset();
+      
+      // Afficher un message de succès
+      showToast('Leçon ajoutée avec succès !', 'success');
+      
+      // En situation réelle, ici on ferait un appel AJAX vers Django
+      console.log('Leçon sauvegardée:', lessonData);
+    }
+
+    function editLesson(lessonId) {
+      // En situation réelle, récupérer les données de la leçon depuis Django
+      showToast('Fonction de modification en cours de développement', 'info');
+    }
+
+    function deleteLesson(lessonId) {
+      if (confirm('Êtes-vous sûr de vouloir supprimer cette leçon ?')) {
+        // En situation réelle, appel AJAX vers Django pour supprimer
+        showToast('Leçon supprimée avec succès !', 'success');
+      }
+    }
+
+    function exportCahier() {
+      // Simulation d'export
+      showToast('Export du cahier de texte en cours...', 'info');
+      
+      // En situation réelle, appel vers Django pour générer le PDF/Excel
+      setTimeout(() => {
+        showToast('Cahier de texte exporté avec succès !', 'success');
+      }, 2000);
+    }
+
+    function showToast(message, type) {
+      // Créer un toast Bootstrap personnalisé
+      const toastHtml = `
+        <div class="toast" role="alert" style="position: fixed; top: 80px; right: 20px; z-index: 1060;">
+          <div class="toast-header bg-${type === 'success' ? 'success' : type === 'info' ? 'info' : 'warning'} text-white">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'info' ? 'info-circle' : 'exclamation-triangle'} mr-2"></i>
+            <strong class="mr-auto">Notification</strong>
+            <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast">
+              <span>×</span>
+            </button>
+          </div>
+          <div class="toast-body">
+            ${message}
+          </div>
+        </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', toastHtml);
+      $('.toast').last().toast({ delay: 3000 }).toast('show');
+      
+      // Nettoyer après fermeture
+      $('.toast').last().on('hidden.bs.toast', function() {
+        $(this).remove();
+      });
+    }
+
+    // Initialisation
+    $(document).ready(function() {
+      // Définir la date du jour par défaut
+      document.getElementById('lessonDate').valueAsDate = new Date();
+      
+      // Auto-complétion des heures courantes
+      const now = new Date();
+      const currentHour = now.getHours().toString().padStart(2, '0');
+      document.getElementById('lessonStartTime').value = currentHour + ':00';
+      document.getElementById('lessonEndTime').value = (parseInt(currentHour) + 2).toString().padStart(2, '0') + ':00';
+    });
+  </script>
+</body>
+</html>

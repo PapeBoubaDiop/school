@@ -1,15 +1,16 @@
+{%load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ENSAE - Gestion des comptes</title>
-  <link rel="shortcut icon" href="assets/img/favicon.png">
+  <link rel="shortcut icon" href="{% static 'responsable_filiere/assets/img/favicon.png' %}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/datatables/datatables.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/css/style.css' %}">
 </head>
 <body>
   <div class="main-wrapper">
@@ -17,8 +18,8 @@
     <!-- Header -->
     <div class="header">
       <div class="header-left">
-        <a href="{%static 'index'%}" class="logo"><img src="assets/img/logo.png" alt="Logo"></a>
-        <a href="{%static 'index'%}" class="logo logo-small"><img src="assets/img/logo-small.png" width="30" height="30" alt="Logo"></a>
+        <a href="{% url 'index' %}" class="logo"><img src="{% static 'responsable_filiere/responsable_filiere/assets/img/logo.png' %}" alt="Logo"></a>
+        <a href="{% url 'index' %}" class="logo logo-small"><img src="{% static 'responsable_filiere/responsable_filiere/assets/img/logo-small.png' %}" width="30" height="30" alt="Logo"></a>
       </div>
       <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
       <div class="top-nav-search">
@@ -27,14 +28,14 @@
       <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
       <ul class="nav user-menu">
         <li class="nav-item dropdown has-arrow">
-          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Admin"></a>
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><img class="rounded-circle" src="{% static 'responsable_filiere/assets/img/profiles/avatar-01.jpg' %}" width="31" alt="Admin"></a>
           <div class="dropdown-menu">
             <div class="user-header">
-              <div class="avatar avatar-sm"><img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle"></div>
+              <div class="avatar avatar-sm"><img src="{% static 'responsable_filiere/assets/img/profiles/avatar-01.jpg' %}" alt="User Image" class="avatar-img rounded-circle"></div>
               <div class="user-text"><h6>Responsable Filière</h6><p class="text-muted mb-0">Administrateur</p></div>
             </div>
             <a class="dropdown-item" href="profile.html">Mon profil</a>
-            <a class="dropdown-item" href="login.html">Déconnexion</a>
+            <a class="dropdown-item" href="logout.html">Déconnexion</a>
           </div>
         </li>
       </ul>
@@ -47,7 +48,7 @@
           <ul>
             <li class="menu-title"><span>Menu</span></li>
             <li>
-              <a href="{%static 'index'%}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+              <a href="{% url 'index' %}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
             </li>
             <li class="submenu">
               <a href="#"><i class="fas fa-book-open"></i> <span>Matières</span> <span class="menu-arrow"></span></a>
@@ -55,25 +56,22 @@
                 <li class="submenu">
                   <a href="#"><span>Semestres</span> <span class="menu-arrow"></span></a>
                   <ul>
-                    <li><a href="01_add-semestre.html">Ajouter un semestre</a></li>
-                    <li><a href="01_semestres.html">Liste des semestres</a></li>
-                    <!-- <li><a href="modifier-semestre.html">Modifier un semestre</a></li> -->
+                    <li><a href="{% url 'ajouter_semestre' %}">Ajouter un semestre</a></li>
+                    <li><a href="{% url 'liste_semestres' %}">Liste des semestres</a></li>
                   </ul>
                 </li>
                 <li class="submenu">
                   <a href="#"><span>Modules</span> <span class="menu-arrow"></span></a>
                   <ul>
-                    <li><a href="01_add-module.html">Ajouter un module</a></li>
-                    <li><a href="01_modules.html">Liste des modules</a></li>
-                    <!-- <li><a href="modifier-module.html">Modifier un module</a></li> -->
+                    <li><a href="{% url 'ajouter_module' %}">Ajouter un module</a></li>
+                    <li><a href="{% url 'liste_modules' %}">Liste des modules</a></li>
                   </ul>
                 </li>
                 <li class="submenu">
                   <a href="#"><span>Matières</span> <span class="menu-arrow"></span></a>
                   <ul>
-                    <li><a href="01_add-subject.html">Ajouter une matière</a></li>
-                    <li><a href="01_subjects.html">Liste des matières</a></li>
-                    <!-- <li><a href="01_edit-subject.html">Modifier une matière</a></li> -->
+                    <li><a href="{% url 'ajouter_matiere' %}">Ajouter une matière</a></li>
+                    <li><a href="{% url 'liste_matieres' %}">Liste des matières</a></li>
                   </ul>
                 </li>
               </ul>
@@ -81,10 +79,8 @@
             <li class="submenu">
               <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span> <span class="menu-arrow"></span></a>
               <ul>
-                  <li><a href="01_add-teacher.html">Ajouter un Professeur</a></li>
-                <li><a href="01_teachers.html">Liste des Professeurs</a></li>
-                <!-- <li><a href="01_edit-teacher.html">Modifier un Professeur</a></li> -->
-                <!-- <li><a href="01_teacher-details.html">Voir un Professeur</a></li> -->
+                <li><a href="{% url 'ajouter_etudiant' %}">Ajouter un Professeur</a></li>
+                <li><a href="{% url 'liste_etudiants' %}">Liste des Professeurs</a></li>
               </ul>
             </li>
             <li class="submenu">
@@ -106,7 +102,7 @@
                     <span>Gestion des comptes</span>
                 </li>
             <li class="active">
-                <a href="01_settings.html"><i class="fas fa-shield-alt"></i> <span> Authentification </span></a>
+                <a href="{% url 'gestion_utilisateurs' %}"><i class="fas fa-shield-alt"></i> <span> Authentification </span></a>
             </li>
           </ul>
         </div>
@@ -124,6 +120,9 @@
                 <li class="breadcrumb-item active">Comptes utilisateurs</li>
               </ul>
             </div>
+                        <div class="col-auto float-right ml-auto">
+              <a href="{% url 'creation_comptes_etudiants' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Ajouter</a>
+            </div>
           </div>
         </div>
 
@@ -136,7 +135,7 @@
                   <table class="table table-hover datatable">
                     <thead>
                       <tr>
-                        <th>ID</th>
+                        <!-- <th>ID</th> -->
                         <th>Nom d'utilisateur</th>
                         <th>Email</th>
                         <th>Rôle</th>
@@ -145,28 +144,28 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>U001</td>
-                        <td>admin</td>
-                        <td>admin@ensae.sn</td>
-                        <td>Administrateur</td>
-                        <td><span class="badge badge-success">Activé</span></td>
-                        <td class="text-right">
-                          <button class="btn btn-sm btn-warning">Désactiver</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>U002</td>
-                        <td>enseignant1</td>
-                        <td>enseignant1@ensae.sn</td>
-                        <td>Professeur</td>
-                        <td><span class="badge badge-danger">Désactivé</span></td>
-                        <td class="text-right">
-                          <button class="btn btn-sm btn-success">Activer</button>
-                        </td>
-                      </tr>
-                      <!-- autres comptes -->
+                      {% for user in users %}
+                        <tr>
+                          <!-- <td>{{ user.id }}</td> -->
+                          <td>{{ user.username }}</td>
+                          <td>{{ user.email }}</td>
+                          <td>{{ user.get_role_display }}</td>
+                          <td>
+                            {% if user.is_active %}
+                              <span class="badge badge-success">Activé</span>
+                            {% else %}
+                              <span class="badge badge-danger">Désactivé</span>
+                            {% endif %}
+                          </td>
+                          <td class="text-right">
+                            <a href="{% url 'toggle_activation' user.id %}" class="btn btn-sm {% if user.is_active %}btn-warning{% else %}btn-success{% endif %}">
+                              {% if user.is_active %}Désactiver{% else %}Activer{% endif %}
+                            </a>
+                          </td>
+                        </tr>
+                      {% endfor %}
                     </tbody>
+
                   </table>
                 </div>
               </div>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENSAE - Modifier une Séance</title>
+  <link rel="shortcut icon" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="main-wrapper">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <a href="02_emploi_temps.html" class="logo">
+          <img src="assets/img/logo.png" alt="Logo">
+        </a>
+        <a href="02_emploi_temps.html" class="logo logo-small">
+          <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+        </a>
+      </div>
+      <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
+      <div class="top-nav-search">
+        <form>
+          <input type="text" class="form-control" placeholder="Recherche...">
+          <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
+      <ul class="nav user-menu">
+        <li class="nav-item dropdown has-arrow">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+            <img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Responsable">
+          </a>
+          <div class="dropdown-menu">
+            <div class="user-header">
+              <div class="avatar avatar-sm">
+                <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+              </div>
+              <div class="user-text">
+                <h6>Responsable de Classe</h6>
+                <p class="text-muted mb-0">AS1</p>
+              </div>
+            </div>
+            <a class="dropdown-item" href="profile.html">Mon profil</a>
+            <a class="dropdown-item" href="login.html">Déconnexion</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+         <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title"><span>Menu</span></li>
+                        <li>
+                            <a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+                        </li>
+                        <li><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
+                        <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
+                        <li><a href="02_etudiants.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
+                        <li><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
+                        <li><a href="02_cahier_texte.html"><i class="fas fa-book"></i> <span>Cahier de texte</span></a></li>
+                        <li><a href="02_devoir_projet.html"><i class="fas fa-clipboard-list"></i> <span>Devoirs & Projets</span></a></li>
+                        <li class="active"><a href="02_emploi_temps.html"><i class="fas fa-calendar-alt"></i> <span>Emploi du temps</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    <!-- Contenu principal -->
+    <div class="page-wrapper">
+      <div class="content container-fluid">
+        <div class="page-header">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="page-title">Modifier une Séance</h3>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="02_emploi_temps.html">Emploi du temps</a></li>
+                <li class="breadcrumb-item active">Modifier séance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alert d'information -->
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <i class="fas fa-info-circle"></i>
+          <strong>Information :</strong> Vous modifiez le cours de Mathématiques du Lundi 08:00-10:00.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-body">
+                <form id="modifierSeanceForm">
+                  <div class="row">
+                    <div class="col-12">
+                      <h5 class="form-title"><span>Détails de la séance</span></h5>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Matière <span class="text-danger">*</span></label>
+                        <select class="form-control" name="matiere" required>
+                          <option value="">-- Sélectionner une matière --</option>
+                          <option value="mathematiques" selected>Mathématiques</option>
+                          <option value="statistiques">Statistiques</option>
+                          <option value="probabilites">Probabilités</option>
+                          <option value="econometrie">Économétrie</option>
+                          <option value="informatique">Informatique statistique</option>
+                          <option value="analyse_donnees">Analyse de données</option>
+                          <option value="methodologie">Méthodologie de recherche</option>
+                          <option value="anglais">Anglais scientifique</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Type de séance <span class="text-danger">*</span></label>
+                        <select class="form-control" name="type_seance" required>
+                          <option value="">-- Sélectionner le type --</option>
+                          <option value="cours" selected>Cours magistral</option>
+                          <option value="td">Travaux dirigés (TD)</option>
+                          <option value="tp">Travaux pratiques (TP)</option>
+                          <option value="controle">Contrôle/Examen</option>
+                          <option value="conference">Conférence</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Enseignant <span class="text-danger">*</span></label>
+                        <select class="form-control" name="enseignant" required>
+                          <option value="">-- Sélectionner un enseignant --</option>
+                          <option value="prof_dubois" selected>Prof. Dubois (Mathématiques)</option>
+                          <option value="prof_martin">Prof. Martin (Statistiques)</option>
+                          <option value="prof_leroy">Prof. Leroy (Probabilités)</option>
+                          <option value="prof_bernard">Prof. Bernard (Informatique)</option>
+                          <option value="prof_johnson">Prof. Johnson (Anglais)</option>
+                          <option value="prof_petit">Prof. Petit (Méthodologie)</option>
+                          <option value="prof_dupont">Prof. Dupont (Économétrie)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Classe <span class="text-danger">*</span></label>
+                        <select class="form-control" name="classe" required>
+                          <option value="">-- Sélectionner une classe --</option>
+                          <option value="AS1" selected>Classe AS1</option>
+                          <option value="AS2">Classe AS2</option>
+                          <option value="AS3">Classe AS3</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <h5 class="form-title mt-4"><span>Horaires et lieu</span></h5>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Jour <span class="text-danger">*</span></label>
+                        <select class="form-control" name="jour" required>
+                          <option value="">-- Sélectionner --</option>
+                          <option value="lundi" selected>Lundi</option>
+                          <option value="mardi">Mardi</option>
+                          <option value="mercredi">Mercredi</option>
+                          <option value="jeudi">Jeudi</option>
+                          <option value="vendredi">Vendredi</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Heure de début <span class="text-danger">*</span></label>
+                        <select class="form-control" name="heure_debut" required>
+                          <option value="">-- Sélectionner --</option>
+                          <option value="08:00" selected>08:00</option>
+                          <option value="10:15">10:15</option>
+                          <option value="14:00">14:00</option>
+                          <option value="16:15">16:15</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Heure de fin <span class="text-danger">*</span></label>
+                        <select class="form-control" name="heure_fin" required>
+                          <option value="">-- Sélectionner --</option>
+                          <option value="10:00" selected>10:00</option>
+                          <option value="12:15">12:15</option>
+                          <option value="16:00">16:00</option>
+                          <option value="18:15">18:15</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Salle <span class="text-danger">*</span></label>
+                        <select class="form-control" name="salle" required>
+                          <option value="">-- Sélectionner une salle --</option>
+                          <option value="A-101" selected>Salle A-101</option>
+                          <option value="A-102">Salle A-102</option>
+                          <option value="B-203">Salle B-203</option>
+                          <option value="B-105">Salle B-105</option>
+                          <option value="C-305">Salle C-305</option>
+                          <option value="C-201">Salle C-201</option>
+                          <option value="Info-1">Salle Info-1</option>
+                          <option value="Info-2">Salle Info-2</option>
+                          <option value="Amphi-1">Amphithéâtre 1</option>
+                          <option value="Amphi-2">Amphithéâtre 2</option>
+                        </select>
+                      </div>
+                    </div>
+
+
+
+                    <div class="col-12">
+                      <div class="form-group">
+                        <label>Description/Remarques (optionnel)</label>
+                        <textarea class="form-control" name="description" rows="3" placeholder="Description du cours, remarques particulières...">Cours de mathématiques fondamentales pour la première année d'Analyse Statistique. Focus sur l'algèbre linéaire et les concepts de base.</textarea>
+                      </div>
+                    </div>
+
+                    <!-- Boutons d'action -->
+                    <div class="col-12 mt-4">
+                      <div class="form-group">
+                        <div class="d-flex justify-content-between">
+                          <div>
+                            <button type="submit" class="btn btn-primary mr-2">
+                              <i class="fas fa-save"></i> Enregistrer les modifications
+                            </button>
+                            <button type="button" class="btn btn-secondary mr-2" onclick="window.history.back()">
+                              <i class="fas fa-times"></i> Annuler
+                            </button>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal de confirmation de suppression -->
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmer la suppression</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Êtes-vous sûr de vouloir supprimer cette séance ?</p>
+          <p class="text-warning"><i class="fas fa-exclamation-triangle"></i> Cette action est irréversible.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-danger" onclick="confirmerSuppression()">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery-3.6.0.min.js"></script>
+  <script src="assets/js/popper.min.js"></script>
+  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+  <script src="assets/js/script.js"></script>
+
+  <script>
+    // Fonctions JavaScript pour la gestion de la séance
+    document.addEventListener('DOMContentLoaded', function() {
+      // Gestion du formulaire
+      const form = document.getElementById('modifierSeanceForm');
+      
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validation basique
+        if (validerFormulaire()) {
+          // Simulation d'envoi des données
+          const formData = new FormData(form);
+          console.log('Données à envoyer:', Object.fromEntries(formData));
+          
+          // Affichage du message de succès
+          afficherMessage('Séance modifiée avec succès !', 'success');
+          
+          // Redirection après 2 secondes
+          setTimeout(() => {
+            window.location.href = '02_emploi_temps.html';
+          }, 2000);
+        }
+      });
+
+      // Gestion des changements de salle pour afficher la capacité
+      const salleSelect = document.querySelector('select[name="salle"]');
+      const capaciteInput = document.querySelector('input[name="capacite"]');
+      
+      salleSelect.addEventListener('change', function() {
+        const capacites = {
+          'A-101': 35,
+          'A-102': 30,
+          'B-203': 40,
+          'B-105': 25,
+          'C-305': 45,
+          'C-201': 35,
+          'Info-1': 20,
+          'Info-2': 25,
+          'Amphi-1': 100,
+          'Amphi-2': 150
+        };
+        
+        capaciteInput.value = capacites[this.value] || '';
+      });
+
+      // Validation des heures
+      const heureDebutSelect = document.querySelector('select[name="heure_debut"]');
+      const heureFinSelect = document.querySelector('select[name="heure_fin"]');
+      
+      heureDebutSelect.addEventListener('change', function() {
+        const heuresCorrespondantes = {
+          '08:00': '10:00',
+          '10:15': '12:15',
+          '14:00': '16:00',
+          '16:15': '18:15'
+        };
+        
+        if (heuresCorrespondantes[this.value]) {
+          heureFinSelect.value = heuresCorrespondantes[this.value];
+        }
+      });
+    });
+
+    function validerFormulaire() {
+      const requiredFields = document.querySelectorAll('[required]');
+      let isValid = true;
+      
+      requiredFields.forEach(field => {
+        if (!field.value) {
+          field.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          field.classList.remove('is-invalid');
+        }
+      });
+      
+      if (!isValid) {
+        afficherMessage('Veuillez remplir tous les champs obligatoires.', 'error');
+      }
+      
+      return isValid;
+    }
+
+    function duppliquerSeance() {
+      if (confirm('Voulez-vous dupliquer cette séance ?')) {
+        // Logique de duplication
+        afficherMessage('Séance dupliquée avec succès !', 'success');
+      }
+    }
+
+    function supprimerSeance() {
+      $('#confirmDeleteModal').modal('show');
+    }
+
+    function confirmerSuppression() {
+      $('#confirmDeleteModal').modal('hide');
+      
+      // Simulation de suppression
+      afficherMessage('Séance supprimée avec succès !', 'success');
+      
+      setTimeout(() => {
+        window.location.href = '02_emploi_temps.html';
+      }, 1500);
+    }
+
+    function afficherMessage(message, type) {
+      const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+      const icon = type === 'success' ? 'check-circle' : 'exclamation-triangle';
+      
+      const alertHtml = `
+        <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+          <i class="fas fa-${icon}"></i>
+          <strong>${message}</strong>
+          <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+          </button>
+        </div>
+      `;
+      
+      // Supprimer les anciennes alertes
+      const existingAlerts = document.querySelectorAll('.alert:not(.alert-info)');
+      existingAlerts.forEach(alert => alert.remove());
+      
+      // Ajouter la nouvelle alerte
+      const pageHeader = document.querySelector('.page-header');
+      pageHeader.insertAdjacentHTML('afterend', alertHtml);
+    }
+  </script>
+</body>
+</html>

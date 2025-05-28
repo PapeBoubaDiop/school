@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'responsable_filiere'
+    'responsable_filiere',
+    'responsable_classe',
 ]
 
 MIDDLEWARE = [
@@ -125,6 +126,13 @@ STATICFILES_DIRS = [BASE_DIR / 'static',
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+AUTH_USER_MODEL = 'responsable_filiere.CustomUser'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'login'
 
 import logging
 logging.basicConfig(level=logging.DEBUG)

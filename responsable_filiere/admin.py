@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Classe, Semestre, Module, Matiere, Professeur, Etudiant, Examen, Utilisateur, Evenement
+from .models import Classe, Semestre, Module, Matiere, Professeur, CustomUser, Etudiant, Examen, Evenement
 
 admin.site.register(Classe)
 admin.site.register(Semestre)
@@ -9,4 +9,13 @@ admin.site.register(Professeur)
 admin.site.register(Etudiant)
 admin.site.register(Examen)
 admin.site.register(Evenement)
-admin.site.register(Utilisateur)
+# admin.site.register(CustomUser)
+
+from django.contrib import admin
+from .models import CustomUser
+
+@admin.register(CustomUser)
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display = ('username', 'email', 'is_active', 'is_authorized', 'is_superuser')
+    list_filter = ('is_active', 'is_authorized', 'is_superuser')
+    search_fields = ('username', 'email')

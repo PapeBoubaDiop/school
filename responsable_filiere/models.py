@@ -51,6 +51,9 @@ class Professeur(models.Model):
         return self.nom
 
 # === ETUDIANTS ===
+from django.conf import settings
+from django.db import models
+
 class Etudiant(models.Model):
     prenom = models.CharField(max_length=100)
     nom = models.CharField(max_length=100)
@@ -60,30 +63,24 @@ class Etudiant(models.Model):
     date_inscription = models.DateField()
     telephone = models.CharField(max_length=20)
     classe = models.ForeignKey(Classe, on_delete=models.CASCADE, related_name="etudiants", null=True)
-
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='etudiant_profile'
+    )
     def __str__(self):
         return f"{self.prenom} {self.nom}"
 
 
-# === UTILISATEURS AVEC ROLE ===
-class Utilisateur(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    ROLES = [
-        ('responsable_filiere', 'Responsable de Filière'),
-        ('responsable_classe', 'Responsable de classe'),
-        ('eleve', 'Elèves'),
-    ]
-    role = models.CharField(max_length=20, choices=ROLES, default='eleve')
-    actif = models.BooleanField(default=True)
 
-    def __str__(self):
-        return f"{self.user.username} - {self.get_role_display()}"
 
 class Evenement(models.Model):
     titre = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     date = models.DateField()
-    heure_de_debut = models.TimeField()
+    heure_debut = models.TimeField()
     heure_de_fin = models.TimeField()
     type_evenement = models.CharField(
         max_length=50,
@@ -103,3 +100,36 @@ class Examen(models.Model):
     def __str__(self):
         return f"{self.matiere.nom} - {self.evenement.date}"
 
+
+
+from django.contrib.auth.models import AbstractUser
+from django.utils.crypto import get_random_string
+
+class CustomUser(AbstractUser):
+    email = models.EmailField(max_length=100, unique=True)
+    is_authorized = models.BooleanField(default=True)
+
+    is_student = models.BooleanField(default=False)
+    is_responsable_de_classe = models.BooleanField(default=False)
+    is_responsable_de_filiere = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.username} ({self.email})"
+
+    def get_role_display(self):
+        if self.is_responsable_de_filiere:
+            return "Responsable Filière"
+        elif self.is_responsable_de_classe:
+            return "Responsable de Classe"
+        elif self.is_student:
+            return "Élève"
+        return "Autre"
+
+class PasswordResetRequest(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    email = models.EmailField()
+    token = models.CharField(max_length=32, default=get_random_string(32), editable=False, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Demande de reset pour {self.email} - {self.created_at.strftime('%Y-%m-%d %H:%M')}"

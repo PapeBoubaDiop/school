@@ -1,13 +1,15 @@
+{%load static%}
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ENSAE - Modifier un examen</title>
-  <link rel="shortcut icon" href="assets/img/favicon.png">
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="shortcut icon" href="{% static 'responsable_filiere/assets/img/favicon.png'%}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/bootstrap/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/fontawesome/css/all.min.css'%}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/css/style.css'%}">
 </head>
 <body>
   <div class="main-wrapper">
@@ -15,8 +17,8 @@
     <!-- Header -->
     <div class="header">
       <div class="header-left">
-        <a href="{%static 'index'%}" class="logo"><img src="assets/img/logo.png" alt="Logo"></a>
-        <a href="{%static 'index'%}" class="logo logo-small"><img src="assets/img/logo-small.png" width="30" height="30" alt="Logo"></a>
+        <a href="{%url 'index'%}" class="logo"><img src="assets/img/logo.png" alt="Logo"></a>
+        <a href="{%url 'index'%}" class="logo logo-small"><img src="assets/img/logo-small.png" width="30" height="30" alt="Logo"></a>
       </div>
       <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
       <div class="top-nav-search">
@@ -132,56 +134,74 @@
           <div class="col-sm-12">
             <div class="card">
               <div class="card-body">
-                <form>
-                  <div class="row">
-                    <div class="col-12">
-                      <h5 class="form-title"><span>Informations sur l'examen</span></h5>
-                    </div>
-                    <div class="col-12 col-sm-6">
-                      <div class="form-group">
-                        <label>Nom de l'examen</label>
-                        <input type="text" class="form-control" value="Examen de Statistiques">
-                      </div>
-                    </div>
-                    <div class="col-12 col-sm-6">
-                      <div class="form-group">
-                        <label>Classe</label>
-                        <select class="form-control">
-                          <option>AS1</option>
-                          <option selected>AS2</option>
-                          <option>AS3</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-12 col-sm-6">
-                      <div class="form-group">
-                        <label>Matière</label>
-                        <input type="text" class="form-control" value="Statistique Inférentielle">
-                      </div>
-                    </div>
-                    <div class="col-12 col-sm-6">
-                      <div class="form-group">
-                        <label>Date</label>
-                        <input type="date" class="form-control" value="2025-06-15">
-                      </div>
-                    </div>
-                    <div class="col-12 col-sm-6">
-                      <div class="form-group">
-                        <label>Heure de début</label>
-                        <input type="time" class="form-control" value="09:00">
-                      </div>
-                    </div>
-                    <div class="col-12 col-sm-6">
-                      <div class="form-group">
-                        <label>Heure de fin</label>
-                        <input type="time" class="form-control" value="12:00">
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+              <form method="POST">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-12"><h5 class="form-title"><span>Informations sur l'examen</span></h5></div>
+
+                  <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                      <label>Titre</label>
+                      <input type="text" name="titre" class="form-control" value="{{ examen.evenement.titre }}">
                     </div>
                   </div>
-                </form>
+
+                  <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                      <label>Description</label>
+                      <input type="text" name="description" class="form-control" value="{{ examen.evenement.description }}">
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                      <label>Classe</label>
+                      <select name="classe" id="classe-select" class="form-control">
+                        {% for cl in classes %}
+                          <option value="{{ cl.id }}" {% if cl in examen.evenement.classes_concernees.all %}selected{% endif %}>{{ cl.nom }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                      <label>Matière</label>
+                      <select name="matiere" id="matiere-select" class="form-control">
+                        {% for mat in matieres %}
+                          <option value="{{ mat.id }}" {% if mat == examen.matiere %}selected{% endif %}>{{ mat.nom }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                      <label>Date</label>
+                      <input type="date" name="date" class="form-control" value="{{ examen.evenement.date|date:'Y-m-d' }}">
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                      <label>Heure de début</label>
+                      <input type="time" name="heure_debut" class="form-control" value="{{ examen.evenement.heure_de_debut|time:'H:i' }}">
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                      <label>Heure de fin</label>
+                      <input type="time" name="heure_fin" class="form-control" value="{{ examen.evenement.heure_de_fin|time:'H:i' }}">
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                  </div>
+                </div>
+              </form>
+
               </div>
             </div>
           </div>
@@ -196,9 +216,47 @@
   </div>
 
   <!-- Scripts -->
-  <script src="assets/js/jquery-3.6.0.min.js"></script>
-  <script src="assets/js/popper.min.js"></script>
-  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/script.js"></script>
+  <script src="{% static 'responsable_filiere/assets/js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/js/popper.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/js/script.js' %}"></script>
+  <script>
+$(document).ready(function () {
+  function loadMatieres(classeId, selectedMatiereId) {
+    const matiereSelect = $('#matiere-select');
+    matiereSelect.empty().append('<option>Chargement...</option>');
+    if (classeId) {
+      $.ajax({
+        url: `/get_matieres/${classeId}/`,
+        type: 'GET',
+        success: function (data) {
+          matiereSelect.empty().append('<option value="">Sélectionner</option>');
+          data.matieres.forEach(function (matiere) {
+            const selected = (matiere.id == selectedMatiereId) ? 'selected' : '';
+            matiereSelect.append(`<option value="${matiere.id}" ${selected}>${matiere.nom}</option>`);
+          });
+        },
+        error: function () {
+          matiereSelect.empty().append('<option>Erreur de chargement</option>');
+        }
+      });
+    } else {
+      matiereSelect.empty().append('<option value="">Sélectionner une classe d\'abord</option>');
+    }
+  }
+
+  // Initialisation au chargement de la page
+  const initialClasseId = $('#classe-select').val();
+  const initialMatiereId = "{{ examen.matiere.id }}";
+  if (initialClasseId) {
+    loadMatieres(initialClasseId, initialMatiereId);
+  }
+
+  // Mise à jour lors du changement de classe
+  $('#classe-select').change(function () {
+    loadMatieres($(this).val(), null);
+  });
+});
+</script>
 </body>
 </html>

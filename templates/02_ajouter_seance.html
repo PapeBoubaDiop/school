@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENSAE - Ajouter une Séance</title>
+  <link rel="shortcut icon" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="main-wrapper">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <a href="02_emploi_temps.html" class="logo">
+          <img src="assets/img/logo.png" alt="Logo">
+        </a>
+        <a href="02_emploi_temps.html" class="logo logo-small">
+          <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+        </a>
+      </div>
+      <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
+      <div class="top-nav-search">
+        <form>
+          <input type="text" class="form-control" placeholder="Recherche...">
+          <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
+      <ul class="nav user-menu">
+        <li class="nav-item dropdown has-arrow">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+            <img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Responsable">
+          </a>
+          <div class="dropdown-menu">
+            <div class="user-header">
+              <div class="avatar avatar-sm">
+                <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+              </div>
+              <div class="user-text">
+                <h6>Responsable de Classe</h6>
+                <p class="text-muted mb-0">AS1</p>
+              </div>
+            </div>
+            <a class="dropdown-item" href="profile.html">Mon profil</a>
+            <a class="dropdown-item" href="login.html">Déconnexion</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+         <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title"><span>Menu</span></li>
+                        <li>
+                            <a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+                        </li>
+                        <li><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
+                        <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
+                        <li><a href="02_etudiants.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
+                        <li><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
+                        <li><a href="02_cahier_texte.html"><i class="fas fa-book"></i> <span>Cahier de texte</span></a></li>
+                        <li><a href="02_devoir_projet.html"><i class="fas fa-clipboard-list"></i> <span>Devoirs & Projets</span></a></li>
+                        <li class="active"><a href="02_emploi_temps.html"><i class="fas fa-calendar-alt"></i> <span>Emploi du temps</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+    <!-- Contenu principal -->
+    <div class="page-wrapper">
+      <div class="content container-fluid">
+        <div class="page-header">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="page-title">Ajouter une Séance</h3>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="02_emploi_temps.html">Emploi du temps</a></li>
+                <li class="breadcrumb-item active">Ajouter séance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-body">
+                <form id="ajouterSeanceForm">
+                  <div class="row">
+                    <div class="col-12">
+                      <h5 class="form-title"><span>Détails de la séance</span></h5>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Matière <span class="text-danger">*</span></label>
+                        <select class="form-control" required>
+                          <option value="">-- Sélectionner une matière --</option>
+                          <option value="mathematiques">Mathématiques</option>
+                          <option value="statistiques">Statistiques</option>
+                          <option value="probabilites">Probabilités</option>
+                          <option value="econometrie">Économétrie</option>
+                          <option value="informatique">Informatique statistique</option>
+                          <option value="analyse_donnees">Analyse de données</option>
+                          <option value="methodologie">Méthodologie de recherche</option>
+                          <option value="anglais">Anglais scientifique</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Type de séance <span class="text-danger">*</span></label>
+                        <select class="form-control" required>
+                          <option value="">-- Sélectionner le type --</option>
+                          <option value="cours">Cours magistral</option>
+                          <option value="td">Travaux dirigés (TD)</option>
+                          <option value="tp">Travaux pratiques (TP)</option>
+                          <option value="controle">Contrôle/Examen</option>
+                          <option value="conference">Conférence</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Enseignant <span class="text-danger">*</span></label>
+                        <select class="form-control" required>
+                          <option value="">-- Sélectionner un enseignant --</option>
+                          <option value="prof_dubois">Prof. Dubois (Mathématiques)</option>
+                          <option value="prof_martin">Prof. Martin (Statistiques)</option>
+                          <option value="prof_leroy">Prof. Leroy (Probabilités)</option>
+                          <option value="prof_bernard">Prof. Bernard (Informatique)</option>
+                          <option value="prof_johnson">Prof. Johnson (Anglais)</option>
+                          <option value="prof_petit">Prof. Petit (Méthodologie)</option>
+                          <option value="prof_dupont">Prof. Dupont (Économétrie)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Classe <span class="text-danger">*</span></label>
+                        <select class="form-control" required>
+                          <option value="">-- Sélectionner une classe --</option>
+                          <option value="AS1">Classe AS1</option>
+                          <option value="AS2">Classe AS2</option>
+                          <option value="AS3">Classe AS3</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <h5 class="form-title mt-4"><span>Horaires et lieu</span></h5>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Jour <span class="text-danger">*</span></label>
+                        <select class="form-control" required>
+                          <option value="">-- Sélectionner --</option>
+                          <option value="lundi">Lundi</option>
+                          <option value="mardi">Mardi</option>
+                          <option value="mercredi">Mercredi</option>
+                          <option value="jeudi">Jeudi</option>
+                          <option value="vendredi">Vendredi</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Heure de début <span class="text-danger">*</span></label>
+                        <select class="form-control" required>
+                          <option value="">-- Sélectionner --</option>
+                          <option value="08:00">08:00</option>
+                          <option value="10:15">10:15</option>
+                          <option value="14:00">14:00</option>
+                          <option value="16:15">16:15</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Heure de fin <span class="text-danger">*</span></label>
+                        <select class="form-control" required>
+                          <option value="">-- Sélectionner --</option>
+                          <option value="10:00">10:00</option>
+                          <option value="12:15">12:15</option>
+                          <option value="16:00">16:00</option>
+                          <option value="18:15">18:15</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Salle <span class="text-danger">*</span></label>
+                        <select class="form-control" required>
+                          <option value="">-- Sélectionner une salle --</option>
+                          <option value="A-101">Salle A-101</option>
+                          <option value="A-102">Salle A-102</option>
+                          <option value="B-203">Salle B-203</option>
+                          <option value="B-105">Salle B-105</option>
+                          <option value="C-305">Salle C-305</option>
+                          <option value="C-201">Salle C-201</option>
+                          <option value="Info-1">Salle Info-1</option>
+                          <option value="Info-2">Salle Info-2</option>
+                          <option value="Amphi-A">Amphithéâtre A</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-group">
+                        <label>Description/Remarques (optionnel)</label>
+                        <textarea class="form-control" rows="3" placeholder="Description du cours, remarques particulières..."></textarea>
+                      </div>
+                    </div>
+
+
+                    <div class="col-12">
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary mr-2">
+                          <i class="fas fa-plus"></i> Ajouter la séance
+                        </button>
+                        <a href="02_emploi_temps.html" class="btn btn-secondary">
+                          <i class="fas fa-times"></i> Annuler
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery-3.6.0.min.js"></script>
+  <script src="assets/js/popper.min.js"></script>
+  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/script.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Validation des heures
+      const heureDebut = document.querySelector('select[name="heure_debut"]');
+      const heureFin = document.querySelector('select[name="heure_fin"]');
+      
+      // Gestion du formulaire
+      document.getElementById('ajouterSeanceForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validation des champs requis
+        const champsRequis = this.querySelectorAll('[required]');
+        let valide = true;
+        
+        champsRequis.forEach(champ => {
+          if (!champ.value.trim()) {
+            champ.classList.add('is-invalid');
+            valide = false;
+          } else {
+            champ.classList.remove('is-invalid');
+          }
+        });
+        
+        if (valide) {
+          // Simuler l'ajout
+          alert('Séance ajoutée avec succès !');
+          window.location.href = '02_emploi_temps.html';
+        } else {
+          alert('Veuillez remplir tous les champs obligatoires.');
+        }
+      });
+      
+      // Autocomplétation intelligente des heures de fin
+      document.querySelector('select[required]').addEventListener('change', function() {
+        if (this.previousElementSibling && this.previousElementSibling.querySelector('label').textContent.includes('début')) {
+          const heureFin = document.querySelectorAll('select')[document.querySelectorAll('select').indexOf(this) + 1];
+          const heureDebut = this.value;
+          
+          // Logique pour suggérer l'heure de fin (2h après le début)
+          const suggestions = {
+            '08:00': '10:00',
+            '10:15': '12:15',
+            '14:00': '16:00',
+            '16:15': '18:15'
+          };
+          
+          if (suggestions[heureDebut]) {
+            heureFin.value = suggestions[heureDebut];
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -20,6 +20,6 @@ from responsable_filiere import views as rf_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', rf_views.index, name='index'),
-    path('',include("responsable_filiere.urls"))
+    path('',include("responsable_filiere.urls")),
+    path('authentification', include("authentification.urls"))
 ]

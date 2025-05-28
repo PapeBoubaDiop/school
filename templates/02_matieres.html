@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENSAE - Matières</title>
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <a href="02_index.html" class="logo">
+                    <img src="assets/img/logo.png" alt="Logo">
+                </a>
+                <a href="02_index.html" class="logo logo-small">
+                    <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+                </a>
+            </div>
+            <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
+            <div class="top-nav-search">
+                <form>
+                    <input type="text" class="form-control" placeholder="Rechercher une matière...">
+                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
+            <ul class="nav user-menu">
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Responsable AS1">
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="user-header">
+                            <div class="avatar avatar-sm">
+                                <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+                            </div>
+                            <div class="user-text">
+                                <h6>Responsable AS1</h6>
+                                <p class="text-muted mb-0">Responsable de classe</p>
+                            </div>
+                        </div>
+                        <a class="dropdown-item" href="profile.html">Mon profil</a>
+                        <a class="dropdown-item" href="login.html">Déconnexion</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title"><span>Menu</span></li>
+                        <li><a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
+                        <li class="active"><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
+                        <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
+                        <li><a href="02_etudiants.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
+                        <li><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
+                        <li><a href="02_cahier_texte.html"><i class="fas fa-book"></i> <span>Cahier de texte</span></a></li>
+                        <li><a href="02_devoir_projet.html"><i class="fas fa-clipboard-list"></i> <span>Devoirs & Projets</span></a></li>
+                        <li><a href="02_emploi_temps.html"><i class="fas fa-calendar-alt"></i> <span>Emploi du temps</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Matières</h3>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="02_index.html">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Matières</li>
+                            </ul>
+                        </div>
+                        <div class="col-auto text-right float-right ml-auto">
+                            <a href="#" class="btn btn-outline-primary mr-2" onclick="exportSubjects()">
+                                <i class="fas fa-download"></i> Exporter
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subjects Table -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-center mb-0" id="subjectsTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Code</th>
+                                                <th>Nom de la matière</th>
+                                                <th>Professeur</th>
+                                                <th>Crédits</th>
+                                                <th>Heures</th>
+                                                <th>Semestre</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>STAT101</strong></td>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="mb-0">Statistiques Descriptives</h6>
+                                                        <small class="text-muted">Introduction aux méthodes statistiques</small>
+                                                    </div>
+                                                </td>
+                                                <td>Dr. Moussa DIAGNE</td>
+                                                <td><span class="badge badge-primary">4</span></td>
+                                                <td>45h</td>
+                                                <td><span class="badge badge-info">S1</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>MATH102</strong></td>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="mb-0">Analyse Mathématique</h6>
+                                                        <small class="text-muted">Calcul différentiel et intégral</small>
+                                                    </div>
+                                                </td>
+                                                <td>Dr. Awa THIAM</td>
+                                                <td><span class="badge badge-primary">5</span></td>
+                                                <td>60h</td>
+                                                <td><span class="badge badge-info">S1</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>INFO103</strong></td>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="mb-0">Programmation Python</h6>
+                                                        <small class="text-muted">Bases de la programmation</small>
+                                                    </div>
+                                                </td>
+                                                <td>Pr. Ibrahima KANE</td>
+                                                <td><span class="badge badge-primary">3</span></td>
+                                                <td>30h</td>
+                                                <td><span class="badge badge-info">S1</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>ECON104</strong></td>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="mb-0">Microéconomie</h6>
+                                                        <small class="text-muted">Théories du comportement économique</small>
+                                                    </div>
+                                                </td>
+                                                <td>Dr. Khady SOW</td>
+                                                <td><span class="badge badge-primary">4</span></td>
+                                                <td>45h</td>
+                                                <td><span class="badge badge-info">S1</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>DEMO201</strong></td>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="mb-0">Démographie Générale</h6>
+                                                        <small class="text-muted">Analyse des populations</small>
+                                                    </div>
+                                                </td>
+                                                <td>Dr. Amadou FALL</td>
+                                                <td><span class="badge badge-primary">4</span></td>
+                                                <td>45h</td>
+                                                <td><span class="badge badge-success">S2</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>DATA202</strong></td>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="mb-0">Data Science</h6>
+                                                        <small class="text-muted">Analyse et visualisation de données</small>
+                                                    </div>
+                                                </td>
+                                                <td>Dr. Mariama NDIAYE</td>
+                                                <td><span class="badge badge-primary">5</span></td>
+                                                <td>60h</td>
+                                                <td><span class="badge badge-success">S2</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>RO203</strong></td>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="mb-0">Recherche Opérationnelle</h6>
+                                                        <small class="text-muted">Optimisation et modélisation</small>
+                                                    </div>
+                                                </td>
+                                                <td>Pr. Cheikh GUEYE</td>
+                                                <td><span class="badge badge-primary">4</span></td>
+                                                <td>45h</td>
+                                                <td><span class="badge badge-success">S2</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>ACT204</strong></td>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="mb-0">Actuariat</h6>
+                                                        <small class="text-muted">Mathématiques de l'assurance</small>
+                                                    </div>
+                                                </td>
+                                                <td>Dr. Fatou DIOUF</td>
+                                                <td><span class="badge badge-primary">4</span></td>
+                                                <td>45h</td>
+                                                <td><span class="badge badge-success">S2</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>STAT301</strong></td>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="mb-0">Statistiques Inférentielles</h6>
+                                                        <small class="text-muted">Tests d'hypothèses et estimation</small>
+                                                    </div>
+                                                </td>
+                                                <td>Dr. Moussa DIAGNE</td>
+                                                <td><span class="badge badge-primary">5</span></td>
+                                                <td>60h</td>
+                                                <td><span class="badge badge-warning">S3</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>ECON302</strong></td>
+                                                <td>
+                                                    <div>
+                                                        <h6 class="mb-0">Économétrie</h6>
+                                                        <small class="text-muted">Modélisation économique</small>
+                                                    </div>
+                                                </td>
+                                                <td>Dr. Khady SOW</td>
+                                                <td><span class="badge badge-primary">5</span></td>
+                                                <td>60h</td>
+                                                <td><span class="badge badge-warning">S3</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="assets/js/script.js"></script>
+
+    <script>
+        function exportSubjects() {
+            alert('Export de la liste des matières');
+            // Logique d'export à implémenter côté Django
+        }
+    </script>
+</body>
+</html>

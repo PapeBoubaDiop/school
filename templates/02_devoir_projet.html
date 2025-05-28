@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENSAE - Gestion Devoirs & Projets</title>
+  <link rel="shortcut icon" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="main-wrapper">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <a href="02_index.html" class="logo">
+          <img src="assets/img/logo.png" alt="Logo">
+        </a>
+        <a href="02_index.html" class="logo logo-small">
+          <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+        </a>
+      </div>
+      <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
+      <div class="top-nav-search">
+        <form>
+          <input type="text" class="form-control" placeholder="Recherche...">
+          <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
+      <ul class="nav user-menu">
+        <li class="nav-item dropdown has-arrow">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+            <img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Admin">
+          </a>
+          <div class="dropdown-menu">
+            <div class="user-header">
+              <div class="avatar avatar-sm">
+                <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+              </div>
+              <div class="user-text">
+                <h6>Responsable AS1</h6>
+                <p class="text-muted mb-0">Responsable de classe</p>
+              </div>
+            </div>
+            <a class="dropdown-item" href="profile.html">Mon profil</a>
+            <a class="dropdown-item" href="login.html">Déconnexion</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+          <ul>
+            <li class="menu-title"><span>Menu</span></li>
+            <li>
+              <a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+            </li>
+            <li><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
+            <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
+            <li><a href="02_etudiants.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
+            <li><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
+            <li><a href="02_cahier_texte.html"><i class="fas fa-book"></i> <span>Cahier de texte</span></a></li>
+            <li class="active"><a href="02_devoir_projet.html"><i class="fas fa-clipboard-list"></i> <span>Devoirs & Projets</span></a></li>
+            <li><a href="02_emploi_temps.html"><i class="fas fa-calendar-alt"></i> <span>Emploi du temps</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="page-wrapper">
+      <div class="content container-fluid">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="page-title">Gestion des Devoirs & Projets</h3>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="02_index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active">Devoirs & Projets</li>
+              </ul>
+            </div>
+            <div class="col-auto text-right float-right ml-auto">
+              <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Exporter</a>
+              <a href="02_ajouter_devoir.html" class="btn btn-primary" data-toggle="modal" data-target="#addDevoirModal"><i class="fas fa-plus"></i> Nouveau Devoir</a>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Tableau des devoirs -->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card card-table">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover table-center mb-0" id="devoirs-table">
+                    <thead>
+                      <tr>
+                        <th>Titre</th>
+                        <th>Type</th>
+                        <th>Matière</th>
+                        <th>Date limite</th>
+                        <th class="text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <h6><a href="#">Analyse de série temporelle</a></h6>
+                          <p class="text-muted mb-0">Étude des données économiques françaises</p>
+                        </td>
+                        <td><span class="badge badge-primary">Projet</span></td>
+                        <td>Statistiques</td>
+                        <td class="text-danger font-weight-bold">24 Mai 2025</td>
+                        <td class="text-right">
+                          <div class="actions">
+                            <a href="02_modifier_devoir.html" class="btn btn-sm bg-success-light mr-1" title="Modifier">
+                              <i class="fas fa-pen"></i>
+                            </a>
+                            <a href="#" class="btn btn-sm bg-danger-light" title="Supprimer">
+                              <i class="fas fa-trash"></i>
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h6><a href="#">Devoir Mathématiques</a></h6>
+                          <p class="text-muted mb-0">Algèbre linéaire - Chapitre 5</p>
+                        </td>
+                        <td><span class="badge badge-info">Devoir Surveillé</span></td>
+                        <td>Mathématiques</td>
+                        <td class="text-success font-weight-bold">26 Mai 2025</td>
+                        <td class="text-right">
+                          <div class="actions">
+                            <a href="02_modifier_devoir.html" class="btn btn-sm bg-success-light mr-1" title="Modifier">
+                              <i class="fas fa-pen"></i>
+                            </a>
+                            <a href="#" class="btn btn-sm bg-danger-light" title="Supprimer">
+                              <i class="fas fa-trash"></i>
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h6><a href="#">Exposé Économie</a></h6>
+                          <p class="text-muted mb-0">Les théories keynésiennes</p>
+                        </td>
+                        <td><span class="badge badge-secondary">Exposé</span></td>
+                        <td>Économie</td>
+                        <td class="text-muted">22 Mai 2025</td>
+                        <td class="text-right">
+                          <div class="actions">
+                            <a href="02_modifier_devoir.html" class="btn btn-sm bg-success-light mr-1" title="Modifier">
+                              <i class="fas fa-pen"></i>
+                            </a>
+                            <a href="#" class="btn btn-sm bg-danger-light" title="Supprimer">
+                              <i class="fas fa-trash"></i>
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h6><a href="#">TP Informatique</a></h6>
+                          <p class="text-muted mb-0">Programmation Python - Pandas</p>
+                        </td>
+                        <td><span class="badge badge-warning">TP</span></td>
+                        <td>Informatique</td>
+                        <td class="text-danger font-weight-bold">23 Mai 2025</td>
+                        <td class="text-right">
+                          <div class="actions">
+                            <a href="02_modifier_devoir.html" class="btn btn-sm bg-success-light mr-1" title="Modifier">
+                              <i class="fas fa-pen"></i>
+                            </a>
+                            <a href="#" class="btn btn-sm bg-danger-light" title="Supprimer">
+                              <i class="fas fa-trash"></i>
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h6><a href="#">Devoir Maison Anglais</a></h6>
+                          <p class="text-muted mb-0">Essay on Economic Trends</p>
+                        </td>
+                        <td><span class="badge badge-success">Devoir Maison</span></td>
+                        <td>Anglais</td>
+                        <td class="text-primary font-weight-bold">28 Mai 2025</td>
+                        <td class="text-right">
+                          <div class="actions">
+                            <a href="02_modifier_devoir.html" class="btn btn-sm bg-success-light mr-1" title="Modifier">
+                              <i class="fas fa-pen"></i>
+                            </a>
+                            <a href="#" class="btn btn-sm bg-danger-light" title="Supprimer">
+                              <i class="fas fa-trash"></i>
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal Ajouter Devoir -->
+  <div class="modal fade" id="addDevoirModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><a href="02_ajouter_devoir.html">Nouveau Devoir/Projet </a></h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Titre <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="Titre du devoir">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Type <span class="text-danger">*</span></label>
+                  <select class="form-control">
+                    <option>Devoir Maison</option>
+                    <option>Devoir Surveillé</option>
+                    <option>Projet</option>
+                    <option>Exposé</option>
+                    <option>TP</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Matière <span class="text-danger">*</span></label>
+                  <select class="form-control">
+                    <option>Mathématiques</option>
+                    <option>Statistiques</option>
+                    <option>Économie</option>
+                    <option>Informatique</option>
+                    <option>Anglais</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Date limite <span class="text-danger">*</span></label>
+                  <input type="datetime-local" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea class="form-control" rows="4" placeholder="Description détaillée du devoir..."></textarea>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Coefficient</label>
+                  <input type="number" class="form-control" placeholder="1" min="0.5" max="5" step="0.5">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Durée estimée (heures)</label>
+                  <input type="number" class="form-control" placeholder="2" min="1" max="20">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="notifyStudents">
+                <label class="custom-control-label" for="notifyStudents">Notifier les étudiants par email</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary">Créer le devoir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/popper.min.js"></script>
+  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+  <script src="assets/js/script.js"></script>
+
+  <script>
+    // Fonctions de filtrage et recherche en JavaScript vanilla
+    document.addEventListener('DOMContentLoaded', function() {
+      const table = document.getElementById('devoirs-table');
+      const tbody = table.querySelector('tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      
+      const searchInput = document.getElementById('search-input');
+      const filterType = document.getElementById('filter-type');
+      const filterMatiere = document.getElementById('filter-matiere');
+
+      function filterTable() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedType = filterType.value;
+        const selectedMatiere = filterMatiere.value;
+        
+        rows.forEach(row => {
+          const title = row.querySelector('h6 a').textContent.toLowerCase();
+          const description = row.querySelector('p.text-muted').textContent.toLowerCase();
+          const type = row.querySelector('.badge').textContent;
+          const matiere = row.cells[2].textContent;
+          
+          const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+          const matchesType = selectedType === 'Tous' || type === selectedType;
+          const matchesMatiere = selectedMatiere === 'Toutes' || matiere === selectedMatiere;
+          
+          if (matchesSearch && matchesType && matchesMatiere) {
+            row.style.display = 'table-row';
+          } else {
+            row.style.display = 'none';
+          }
+        });
+      }
+
+      // Ajouter les événements de filtrage
+      searchInput.addEventListener('keyup', filterTable);
+      filterType.addEventListener('change', filterTable);
+      filterMatiere.addEventListener('change', filterTable);
+    });
+  </script>
+</body>
+</html>

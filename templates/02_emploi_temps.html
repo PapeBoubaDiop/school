@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Preskool - Emploi du temps</title>
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+<body>
+    <div class="main-wrapper">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <a href="02_index.html" class="logo">
+                    <img src="assets/img/logo.png" alt="Logo">
+                </a>
+                <a href="02_index.html" class="logo logo-small">
+                    <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+                </a>
+            </div>
+            <a href="javascript:void(0);" id="toggle_btn">
+                <i class="fas fa-align-left"></i>
+            </a>
+            <div class="top-nav-search">
+                <form>
+                    <input type="text" class="form-control" placeholder="Rechercher...">
+                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            <a class="mobile_btn" id="mobile_btn">
+                <i class="fas fa-bars"></i>
+            </a>
+            <ul class="nav user-menu">
+                <li class="nav-item dropdown noti-dropdown">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="far fa-bell"></i> <span class="badge badge-pill">3</span>
+                    </a>
+                    <div class="dropdown-menu notifications">
+                        <div class="topnav-dropdown-header">
+                            <span class="notification-title">Notifications</span>
+                            <a href="javascript:void(0)" class="clear-noti">Tout effacer</a>
+                        </div>
+                        <div class="noti-content">
+                            <ul class="notification-list">
+                                <li class="notification-message">
+                                    <a href="#">
+                                        <div class="media">
+                                            <span class="avatar avatar-sm">
+                                                <img class="avatar-img rounded-circle" alt="User Image" src="assets/img/profiles/avatar-02.jpg">
+                                            </span>
+                                            <div class="media-body">
+                                                <p class="noti-details"><span class="noti-title">Nouveau cours</span> ajouté à l'emploi du temps</p>
+                                                <p class="noti-time"><span class="notification-time">Il y a 4 minutes</span></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <span class="user-img"><img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Admin"></span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="user-header">
+                            <div class="avatar avatar-sm">
+                                <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+                            </div>
+                            <div class="user-text">
+                                <h6>Administrateur</h6>
+                                <p class="text-muted mb-0">ENSAE</p>
+                            </div>
+                        </div>
+                        <a class="dropdown-item" href="profile.html">Mon Profil</a>
+                        <a class="dropdown-item" href="login.html">Déconnexion</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title"><span>Menu</span></li>
+                        <li>
+                            <a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+                        </li>
+                        <li><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
+                        <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
+                        <li><a href="02_etudiants.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
+                        <li><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
+                        <li><a href="02_cahier_texte.html"><i class="fas fa-book"></i> <span>Cahier de texte</span></a></li>
+                        <li><a href="02_devoir_projet.html"><i class="fas fa-clipboard-list"></i> <span>Devoirs & Projets</span></a></li>
+                        <li class="active"><a href="02_emploi_temps.html"><i class="fas fa-calendar-alt"></i> <span>Emploi du temps</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Page Wrapper -->
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Emploi du temps - AS1</h3>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="02_index.html">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Emploi du temps</li>
+                            </ul>
+                        </div>
+                        <div class="col-auto text-right float-right ml-auto">
+                            <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Exporter PDF</a>
+                            <a href="02_ajouter_seance.html" class="btn btn-primary"><i class="fas fa-plus"></i> Ajouter séance</a>
+                        </div>
+                    </div>
+                </div>
+
+            
+                <!-- Schedule Table -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" style="width: 120px;">Horaires</th>
+                                                <th class="text-center">Lundi</th>
+                                                <th class="text-center">Mardi</th>
+                                                <th class="text-center">Mercredi</th>
+                                                <th class="text-center">Jeudi</th>
+                                                <th class="text-center">Vendredi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center font-weight-bold bg-light">08:00 - 10:00</td>
+                                                <td class="text-center">
+                                                    <div class="schedule-item bg-primary-light p-2 rounded">
+                                                        <h6 class="mb-1">Mathématiques</h6>
+                                                        <small class="text-muted">Prof. Dubois</small>
+                                                        <small class="d-block">Salle A-101</small>
+                                                        <div class="mt-2">
+                                                            <a href="02_modifier_seance.html?id=1" class="btn btn-sm bg-success-light mr-1">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm bg-danger-light">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="schedule-item bg-success-light p-2 rounded">
+                                                        <h6 class="mb-1">Économie</h6>
+                                                        <small class="text-muted">Prof. Martin</small>
+                                                        <small class="d-block">Salle B-203</small>
+                                                        <div class="mt-2">
+                                                            <a href="02_modifier_seance.html?id=2" class="btn btn-sm bg-success-light mr-1">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm bg-danger-light">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="text-muted">Libre</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="schedule-item bg-warning-light p-2 rounded">
+                                                        <h6 class="mb-1">Statistiques</h6>
+                                                        <small class="text-muted">Prof. Leroy</small>
+                                                        <small class="d-block">Salle C-305</small>
+                                                        <div class="mt-2">
+                                                            <a href="02_modifier_seance.html?id=3" class="btn btn-sm bg-success-light mr-1">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm bg-danger-light">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="schedule-item bg-info-light p-2 rounded">
+                                                        <h6 class="mb-1">Informatique</h6>
+                                                        <small class="text-muted">Prof. Bernard</small>
+                                                        <small class="d-block">Salle Info-1</small>
+                                                        <div class="mt-2">
+                                                            <a href="02_modifier_seance.html?id=4" class="btn btn-sm bg-success-light mr-1">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm bg-danger-light">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center font-weight-bold bg-light">10:15 - 12:15</td>
+                                                <td class="text-center">
+                                                    <div class="schedule-item bg-danger-light p-2 rounded">
+                                                        <h6 class="mb-1">Anglais</h6>
+                                                        <small class="text-muted">Prof. Johnson</small>
+                                                        <small class="d-block">Salle B-105</small>
+                                                        <div class="mt-2">
+                                                            <a href="02_modifier_seance.html?id=5" class="btn btn-sm bg-success-light mr-1">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm bg-danger-light">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="text-muted">Libre</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="schedule-item bg-secondary-light p-2 rounded">
+                                                        <h6 class="mb-1">Méthodologie</h6>
+                                                        <small class="text-muted">Prof. Petit</small>
+                                                        <small class="d-block">Salle A-102</small>
+                                                        <div class="mt-2">
+                                                            <a href="02_modifier_seance.html?id=6" class="btn btn-sm bg-success-light mr-1">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm bg-danger-light">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="schedule-item bg-primary-light p-2 rounded">
+                                                        <h6 class="mb-1">Mathématiques</h6>
+                                                        <small class="text-muted">Prof. Dubois</small>
+                                                        <small class="d-block">Salle A-101</small>
+                                                        <div class="mt-2">
+                                                            <a href="02_modifier_seance.html?id=7" class="btn btn-sm bg-success-light mr-1">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm bg-danger-light">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="text-muted">Libre</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="bg-light">
+                                                <td class="text-center font-weight-bold">12:15 - 14:00</td>
+                                                <td colspan="5" class="text-center text-muted font-weight-bold">PAUSE DÉJEUNER</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center font-weight-bold bg-light">14:00 - 16:00</td>
+                                                <td class="text-center">
+                                                    <div class="schedule-item bg-warning-light p-2 rounded">
+                                                        <h6 class="mb-1">Statistiques</h6>
+                                                        <small class="text-muted">Prof. Leroy</small>
+                                                        <small class="d-block">Salle C-305</small>
+                                                        <div class="mt-2">
+                                                            <a href="02_modifier_seance.html?id=8" class="btn btn-sm bg-success-light mr-1">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm bg-danger-light">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="schedule-item bg-info-light p-2 rounded">
+                                                        <h6 class="mb-1">Informatique</h6>
+                                                        <small class="text-muted">Prof. Bernard</small>
+                                                        <small class="d-block">Salle Info-2</small>
+                                                        <div class="mt-2">
+                                                            <a href="02_modifier_seance.html?id=9" class="btn btn-sm bg-success-light mr-1">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm bg-danger-light">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="text-muted">Libre</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="schedule-item bg-success-light p-2 rounded">
+                                                        <h6 class="mb-1">Économie</h6>
+                                                        <small class="text-muted">Prof. Martin</small>
+                                                        <small class="d-block">Salle B-203</small>
+                                                        <div class="mt-2">
+                                                            <a href="02_modifier_seance.html?id=10" class="btn btn-sm bg-success-light mr-1">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm bg-danger-light">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="schedule-item bg-danger-light p-2 rounded">
+                                                        <h6 class="mb-1">Anglais</h6>
+                                                        <small class="text-muted">Prof. Johnson</small>
+                                                        <small class="d-block">Salle B-105</small>
+                                                        <div class="mt-2">
+                                                            <a href="02_modifier_seance.html?id=11" class="btn btn-sm bg-success-light mr-1">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm bg-danger-light">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center font-weight-bold bg-light">16:15 - 18:15</td>
+                                                <td class="text-center">
+                                                    <span class="text-muted">Libre</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="schedule-item bg-secondary-light p-2 rounded">
+                                                        <h6 class="mb-1">TD Statistiques</h6>
+                                                        <small class="text-muted">Prof. Dupont</small>
+                                                        <small class="d-block">Salle C-201</small>
+                                                        <div class="mt-2">
+                                                            <a href="02_modifier_seance.html?id=12" class="btn btn-sm bg-success-light mr-1">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm bg-danger-light">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="text-muted">Libre</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="text-muted">Libre</span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="text-muted">Libre</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="assets/js/script.js"></script>
+
+    <script>
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle view toggle buttons
+            const viewButtons = document.querySelectorAll('.btn-group .btn');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    viewButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Handle delete buttons with confirmation
+            document.querySelectorAll('.bg-danger-light').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (confirm('Êtes-vous sûr de vouloir supprimer cette séance ?')) {
+                        // Add delete logic here
+                        console.log('Séance supprimée');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

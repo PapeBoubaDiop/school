@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENSAE - Modifier une Leçon</title>
+  <link rel="shortcut icon" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .lesson-card { 
+      border-left: 4px solid #007bff; 
+      transition: all 0.3s ease;
+    }
+    .lesson-card:hover { 
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+      transform: translateY(-2px);
+    }
+    .date-badge { 
+      position: absolute; 
+      top: 15px; 
+      right: 15px; 
+      font-size: 0.8em;
+    }
+    .subject-badge {
+      font-size: 0.9em;
+      padding: 4px 12px;
+    }
+    .add-lesson-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    .modal-backdrop.show {
+      opacity: 0.8;
+    }
+    .form-floating > label {
+      color: #6c757d;
+    }
+    .lesson-content {
+      line-height: 1.6;
+    }
+    .homework-section {
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 10px;
+    }
+    .edit-indicator {
+      background: linear-gradient(135deg, #ffc107, #fd7e14);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-wrapper">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <a href="02_index.html" class="logo">
+          <img src="assets/img/logo.png" alt="Logo">
+        </a>
+        <a href="02_index.html" class="logo logo-small">
+          <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+        </a>
+      </div>
+      <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
+      <div class="top-nav-search">
+        <form>
+          <input type="text" class="form-control" placeholder="Rechercher dans le cahier...">
+          <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
+      <ul class="nav user-menu">
+        <li class="nav-item dropdown has-arrow">
+          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+            <img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Admin">
+          </a>
+          <div class="dropdown-menu">
+            <div class="user-header">
+              <div class="avatar avatar-sm">
+                <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+              </div>
+              <div class="user-text">
+                <h6>Responsable AS1</h6>
+                <p class="text-muted mb-0">Responsable de classe</p>
+              </div>
+            </div>
+            <a class="dropdown-item" href="profile.html">Mon profil</a>
+            <a class="dropdown-item" href="login.html">Déconnexion</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+          <ul>
+            <li class="menu-title"><span>Menu</span></li>
+            <li><a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
+            <li><a href="matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
+            <li><a href="professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
+            <li><a href="etudiants.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
+            <li><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
+            <li class="active"><a href="02_cahier_texte.html"><i class="fas fa-book"></i> <span>Cahier de texte</span></a></li>
+            <li><a href="02_devoir_projet.html"><i class="fas fa-clipboard-list"></i> <span>Devoirs & Projets</span></a></li>
+            <li><a href="02_emploi_temps.html"><i class="fas fa-calendar-alt"></i> <span>Emploi du temps</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="page-wrapper">
+      <div class="content container-fluid">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="page-title">
+                Modifier une Leçon
+              </h3>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="02_index.html">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="02_cahier_texte.html">Cahier de texte</a></li>
+                <li class="breadcrumb-item active">Modifier</li>
+              </ul>
+            </div>
+            <div class="col-auto text-right float-right ml-auto">
+              <a href="02_cahier_texte.html" class="btn btn-outline-secondary mr-2">Retour</a>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Formulaire de modification -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">
+                  <i class="fas fa-edit text-primary"></i> Formulaire de modification
+                </h5>
+              </div>
+              <div class="card-body">
+                <form id="editLessonForm">
+                  <!-- Champ caché pour l'ID -->
+                  <input type="hidden" id="lessonId" value="1">
+                  
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <input type="date" class="form-control" id="lessonDate" value="2025-05-22" required>
+                        <label for="lessonDate">Date de la leçon</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <select class="form-control" id="lessonSubject" required>
+                          <option value="" disabled>Sélectionner une matière</option>
+                          <option value="maths" selected>Mathématiques</option>
+                          <option value="stats">Statistiques</option>
+                          <option value="eco">Économie</option>
+                          <option value="anglais">Anglais</option>
+                          <option value="info">Informatique</option>
+                        </select>
+                        <label for="lessonSubject">Matière</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-floating mb-3">
+                        <input type="time" class="form-control" id="lessonStartTime" value="08:00" required>
+                        <label for="lessonStartTime">Heure de début</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-floating mb-3">
+                        <input type="time" class="form-control" id="lessonEndTime" value="10:00" required>
+                        <label for="lessonEndTime">Heure de fin</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="lessonRoom" value="Salle 204" placeholder="Ex: Salle 204">
+                        <label for="lessonRoom">Salle</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="lessonTeacher" value="M. Dupont" placeholder="Ex: M. Dupont">
+                        <label for="lessonTeacher">Professeur</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="lessonTitle" value="Fonctions logarithmiques et exponentielles" placeholder="Ex: Les fonctions logarithmiques" required>
+                        <label for="lessonTitle">Titre de la leçon</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <textarea class="form-control" id="lessonContent" style="height: 120px" placeholder="Décrivez le contenu de la leçon..." required>Introduction aux fonctions logarithmiques et exponentielles. Étude des propriétés fondamentales : continuité, dérivabilité, limites. Résolution d'équations et d'inéquations.</textarea>
+                    <label for="lessonContent">Contenu de la leçon</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <textarea class="form-control" id="lessonHomework" style="height: 100px" placeholder="Exercices, lectures, préparations...">Exercices 15 à 20 page 87 du manuel
+Apprendre les propriétés des logarithmes (cours)
+Préparer l'interrogation du 29 mai sur les dérivées</textarea>
+                    <label for="lessonHomework">Travail à faire (optionnel)</label>
+                  </div>
+                  
+                  <!-- Informations de modification -->
+                  <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Information:</strong> Cette leçon sera mise à jour et tous les étudiants seront notifiés des changements.
+                  </div>
+
+                  <div class="text-right">
+                    <button type="button" class="btn btn-outline-secondary mr-2" onclick="window.location.href='02_cahier_texte.html'">Annuler</button>
+                    <button type="submit" class="btn btn-warning">
+                      <i class="fas fa-save"></i> Mettre à jour
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="text-center mt-4 mb-3">
+        <p>© 2025 ENSAE - Gestion classe Analyse Statistique</p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Modal de confirmation de suppression -->
+  <div class="modal fade" id="deleteConfirmModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">
+            <i class="fas fa-exclamation-triangle"></i> Confirmer la suppression
+          </h5>
+          <button type="button" class="close text-white" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Attention!</strong> Vous êtes sur le point de supprimer définitivement cette leçon :</p>
+          <div class="alert alert-warning">
+            <strong>Fonctions logarithmiques et exponentielles</strong><br>
+            <small>Mathématiques • 22 Mai 2025 • 08:00 - 10:00</small>
+          </div>
+          <p>Cette action est <strong>irréversible</strong>. Êtes-vous sûr de vouloir continuer ?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-danger" onclick="deleteLesson()">
+            <i class="fas fa-trash"></i> Supprimer définitivement
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal d'aperçu des changements -->
+  <div class="modal fade" id="previewModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-info text-white">
+          <h5 class="modal-title">
+            <i class="fas fa-eye"></i> Aperçu des modifications
+          </h5>
+          <button type="button" class="close text-white" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="previewContent">
+            <!-- Le contenu sera généré dynamiquement -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
+          <button type="button" class="btn btn-warning" onclick="$('#previewModal').modal('hide'); $('#editLessonForm').submit();">
+            <i class="fas fa-save"></i> Confirmer et sauvegarder
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery-3.6.0.min.js"></script>
+  <script src="assets/js/popper.min.js"></script>
+  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script>
+    // Données originales de la leçon (simulées)
+    const originalLesson = {
+      id: 1,
+      date: '2025-05-22',
+      subject: 'maths',
+      title: 'Fonctions logarithmiques et exponentielles',
+      teacher: 'M. Dupont',
+      startTime: '08:00',
+      endTime: '10:00',
+      room: 'Salle 204',
+      content: 'Introduction aux fonctions logarithmiques et exponentielles. Étude des propriétés fondamentales : continuité, dérivabilité, limites. Résolution d\'équations et d\'inéquations.',
+      homework: 'Exercices 15 à 20 page 87 du manuel\nApprendre les propriétés des logarithmes (cours)\nPréparer l\'interrogation du 29 mai sur les dérivées'
+    };
+
+    // Initialisation
+    $(document).ready(function() {
+      // Pré-remplir le formulaire avec les données existantes
+      loadLessonData();
+
+      // Gestion de la soumission du formulaire
+      $('#editLessonForm').on('submit', function(e) {
+        e.preventDefault();
+        updateLesson();
+      });
+
+      // Détection des modifications pour alerter l'utilisateur
+      detectChanges();
+    });
+
+    function loadLessonData() {
+      // En situation réelle, ces données viendraient de Django via AJAX
+      // ou seraient passées dans le contexte du template
+      document.getElementById('lessonId').value = originalLesson.id;
+      document.getElementById('lessonDate').value = originalLesson.date;
+      document.getElementById('lessonSubject').value = originalLesson.subject;
+      document.getElementById('lessonTitle').value = originalLesson.title;
+      document.getElementById('lessonTeacher').value = originalLesson.teacher;
+      document.getElementById('lessonStartTime').value = originalLesson.startTime;
+      document.getElementById('lessonEndTime').value = originalLesson.endTime;
+      document.getElementById('lessonRoom').value = originalLesson.room;
+      document.getElementById('lessonContent').value = originalLesson.content;
+      document.getElementById('lessonHomework').value = originalLesson.homework;
+    }
+
+    function updateLesson() {
+      // Validation basique
+      const requiredFields = ['lessonDate', 'lessonSubject', 'lessonTitle', 'lessonContent'];
+      let isValid = true;
+      
+      requiredFields.forEach(field => {
+        const input = document.getElementById(field);
+        if (!input.value.trim()) {
+          input.classList.add('is-invalid');
+          isValid = false;
+        } else {
+          input.classList.remove('is-invalid');
+        }
+      });
+
+      if (!isValid) {
+        showToast('Veuillez remplir tous les champs obligatoires.', 'error');
+        return;
+      }
+
+      // Récupération des données modifiées
+      const updatedLesson = {
+        id: document.getElementById('lessonId').value,
+        date: document.getElementById('lessonDate').value,
+        subject: document.getElementById('lessonSubject').value,
+        title: document.getElementById('lessonTitle').value,
+        teacher: document.getElementById('lessonTeacher').value,
+        startTime: document.getElementById('lessonStartTime').value,
+        endTime: document.getElementById('lessonEndTime').value,
+        room: document.getElementById('lessonRoom').value,
+        content: document.getElementById('lessonContent').value,
+        homework: document.getElementById('lessonHomework').value
+      };
+
+      // Simulation de la mise à jour
+      console.log('Leçon mise à jour:', updatedLesson);
+
+      // En situation réelle, ici on ferait un appel AJAX vers Django
+      // $.post('/api/lessons/update/', updatedLesson, function(response) { ... });
+
+      showToast('Leçon mise à jour avec succès !', 'success');
+      
+      // Redirection après un délai
+      setTimeout(() => {
+        window.location.href = '02_cahier_texte.html';
+      }, 2000);
+    }
+
+    function confirmDelete() {
+      $('#deleteConfirmModal').modal('show');
+    }
+
+    function deleteLesson() {
+      const lessonId = document.getElementById('lessonId').value;
+      
+      // En situation réelle, appel AJAX vers Django pour supprimer
+      console.log('Suppression de la leçon:', lessonId);
+      
+      $('#deleteConfirmModal').modal('hide');
+      showToast('Leçon supprimée avec succès !', 'success');
+      
+      setTimeout(() => {
+        window.location.href = '02_cahier_texte.html';
+      }, 2000);
+    }
+
+    function previewChanges() {
+      const currentData = {
+        date: document.getElementById('lessonDate').value,
+        subject: document.getElementById('lessonSubject').options[document.getElementById('lessonSubject').selectedIndex].text,
+        title: document.getElementById('lessonTitle').value,
+        teacher: document.getElementById('lessonTeacher').value,
+        time: document.getElementById('lessonStartTime').value + ' - ' + document.getElementById('lessonEndTime').value,
+        room: document.getElementById('lessonRoom').value,
+        content: document.getElementById('lessonContent').value,
+        homework: document.getElementById('lessonHomework').value
+      };
+
+      let previewHtml = `
+        <div class="card lesson-card">
+          <div class="card-body position-relative">
+            <span class="badge badge-primary date-badge">${formatDate(currentData.date)}</span>
+            <div class="d-flex align-items-start mb-3">
+              <span class="badge badge-success subject-badge mr-3">${currentData.subject}</span>
+              <div class="flex-grow-1">
+                <h5 class="mb-1">${currentData.title}</h5>
+                <small class="text-muted">
+                  <i class="fas fa-clock"></i> ${currentData.time} &nbsp;|&nbsp;
+                  <i class="fas fa-user"></i> ${currentData.teacher} &nbsp;|&nbsp;
+                  <i class="fas fa-map-marker-alt"></i> ${currentData.room}
+                </small>
+              </div>
+            </div>
+            
+            <div class="lesson-content">
+              <h6><i class="fas fa-book-open text-primary"></i> Contenu de la leçon :</h6>
+              <p class="mb-3">${currentData.content}</p>
+              
+              ${currentData.homework ? `
+                <div class="homework-section">
+                  <h6><i class="fas fa-clipboard-list text-warning"></i> Travail à faire :</h6>
+                  <p class="mb-0">${currentData.homework.replace(/\n/g, '<br>')}</p>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('previewContent').innerHTML = previewHtml;
+      $('#previewModal').modal('show');
+    }
+
+    function detectChanges() {
+      const inputs = ['lessonDate', 'lessonSubject', 'lessonTitle', 'lessonTeacher', 'lessonStartTime', 'lessonEndTime', 'lessonRoom', 'lessonContent', 'lessonHomework'];
+      
+      inputs.forEach(inputId => {
+        document.getElementById(inputId).addEventListener('input', function() {
+          // Marquer qu'il y a des modifications non sauvegardées
+          window.onbeforeunload = function() {
+            return "Vous avez des modifications non sauvegardées. Voulez-vous vraiment quitter ?";
+          };
+        });
+      });
+
+      // Retirer l'alerte après sauvegarde
+      $('#editLessonForm').on('submit', function() {
+        window.onbeforeunload = null;
+      });
+    }
+
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      return date.toLocaleDateString('fr-FR', options);
+    }
+
+    function showToast(message, type) {
+      const toastClass = type === 'success' ? 'bg-success' : type === 'error' ? 'bg-danger' : 'bg-info';
+      const iconClass = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+      
+      const toastHtml = `
+        <div class="toast" role="alert" style="position: fixed; top: 80px; right: 20px; z-index: 1060;">
+          <div class="toast-header ${toastClass} text-white">
+            <i class="fas ${iconClass} mr-2"></i>
+            <strong class="mr-auto">Notification</strong>
+            <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast">
+              <span>×</span>
+            </button>
+          </div>
+          <div class="toast-body">
+            ${message}
+          </div>
+        </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', toastHtml);
+      $('.toast').last().toast({ delay: 4000 }).toast('show');
+      $('.toast').last().on('hidden.bs.toast', function() {
+        $(this).remove();
+      });
+    }
+  </script>
+</body>
+</html>

@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ENSAE - Dashboard</title>
-  <link rel="shortcut icon" href="{% static 'assets/img/favicon.png'%}">
+  <link rel="shortcut icon" href="{% static 'responsable_filiere/assets/img/favicon.png'%}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-  <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css'%}">
-  <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css'%}">
-  <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css'%}">
-  <link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/bootstrap/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/fontawesome/css/fontawesome.min.css'%}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/fontawesome/css/all.min.css'%}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/css/style.css'%}">
 </head>
 <body>
   <div class="main-wrapper">
@@ -18,10 +18,10 @@
     <div class="header">
       <div class="header-left">
         <a href="{%url 'index'%}" class="logo">
-          <img src="{% static 'assets/img/logo.png'%}" alt="Logo">
+          <img src="{% static 'responsable_filiere/assets/img/logo.png'%}" alt="Logo">
         </a>
         <a href="{%url 'index'%}" class="logo logo-small">
-          <img src="{% static 'assets/img/logo-small.png'%}" alt="Logo" width="30" height="30">
+          <img src="{% static 'responsable_filiere/assets/img/logo-small.png'%}" alt="Logo" width="30" height="30">
         </a>
       </div>
       <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
@@ -48,7 +48,7 @@
               </div>
             </div>
             <a class="dropdown-item" href="profile.html">Mon profil</a>
-            <a class="dropdown-item" href="01_login.html">Déconnexion</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Déconnexion</a>
           </div>
         </li>
       </ul>
@@ -111,16 +111,19 @@
               </ul>
             </li>
             <li>
-            <a href="{%url 'events_json'%}"><i class="fas fa-calendar-day"></i> <span>Événements</span></a>
+            <a href="{%url 'liste_evenements'%}"><i class="fas fa-calendar-day"></i> <span>Événements</span></a>
             </li>
             <li>
-              <a href="01_exam.html"><i class="fas fa-clipboard-list"></i> <span>Examens</span></a>
+              <a href="{%url 'examens'%}"><i class="fas fa-clipboard-list"></i> <span>Examens</span></a>
             </li>
                 <li class="menu-title">
                     <span>Gestion des comptes</span>
                 </li>
             <li>
-                <a href="01_settings.html"><i class="fas fa-shield-alt"></i> <span> Authentification </span></a>
+                <a href="{% url 'gestion_utilisateurs' %}"><i class="fas fa-shield-alt"></i> <span> Authentification </span></a>
+            </li>
+            <li>
+                <a href="{% url 'password_change' %}"><i class="fas fa-shield-alt"></i> <span> Changer mon mot de passe </span></a>
             </li>
           </ul>
         </div>
@@ -148,7 +151,7 @@
               <div class="card-body d-flex justify-content-between align-items-center">
                 <div class="db-icon"><i class="fas fa-user-graduate"></i></div>
                 <div class="db-info">
-                  <h3>120</h3><h6>Élèves inscrits</h6>
+                  <h3>{{ nb_etudiants }}</h3><h6>Élèves inscrits</h6>
                 </div>
               </div>
             </div>
@@ -158,7 +161,7 @@
               <div class="card-body d-flex justify-content-between align-items-center">
                 <div class="db-icon"><i class="fas fa-book"></i></div>
                 <div class="db-info">
-                  <h3>15</h3><h6>Matières</h6>
+                  <h3>{{ nb_matieres }}</h3><h6>Matières</h6>
                 </div>
               </div>
             </div>
@@ -168,7 +171,7 @@
               <div class="card-body d-flex justify-content-between align-items-center">
                 <div class="db-icon"><i class="fas fa-user-tie"></i></div>
                 <div class="db-info">
-                  <h3>8</h3><h6>Professeurs</h6>
+                  <h3>{{ nb_professeurs }}</h3><h6>Professeurs</h6>
                 </div>
               </div>
             </div>
@@ -184,9 +187,10 @@
   </div>
 
   <!-- Scripts -->
-  <script src="{% static 'assets/js/jquery-3.6.0.min.js'%}"></script>
-  <script src="{% static 'assets/js/popper.min.js'%}"></script>
-  <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js'%}"></script>
-  <script src="{% static 'assets/js/script.js'%}"></script>
+  <script src="{% static 'responsable_filiere/assets/js/jquery-3.6.0.min.js'%}"></script>
+  <script src="{% static 'responsable_filiere/assets/js/popper.min.js'%}"></script>
+  <script src="{% static 'responsable_filiere/assets/plugins/bootstrap/js/bootstrap.min.js'%}"></script>
+  <script src="{% static 'responsable_filiere/assets/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
+  <script src="{% static 'responsable_filiere/assets/js/script.js'%}"></script>
 </body>
 </html>
