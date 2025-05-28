@@ -6,13 +6,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ENSAE - Modifier une matière</title>
-  <link rel="shortcut icon" href="{%static 'assets/img/favicon.png'%}">
+  <link rel="shortcut icon" href="{%static 'responsable_filiere/assets/img/favicon.png'%}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-  <link rel="stylesheet" href="{%static 'assets/plugins/bootstrap/css/bootstrap.min.css'%}">
-  <link rel="stylesheet" href="{%static 'assets/plugins/fontawesome/css/fontawesome.min.css'%}">
-  <link rel="stylesheet" href="{%static 'assets/plugins/fontawesome/css/all.min.css'%}">
-  <link rel="stylesheet" href="{%static 'assets/plugins/datatables/datatables.min.css'%}">
-  <link rel="stylesheet" href="{%static 'assets/css/style.css'%}">
+  <link rel="stylesheet" href="{%static 'responsable_filiere/assets/plugins/bootstrap/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="{%static 'responsable_filiere/assets/plugins/fontawesome/css/fontawesome.min.css'%}">
+  <link rel="stylesheet" href="{%static 'responsable_filiere/assets/plugins/fontawesome/css/all.min.css'%}">
+  <link rel="stylesheet" href="{%static 'responsable_filiere/assets/plugins/datatables/datatables.min.css'%}">
+  <link rel="stylesheet" href="{%static 'responsable_filiere/assets/css/style.css'%}">
 </head>
 <body>
   <div class="main-wrapper">
@@ -177,6 +177,16 @@
                       <option value="{{ mod.id }}" data-semestre="{{ mod.semestre.id }}" {% if mod.id == matiere.module.id %}selected{% endif %}>{{ mod.nom }}</option>
                     {% endfor %}
                   </select>
+                </div>
+                <!-- Ajoute après le champ "Module" -->
+                <div class="form-group">
+                  <label>Crédits</label>
+                  <input type="number" name="credits" class="form-control" value="{{ matiere.credits }}">
+                </div>
+
+                <div class="form-group">
+                  <label>Volume horaire</label>
+                  <input type="number" name="volume_horaire" class="form-control" value="{{ matiere.volume_horaire }}">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>

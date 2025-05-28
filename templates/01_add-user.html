@@ -86,6 +86,9 @@
             <li class="active">
                 <a href="{% url 'gestion_utilisateurs' %}"><i class="fas fa-shield-alt"></i> <span> Authentification </span></a>
             </li>
+            <li>
+                <a href="{% url 'password_change' %}"><i class="fas fa-shield-alt"></i> <span> Changer mon mot de passe </span></a>
+            </li>
           </ul>
         </div>
       </div>
@@ -119,6 +122,7 @@
                     <th>Nom</th>
                     <th>Email</th>
                     <th>Classe</th>
+                    <th>Responsable de classe</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -129,6 +133,9 @@
                     <td>{{ etudiant.nom }}</td>
                     <td>{{ etudiant.email }}</td>
                     <td>{{ etudiant.classe.nom }}</td>
+                    <td>
+                        <input type="checkbox" name="responsables" value="{{ etudiant.id }}">
+                    </td>
                   </tr>
                   {% endfor %}
                 </tbody>

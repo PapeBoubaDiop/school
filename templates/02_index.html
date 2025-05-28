@@ -1,45 +1,47 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ENSAE - Dashboard Responsable de Classe</title>
-  <link rel="shortcut icon" href="assets/img/favicon.png">
+  <link rel="shortcut icon" href="{% static 'responsable_classe/assets/img/favicon.png' %}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_classe/assets/css/style.css' %}">
 </head>
 <body>
   <div class="main-wrapper">
     <!-- Header -->
     <div class="header">
       <div class="header-left">
-        <a href="02_index.html" class="logo">
-          <img src="assets/img/logo.png" alt="Logo">
+        <a href="{% url 'dashboard_responsable_classe' %}" class="logo">
+          <img src="{% static 'responsable_classe/assets/img/logo.png' %}" alt="Logo">
         </a>
         <a href="02_index.html" class="logo logo-small">
-          <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+          <img src="{% static 'responsable_classe/assets/img/logo-small.png' %}" alt="Logo" width="30" height="30">
         </a>
       </div>
       <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
       <div class="top-nav-search">
-        <form>
-          <input type="text" class="form-control" placeholder="Recherche...">
-          <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-        </form>
+      <form method="post">
+        {% csrf_token %}
+        <input type="text" class="form-control" placeholder="Recherche...">
+        <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+      </form>
       </div>
       <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
       <ul class="nav user-menu">
         <li class="nav-item dropdown has-arrow">
           <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-            <img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Admin">
+            <img class="rounded-circle" src="{% static 'responsable_classe/assets/img/profiles/avatar-01.jpg' %}" width="31" alt="Admin">
           </a>
           <div class="dropdown-menu">
             <div class="user-header">
               <div class="avatar avatar-sm">
-                <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+                <img src="{% static 'responsable_classe/assets/img/profiles/avatar-01.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
               </div>
               <div class="user-text">
                 <h6>Responsable AS1</h6>
@@ -62,7 +64,7 @@
             <li class="active">
               <a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
             </li>
-            <li><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
+            <li><a href="{% url 'matieres_view' %}"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
             <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
             <li><a href="02_etudiants.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
             <li><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
@@ -80,7 +82,7 @@
         <div class="page-header">
           <div class="row">
             <div class="col-sm-12">
-              <h3 class="page-title">Bienvenue Responsable AS1 !</h3>
+              <h3 class="page-title">Bienvenue Responsable {{classe}} !</h3>
               <ul class="breadcrumb">
                 <li class="breadcrumb-item active">Dashboard</li>
               </ul>
@@ -95,7 +97,7 @@
               <div class="card-body d-flex justify-content-between align-items-center">
                 <div class="db-icon"><i class="fas fa-user-graduate"></i></div>
                 <div class="db-info">
-                  <h3>40</h3><h6>Élèves</h6>
+                  <h3>{{ etudiants_count }}</h3><h6>Élèves</h6>
                 </div>
               </div>
             </div>
@@ -105,7 +107,7 @@
               <div class="card-body d-flex justify-content-between align-items-center">
                 <div class="db-icon"><i class="fas fa-user-times"></i></div>
                 <div class="db-info">
-                  <h3>5</h3><h6>Absences</h6>
+                  <h3>{{ absences_count }}</h3><h6>Absences</h6>
                 </div>
               </div>
             </div>
@@ -115,7 +117,7 @@
               <div class="card-body d-flex justify-content-between align-items-center">
                 <div class="db-icon"><i class="fas fa-tasks"></i></div>
                 <div class="db-info">
-                  <h3>12</h3><h6>Devoirs</h6>
+                  <h3>{{ devoirs_count }}</h3><h6>Devoirs</h6>
                 </div>
               </div>
             </div>
@@ -125,62 +127,18 @@
               <div class="card-body d-flex justify-content-between align-items-center">
                 <div class="db-icon"><i class="fas fa-calendar-alt"></i></div>
                 <div class="db-info">
-                  <h3>Maths - 24 Mai</h3><h6>Prochain devoir</h6>
+                  <h3>
+                    {% if prochain_devoir %}
+                      {{ prochain_devoir.titre }} - {{ prochain_devoir.date|date:"d M" }}
+                    {% else %}
+                      Aucun
+                    {% endif %}
+                  </h3><h6>Prochain devoir</h6>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-                <!-- Exemple de planning -->
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Jour</th>
-                      <th>08:00 - 10:00</th>
-                      <th>10:15 - 12:15</th>
-                      <th>14:00 - 16:00</th>
-                      <th>16:15 - 18:15</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="font-weight-bold">Lundi</td>
-                      <td><span class="badge badge-primary">Maths</span></td>
-                      <td><span class="badge badge-danger">Anglais</span></td>
-                      <td><span class="badge badge-warning">Statistiques</span></td>
-                      <td><span class="text-muted">Libre</span></td>
-                    </tr>
-                    <tr>
-                      <td class="font-weight-bold">Mardi</td>
-                      <td><span class="badge badge-success">Économie</span></td>
-                      <td><span class="text-muted">Libre</span></td>
-                      <td><span class="badge badge-info">Informatique</span></td>
-                      <td><span class="badge badge-secondary">TD Stats</span></td>
-                    </tr>
-                    <tr>
-                      <td class="font-weight-bold">Mercredi</td>
-                      <td><span class="text-muted">Libre</span></td>
-                      <td><span class="badge badge-secondary">Méthodologie</span></td>
-                      <td><span class="text-muted">Libre</span></td>
-                      <td><span class="text-muted">Libre</span></td>
-                    </tr>
-                    <tr>
-                      <td class="font-weight-bold">Jeudi</td>
-                      <td><span class="badge badge-warning">Statistiques</span></td>
-                      <td><span class="badge badge-primary">Maths</span></td>
-                      <td><span class="badge badge-success">Économie</span></td>
-                      <td><span class="text-muted">Libre</span></td>
-                    </tr>
-                    <tr>
-                      <td class="font-weight-bold">Vendredi</td>
-                      <td><span class="badge badge-info">Informatique</span></td>
-                      <td><span class="text-muted">Libre</span></td>
-                      <td><span class="badge badge-danger">Anglais</span></td>
-                      <td><span class="text-muted">Libre</span></td>
-                    </tr>
-                  </tbody>
-                </table>
               </div>
             </div>
           </div>
@@ -190,9 +148,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="assets/js/jquery-3.6.0.min.js"></script>
-  <script src="assets/js/popper.min.js"></script>
-  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/script.js"></script>
+  <script src="{% static 'responsable_classe/assets/js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'responsable_classe/assets/js/popper.min.js' %}"></script>
+  <script src="{% static 'responsable_classe/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'responsable_classe/assets/js/script.js' %}"></script>
 </body>
 </html>

@@ -70,24 +70,24 @@
                 <li class="submenu">
                   <a href="#"><span>Semestres</span> <span class="menu-arrow"></span></a>
                   <ul>
-                    <li><a href="01_add-semestre.html">Ajouter un semestre</a></li>
-                    <li><a href="01_semestres.html">Liste des semestres</a></li>
+                    <li><a href="{% url 'ajouter_semestre' %}">Ajouter un semestre</a></li>
+                    <li><a href="{% url 'liste_semestres' %}">Liste des semestres</a></li>
                     <!-- <li><a href="modifier-semestre.html">Modifier un semestre</a></li> -->
                   </ul>
                 </li>
                 <li class="submenu">
                   <a href="#"><span>Modules</span> <span class="menu-arrow"></span></a>
                   <ul>
-                    <li><a href="01_add-module.html">Ajouter un module</a></li>
-                    <li><a href="01_modules.html">Liste des modules</a></li>
+                    <li><a href="{% url 'ajouter_module' %}">Ajouter un module</a></li>
+                    <li><a href="{% url 'liste_modules' %}">Liste des modules</a></li>
                     <!-- <li><a href="modifier-module.html">Modifier un module</a></li> -->
                   </ul>
                 </li>
                 <li class="submenu">
                   <a href="#"><span>Matières</span> <span class="menu-arrow"></span></a>
                   <ul>
-                    <li><a href="01_add-subject.html">Ajouter une matière</a></li>
-                    <li><a href="01_subjects.html">Liste des matières</a></li>
+                    <li><a href="{% url 'ajouter_matiere' %}">Ajouter une matière</a></li>
+                    <li><a href="{% url 'liste_matieres' %}">Liste des matières</a></li>
                     <!-- <li><a href="01_edit-subject.html">Modifier une matière</a></li> -->
                   </ul>
                 </li>
@@ -96,8 +96,8 @@
             <li class="submenu">
               <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span> <span class="menu-arrow"></span></a>
               <ul>
-                  <li><a href="01_add-teacher.html">Ajouter un Professeur</a></li>
-                <li><a href="01_teachers.html">Liste des Professeurs</a></li>
+                  <li><a href="{% url 'ajouter_professeur'%}">Ajouter un Professeur</a></li>
+                <li><a href="{% url 'liste_professeurs'%}">Liste des Professeurs</a></li>
                 <!-- <li><a href="01_edit-teacher.html">Modifier un Professeur</a></li> -->
                 <!-- <li><a href="01_teacher-details.html">Voir un Professeur</a></li> -->
               </ul>
@@ -105,8 +105,8 @@
             <li class="submenu">
               <a href="#"><i class="fas fa-user-graduate"></i> <span>Étudiants</span> <span class="menu-arrow"></span></a>
               <ul>
-                  <li><a href="01_add-student.html">Ajouter un Étudiant</a></li>
-                  <li><a href="01_students.html">Liste des Étudiants</a></li>
+                  <li><a href="{% url 'ajouter_etudiant'%}">Ajouter un Étudiant</a></li>
+                  <li><a href="{% url 'liste_etudiants'%}">Liste des Étudiants</a></li>
                 <!-- <li><a href="modifier-etudiant.html">Modifier un Étudiant</a></li> -->
                 <!-- <li><a href="voir-etudiant.html">Voir un Étudiant</a></li> -->
               </ul>
@@ -115,7 +115,7 @@
               <a href="{% url 'liste_evenements' %}"><i class="fas fa-calendar-day"></i> <span>Événements</span></a>
             </li>
             <li>
-              <a href="01_exam.html"><i class="fas fa-clipboard-list"></i> <span>Examens</span></a>
+              <a href="{% url 'examens'%}"><i class="fas fa-clipboard-list"></i> <span>Examens</span></a>
             </li>
                 <li class="menu-title">
                     <span>Gestion des comptes</span>

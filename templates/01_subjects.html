@@ -6,13 +6,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ENSAE - Liste des matières</title>
-  <link rel="shortcut icon" href="{%static 'assets/img/favicon.png'%}">
+  <link rel="shortcut icon" href="{%static 'responsable_filiere/assets/img/favicon.png'%}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-  <link rel="stylesheet" href="{%static 'assets/plugins/bootstrap/css/bootstrap.min.css'%}">
-  <link rel="stylesheet" href="{%static 'assets/plugins/fontawesome/css/fontawesome.min.css'%}">
-  <link rel="stylesheet" href="{%static 'assets/plugins/fontawesome/css/all.min.css'%}">
-  <link rel="stylesheet" href="{%static 'assets/plugins/datatables/datatables.min.css'%}">
-  <link rel="stylesheet" href="{%static 'assets/css/style.css'%}">
+  <link rel="stylesheet" href="{%static 'responsable_filiere/assets/plugins/bootstrap/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="{%static 'responsable_filiere/assets/plugins/fontawesome/css/fontawesome.min.css'%}">
+  <link rel="stylesheet" href="{%static 'responsable_filiere/assets/plugins/fontawesome/css/all.min.css'%}">
+  <link rel="stylesheet" href="{%static 'responsable_filiere/assets/plugins/datatables/datatables.min.css'%}">
+  <link rel="stylesheet" href="{%static 'responsable_filiere/assets/css/style.css'%}">
 </head>
 <body>
   <div class="main-wrapper">
@@ -131,7 +131,7 @@
             <div class="col">
               <h3 class="page-title">Liste des matières</h3>
               <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{%static 'index'%}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{%static 'responsable_filiere/index'%}">Dashboard</a></li>
                 <li class="breadcrumb-item active">Matières</li>
               </ul>
             </div>
@@ -153,35 +153,39 @@
                         <th>Matière</th>
                         <th>Classe</th>
                         <th>Module</th>
+                        <th>Crédits</th>
+                        <th>Volume horaire</th>
                         <th class="text-right">Action</th>
                       </tr>
                     </thead>
-   <tbody>
-  {% for matiere in matieres %}
-  <tr>
-    <td>
-      <h2>
-        <a>{{ matiere.nom }}</a>
-      </h2>
-    </td>
-    <td>{{ matiere.classe.nom }}</td>
-    <td>{{ matiere.module.nom }}</td>
-    <td class="text-right">
-      <div class="actions">
-        <a href="{% url 'edit_matiere' matiere.id %}" class="btn btn-sm bg-success-light mr-2">
-          <i class="fas fa-pen"></i>
-        </a>
-        <a href="{% url 'supprimer_matiere' matiere.id %}" class="btn btn-sm bg-danger-light"
-          onclick="return confirm('Voulez-vous vraiment supprimer cette matière ?');">
-          <i class="fas fa-trash"></i>
-        </a>
-      </div>
-    </td>
-  </tr>
-                      {% empty %}
-                    <tr><td colspan="8" class="text-center text-muted">Aucun professeur enregistré</td></tr>
-                    {% endfor %}
-</tbody>
+                    <tbody>
+                    {% for matiere in matieres %}
+                    <tr>
+                      <td>
+                        <h2>
+                          <a>{{ matiere.nom }}</a>
+                        </h2>
+                      </td>
+                      <td>{{ matiere.classe.nom }}</td>
+                      <td>{{ matiere.module.nom }}</td>
+                      <td>{{ matiere.credits }}</td>
+                      <td>{{ matiere.volume_horaire }}</td>
+                      <td class="text-right">
+                        <div class="actions">
+                          <a href="{% url 'edit_matiere' matiere.id %}" class="btn btn-sm bg-success-light mr-2">
+                            <i class="fas fa-pen"></i>
+                          </a>
+                          <a href="{% url 'supprimer_matiere' matiere.id %}" class="btn btn-sm bg-danger-light"
+                            onclick="return confirm('Voulez-vous vraiment supprimer cette matière ?');">
+                            <i class="fas fa-trash"></i>
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                                        {% empty %}
+                                      <tr><td colspan="8" class="text-center text-muted">Aucun professeur enregistré</td></tr>
+                                      {% endfor %}
+                  </tbody>
 
                   </table>
                 </div>

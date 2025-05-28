@@ -33,7 +33,8 @@ class Matiere(models.Model):
     module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='matieres')
     semestre = models.ForeignKey(Semestre, on_delete=models.CASCADE, related_name='matieres')
     classe = models.ForeignKey(Classe, on_delete=models.CASCADE, related_name='matieres')
-
+    credits = models.IntegerField(null=True)  
+    volume_horaire = models.IntegerField(null=True) 
     def __str__(self):
         return self.nom
 
@@ -104,6 +105,7 @@ class Examen(models.Model):
 
 from django.contrib.auth.models import AbstractUser
 from django.utils.crypto import get_random_string
+from responsable_filiere.models import Classe
 
 class CustomUser(AbstractUser):
     email = models.EmailField(max_length=100, unique=True)
@@ -112,7 +114,9 @@ class CustomUser(AbstractUser):
     is_student = models.BooleanField(default=False)
     is_responsable_de_classe = models.BooleanField(default=False)
     is_responsable_de_filiere = models.BooleanField(default=False)
-
+    classe_responsable = models.ForeignKey(Classe, null=True, blank=True, on_delete=models.SET_NULL)
+    is_responsable_de_classe = models.BooleanField(default=False)
+    is_responsable_adjoint = models.BooleanField(default=False) 
     def __str__(self):
         return f"{self.username} ({self.email})"
 
@@ -133,3 +137,27 @@ class PasswordResetRequest(models.Model):
 
     def __str__(self):
         return f"Demande de reset pour {self.email} - {self.created_at.strftime('%Y-%m-%d %H:%M')}"
+
+
+class JourSemaine(models.TextChoices):
+    LUNDI = 'Lundi'
+    MARDI = 'Mardi'
+    MERCREDI = 'Mercredi'
+    JEUDI = 'Jeudi'
+    VENDREDI = 'Vendredi'
+    SAMEDI = 'Samedi'
+
+class PlageHoraire(models.TextChoices):
+    P1 = '08:00 - 10:00'
+    P2 = '10:15 - 12:15'
+    P3 = '14:30 - 16:30'
+    P4 = '16:45 - 18:45'
+
+class EmploiDuTemps(models.Model):
+    jour = models.CharField(max_length=10, choices=JourSemaine.choices)
+    horaire = models.CharField(max_length=20, choices=PlageHoraire.choices)
+    matiere = models.CharField(max_length=100)
+    classe = models.ForeignKey(Classe, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.jour} - {self.horaire} : {self.matiere}"

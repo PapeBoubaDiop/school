@@ -21,5 +21,5 @@ from responsable_filiere import views as rf_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include("responsable_filiere.urls")),
-    path('authentification', include("authentification.urls"))
+    path('responsable_classe/',include("responsable_classe.urls")),
 ]

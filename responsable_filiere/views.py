@@ -45,41 +45,51 @@ def ajouter_matiere(request):
         classe_id = request.POST.get('classe')
         module_id = request.POST.get('module')
         semestre_id = request.POST.get('semestre')
+        credits = request.POST.get('credits')
+        volume_horaire = request.POST.get('volume_horaire')
 
         module = Module.objects.get(id=module_id)
         classe = Classe.objects.get(id=classe_id)
         semestre = Semestre.objects.get(id=semestre_id)
-        matiere = Matiere.objects.create(nom=nom, classe=classe, module=module, semestre=semestre)
+        matiere = Matiere.objects.create(
+            nom=nom,
+            classe=classe,
+            module=module,
+            semestre=semestre,
+            credits=credits if credits else None,
+            volume_horaire=volume_horaire if volume_horaire else None
+        )
         return redirect('liste_matieres')
 
     return render(request, '01_add-subject.html', {
-    'modules': modules,
-    'classes': classes,
-    'semestres': semestres
-})
+        'modules': modules,
+        'classes': classes,
+        'semestres': semestres
+    })
 
 @login_required
 def edit_matiere(request, matiere_id):
     matiere = get_object_or_404(Matiere, id=matiere_id)
+    modules = Module.objects.all()
     classes = Classe.objects.all()
     semestres = Semestre.objects.all()
-    modules = Module.objects.all()
 
     if request.method == "POST":
-        matiere.nom = request.POST.get("nom")
-        matiere.classe = Classe.objects.get(id=request.POST.get("classe"))
-        matiere.semestre = Semestre.objects.get(id=request.POST.get("semestre"))
-        matiere.module = Module.objects.get(id=request.POST.get("module"))
+        matiere.nom = request.POST.get('nom')
+        matiere.classe_id = request.POST.get('classe')
+        matiere.module_id = request.POST.get('module')
+        matiere.semestre_id = request.POST.get('semestre')
+        matiere.credits = request.POST.get('credits')
+        matiere.volume_horaire = request.POST.get('volume_horaire')
         matiere.save()
-        return redirect("liste_matieres")
+        return redirect('liste_matieres')
 
-    context = {
-        "matiere": matiere,
-        "classes": classes,
-        "semestres": semestres,
-        "modules": modules,
-    }
-    return render(request, "01_edit-subject.html", context)
+    return render(request, '01_edit-subject.html', {
+        'matiere': matiere,
+        'modules': modules,
+        'classes': classes,
+        'semestres': semestres,
+    })
 
 @login_required
 def supprimer_matiere(request, matiere_id):
@@ -465,21 +475,44 @@ User = get_user_model()
 def creation_comptes_etudiants(request):
     if request.method == 'POST':
         ids = request.POST.getlist('etudiants')
+        responsables = request.POST.getlist('responsables')  # liste des IDs cochés comme responsables
+
         for id in ids:
             etu = Etudiant.objects.get(id=id)
             if not etu.user:
                 username = etu.prenom.lower() + str(etu.id)
-                password = "passer"  # Mot de passe par défaut
-                user = User.objects.create_user(
-                    username=username,
-                    email=etu.email,
-                    password=password,
-                    first_name=etu.prenom,
-                    last_name=etu.nom,
-                    is_student=True,
-                )
-                etu.user = user
-                etu.save()
+                if not CustomUser.objects.filter(username=username).exists():
+                    password = "passer"
+                    # Détection si cet étudiant doit être responsable de classe
+                    is_resp = str(id) in responsables
+                    is_resp_adjoint = False
+                    classe = etu.classe
+
+                    # Vérifier combien de responsables existent déjà pour cette classe
+                    nb_resps = CustomUser.objects.filter(
+                        is_responsable_de_classe=True,
+                        classe_responsable=classe
+                    ).count()
+
+                    # Si déjà un responsable, le suivant devient adjoint
+                    if is_resp and nb_resps == 1:
+                        is_resp_adjoint = True
+                    elif is_resp and nb_resps >= 2:
+                        is_resp = False  # On ne crée pas plus de 2 responsables
+
+                    user = CustomUser.objects.create_user(
+                        username=username,
+                        email=etu.email,
+                        password=password,
+                        first_name=etu.prenom,
+                        last_name=etu.nom,
+                        is_student=True,
+                        is_responsable_de_classe=is_resp,
+                        is_responsable_adjoint=is_resp_adjoint,
+                        classe_responsable=classe if is_resp else None,
+                    )
+                    etu.user = user
+                    etu.save()
         return redirect('gestion_utilisateurs')
 
     etudiants = Etudiant.objects.filter(user__isnull=True)
@@ -509,7 +542,11 @@ def login_view(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return redirect('index')  # Rediriger vers le dashboard
+                # Redirection selon le rôle
+                if getattr(user, 'is_responsable_de_classe', False):
+                    return redirect('dashboard_responsable_classe')  # nom de l'url dans responsable_classe/urls.py
+                else:
+                    return redirect('index')  # dashboard général
             else:
                 return render(request, '01_login.html', {'error': "Votre compte est désactivé."})
         else:

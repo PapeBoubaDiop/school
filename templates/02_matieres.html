@@ -1,15 +1,16 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENSAE - Matières</title>
-    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" href="{% static 'responsable_classe/assets/img/favicon.png' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/css/style.css' %}">
 </head>
 <body>
     <div class="main-wrapper">
@@ -59,8 +60,8 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li class="menu-title"><span>Menu</span></li>
-                        <li><a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
-                        <li class="active"><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
+                        <li><a href="{% url 'dashboard_responsable_classe' %}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
+                        <li class="active"><a href="{% url 'matieres_view' %}"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
                         <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
                         <li><a href="02_etudiants.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
                         <li><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
@@ -102,7 +103,6 @@
                                     <table class="table table-hover table-center mb-0" id="subjectsTable">
                                         <thead>
                                             <tr>
-                                                <th>Code</th>
                                                 <th>Nom de la matière</th>
                                                 <th>Professeur</th>
                                                 <th>Crédits</th>
@@ -111,136 +111,32 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><strong>STAT101</strong></td>
-                                                <td>
-                                                    <div>
-                                                        <h6 class="mb-0">Statistiques Descriptives</h6>
-                                                        <small class="text-muted">Introduction aux méthodes statistiques</small>
-                                                    </div>
-                                                </td>
-                                                <td>Dr. Moussa DIAGNE</td>
-                                                <td><span class="badge badge-primary">4</span></td>
-                                                <td>45h</td>
-                                                <td><span class="badge badge-info">S1</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>MATH102</strong></td>
-                                                <td>
-                                                    <div>
-                                                        <h6 class="mb-0">Analyse Mathématique</h6>
-                                                        <small class="text-muted">Calcul différentiel et intégral</small>
-                                                    </div>
-                                                </td>
-                                                <td>Dr. Awa THIAM</td>
-                                                <td><span class="badge badge-primary">5</span></td>
-                                                <td>60h</td>
-                                                <td><span class="badge badge-info">S1</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>INFO103</strong></td>
-                                                <td>
-                                                    <div>
-                                                        <h6 class="mb-0">Programmation Python</h6>
-                                                        <small class="text-muted">Bases de la programmation</small>
-                                                    </div>
-                                                </td>
-                                                <td>Pr. Ibrahima KANE</td>
-                                                <td><span class="badge badge-primary">3</span></td>
-                                                <td>30h</td>
-                                                <td><span class="badge badge-info">S1</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>ECON104</strong></td>
-                                                <td>
-                                                    <div>
-                                                        <h6 class="mb-0">Microéconomie</h6>
-                                                        <small class="text-muted">Théories du comportement économique</small>
-                                                    </div>
-                                                </td>
-                                                <td>Dr. Khady SOW</td>
-                                                <td><span class="badge badge-primary">4</span></td>
-                                                <td>45h</td>
-                                                <td><span class="badge badge-info">S1</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>DEMO201</strong></td>
-                                                <td>
-                                                    <div>
-                                                        <h6 class="mb-0">Démographie Générale</h6>
-                                                        <small class="text-muted">Analyse des populations</small>
-                                                    </div>
-                                                </td>
-                                                <td>Dr. Amadou FALL</td>
-                                                <td><span class="badge badge-primary">4</span></td>
-                                                <td>45h</td>
-                                                <td><span class="badge badge-success">S2</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>DATA202</strong></td>
-                                                <td>
-                                                    <div>
-                                                        <h6 class="mb-0">Data Science</h6>
-                                                        <small class="text-muted">Analyse et visualisation de données</small>
-                                                    </div>
-                                                </td>
-                                                <td>Dr. Mariama NDIAYE</td>
-                                                <td><span class="badge badge-primary">5</span></td>
-                                                <td>60h</td>
-                                                <td><span class="badge badge-success">S2</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>RO203</strong></td>
-                                                <td>
-                                                    <div>
-                                                        <h6 class="mb-0">Recherche Opérationnelle</h6>
-                                                        <small class="text-muted">Optimisation et modélisation</small>
-                                                    </div>
-                                                </td>
-                                                <td>Pr. Cheikh GUEYE</td>
-                                                <td><span class="badge badge-primary">4</span></td>
-                                                <td>45h</td>
-                                                <td><span class="badge badge-success">S2</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>ACT204</strong></td>
-                                                <td>
-                                                    <div>
-                                                        <h6 class="mb-0">Actuariat</h6>
-                                                        <small class="text-muted">Mathématiques de l'assurance</small>
-                                                    </div>
-                                                </td>
-                                                <td>Dr. Fatou DIOUF</td>
-                                                <td><span class="badge badge-primary">4</span></td>
-                                                <td>45h</td>
-                                                <td><span class="badge badge-success">S2</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>STAT301</strong></td>
-                                                <td>
-                                                    <div>
-                                                        <h6 class="mb-0">Statistiques Inférentielles</h6>
-                                                        <small class="text-muted">Tests d'hypothèses et estimation</small>
-                                                    </div>
-                                                </td>
-                                                <td>Dr. Moussa DIAGNE</td>
-                                                <td><span class="badge badge-primary">5</span></td>
-                                                <td>60h</td>
-                                                <td><span class="badge badge-warning">S3</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>ECON302</strong></td>
-                                                <td>
-                                                    <div>
-                                                        <h6 class="mb-0">Économétrie</h6>
-                                                        <small class="text-muted">Modélisation économique</small>
-                                                    </div>
-                                                </td>
-                                                <td>Dr. Khady SOW</td>
-                                                <td><span class="badge badge-primary">5</span></td>
-                                                <td>60h</td>
-                                                <td><span class="badge badge-warning">S3</span></td>
-                                            </tr>
+                                        {% for matiere in matieres %}
+                                        <tr>
+                                            <td>
+                                            <div>
+                                                <h6 class="mb-0">{{ matiere.nom }}</h6>
+                                                <small class="text-muted">{{ matiere.module.nom }}</small>
+                                            </div>
+                                            </td>
+                                            <td>
+                                            {% if matiere.professeurs.all %}
+                                                {{ matiere.professeurs.first.nom }}
+                                            {% else %}
+                                                <em>Aucun professeur</em>
+                                            {% endif %}
+                                            </td>
+                                            <td><span class="badge badge-primary">{{ matiere.credits|default:"---" }}</span></td>
+                                            <td>{{ matiere.volume_horaire|default:"---" }}h</td>
+                                            <td>
+                                            <span class="badge badge-info">S{{ matiere.semestre.numero }}</span>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="6" class="text-center text-muted">Aucune matière trouvée pour cette classe.</td>
+                                        </tr>
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -253,11 +149,11 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="{% static 'responsable_classe/assets/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'responsable_classe/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'responsable_classe/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'responsable_classe/assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'responsable_classe/assets/js/script.js' %}"></script>
 
     <script>
         function exportSubjects() {
