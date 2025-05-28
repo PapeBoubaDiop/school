@@ -161,3 +161,55 @@ class EmploiDuTemps(models.Model):
 
     def __str__(self):
         return f"{self.jour} - {self.horaire} : {self.matiere}"
+    
+class Seance(models.Model):
+    jour = models.CharField(max_length=10, choices=[
+        ('lundi', 'Lundi'), ('mardi', 'Mardi'), ('mercredi', 'Mercredi'),
+        ('jeudi', 'Jeudi'), ('vendredi', 'Vendredi'), ('samedi', 'Samedi')
+    ])
+    heure_debut = models.TimeField()
+    heure_fin = models.TimeField()
+    matiere = models.ForeignKey(Matiere, on_delete=models.CASCADE)
+    professeur = models.ForeignKey(Professeur, on_delete=models.SET_NULL, null=True)
+    salle = models.CharField(max_length=50)
+    classe = models.ForeignKey(Classe, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.jour} {self.heure_debut} - {self.matiere.nom}"
+    
+# === ABSENCES ===
+class Absence(models.Model):
+    etudiant = models.ForeignKey(Etudiant, on_delete=models.CASCADE)
+    seance = models.ForeignKey(Seance, on_delete=models.CASCADE)
+    date = models.DateField()
+    type_absence = models.CharField(max_length=50, choices=[
+        ('non_justifiee', 'Absence injustifiée'),
+        ('justifiee', 'Absence justifiée'),
+        ('retard', 'Retard'),
+        ('maladie', 'Maladie'),
+    ])
+    justification = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.etudiant.nom} - {self.seance} - {self.date}"
+
+    justification = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.etudiant.nom} - {self.seance} - {self.date}"
+
+from django.db import models
+
+class Lecon(models.Model):
+    seance = models.OneToOneField(
+        'Seance',
+        on_delete=models.CASCADE,
+        related_name='lecon'
+    )
+    titre = models.CharField(max_length=255)
+    contenu = models.TextField()
+    travail = models.TextField(blank=True, null=True)  # Exercice ou devoir à faire
+    date_ajout = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.seance.matiere.nom} - {self.titre} ({self.seance.date})"

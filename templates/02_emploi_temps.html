@@ -1,17 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>Preskool - Emploi du temps</title>
-    <link rel="shortcut icon" href="assets/img/favicon.png">
-    
+    <link rel="shortcut icon" href="{% static 'responsable_classe/assets/img/favicon.png' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/datatables/datatables.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/css/style.css' %}">
 
 </head>
 <body>
@@ -96,7 +96,7 @@
                     <ul>
                         <li class="menu-title"><span>Menu</span></li>
                         <li>
-                            <a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+                            <a href="{% url 'dashboard_responsable_classe' %}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
                         </li>
                         <li><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
                         <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
@@ -116,7 +116,7 @@
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title">Emploi du temps - AS1</h3>
+                            <h3 class="page-title">Emploi du temps - {{ classe.nom }}</h3>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="02_index.html">Dashboard</a></li>
                                 <li class="breadcrumb-item active">Emploi du temps</li>
@@ -145,229 +145,48 @@
                                                 <th class="text-center">Mercredi</th>
                                                 <th class="text-center">Jeudi</th>
                                                 <th class="text-center">Vendredi</th>
+                                                <th class="text-center">Samedi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="text-center font-weight-bold bg-light">08:00 - 10:00</td>
-                                                <td class="text-center">
+                                       {% for ligne in emploi %}
+                                        <tr>
+                                            <td class="text-center font-weight-bold bg-light">{{ ligne.0 }}</td>
+                                            {% for seance in ligne|slice:"1:" %}
+                                            <td class="text-center {% if seance.lecon %}bg-light text-muted opacity-50{% endif %}">
+                                                {% if seance %}
                                                     <div class="schedule-item bg-primary-light p-2 rounded">
-                                                        <h6 class="mb-1">Mathématiques</h6>
-                                                        <small class="text-muted">Prof. Dubois</small>
-                                                        <small class="d-block">Salle A-101</small>
+                                                        <h6 class="mb-1">{{ seance.matiere.nom }}</h6>
+                                                        <small class="text-muted">Prof. {{ seance.professeur.nom }}</small>
+                                                        <small class="d-block">Salle {{ seance.salle }}</small>
                                                         <div class="mt-2">
-                                                            <a href="02_modifier_seance.html?id=1" class="btn btn-sm bg-success-light mr-1">
-                                                                <i class="fas fa-pen"></i>
+                                                            <a href="{% url 'ajouter_lecon_seance' seance.id %}"
+                                                            class="btn btn-outline-primary btn-sm {% if seance.lecon %}disabled text-muted{% endif %}"
+                                                            {% if seance.lecon %}tabindex="-1" aria-disabled="true"{% endif %}>
+                                                                <i class="fas fa-edit"></i> Pointer
                                                             </a>
+                                                            {% if seance.lecon %}
+                                                                <span class="badge badge-secondary ml-2">Déjà pointé</span>
+                                                            {% endif %}
                                                             <a href="#" class="btn btn-sm bg-danger-light">
                                                                 <i class="fas fa-trash"></i>
                                                             </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="schedule-item bg-success-light p-2 rounded">
-                                                        <h6 class="mb-1">Économie</h6>
-                                                        <small class="text-muted">Prof. Martin</small>
-                                                        <small class="d-block">Salle B-203</small>
-                                                        <div class="mt-2">
-                                                            <a href="02_modifier_seance.html?id=2" class="btn btn-sm bg-success-light mr-1">
-                                                                <i class="fas fa-pen"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm bg-danger-light">
-                                                                <i class="fas fa-trash"></i>
+                                                            <a href="{% url 'absences_seance' seance.id %}" class="btn btn-sm bg-warning-light" title="Renseigner les absences">
+                                                                <div class="db-icon text-danger d-inline-block m-0 p-0" style="font-size:1.2em;">
+                                                                    <i class="fas fa-user-times"></i>
+                                                                </div>
                                                             </a>
                                                         </div>
                                                     </div>
-                                                </td>
-                                                <td class="text-center">
+                                                {% else %}
                                                     <span class="text-muted">Libre</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="schedule-item bg-warning-light p-2 rounded">
-                                                        <h6 class="mb-1">Statistiques</h6>
-                                                        <small class="text-muted">Prof. Leroy</small>
-                                                        <small class="d-block">Salle C-305</small>
-                                                        <div class="mt-2">
-                                                            <a href="02_modifier_seance.html?id=3" class="btn btn-sm bg-success-light mr-1">
-                                                                <i class="fas fa-pen"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm bg-danger-light">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="schedule-item bg-info-light p-2 rounded">
-                                                        <h6 class="mb-1">Informatique</h6>
-                                                        <small class="text-muted">Prof. Bernard</small>
-                                                        <small class="d-block">Salle Info-1</small>
-                                                        <div class="mt-2">
-                                                            <a href="02_modifier_seance.html?id=4" class="btn btn-sm bg-success-light mr-1">
-                                                                <i class="fas fa-pen"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm bg-danger-light">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center font-weight-bold bg-light">10:15 - 12:15</td>
-                                                <td class="text-center">
-                                                    <div class="schedule-item bg-danger-light p-2 rounded">
-                                                        <h6 class="mb-1">Anglais</h6>
-                                                        <small class="text-muted">Prof. Johnson</small>
-                                                        <small class="d-block">Salle B-105</small>
-                                                        <div class="mt-2">
-                                                            <a href="02_modifier_seance.html?id=5" class="btn btn-sm bg-success-light mr-1">
-                                                                <i class="fas fa-pen"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm bg-danger-light">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <span class="text-muted">Libre</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="schedule-item bg-secondary-light p-2 rounded">
-                                                        <h6 class="mb-1">Méthodologie</h6>
-                                                        <small class="text-muted">Prof. Petit</small>
-                                                        <small class="d-block">Salle A-102</small>
-                                                        <div class="mt-2">
-                                                            <a href="02_modifier_seance.html?id=6" class="btn btn-sm bg-success-light mr-1">
-                                                                <i class="fas fa-pen"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm bg-danger-light">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="schedule-item bg-primary-light p-2 rounded">
-                                                        <h6 class="mb-1">Mathématiques</h6>
-                                                        <small class="text-muted">Prof. Dubois</small>
-                                                        <small class="d-block">Salle A-101</small>
-                                                        <div class="mt-2">
-                                                            <a href="02_modifier_seance.html?id=7" class="btn btn-sm bg-success-light mr-1">
-                                                                <i class="fas fa-pen"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm bg-danger-light">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <span class="text-muted">Libre</span>
-                                                </td>
-                                            </tr>
-                                            <tr class="bg-light">
-                                                <td class="text-center font-weight-bold">12:15 - 14:00</td>
-                                                <td colspan="5" class="text-center text-muted font-weight-bold">PAUSE DÉJEUNER</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center font-weight-bold bg-light">14:00 - 16:00</td>
-                                                <td class="text-center">
-                                                    <div class="schedule-item bg-warning-light p-2 rounded">
-                                                        <h6 class="mb-1">Statistiques</h6>
-                                                        <small class="text-muted">Prof. Leroy</small>
-                                                        <small class="d-block">Salle C-305</small>
-                                                        <div class="mt-2">
-                                                            <a href="02_modifier_seance.html?id=8" class="btn btn-sm bg-success-light mr-1">
-                                                                <i class="fas fa-pen"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm bg-danger-light">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="schedule-item bg-info-light p-2 rounded">
-                                                        <h6 class="mb-1">Informatique</h6>
-                                                        <small class="text-muted">Prof. Bernard</small>
-                                                        <small class="d-block">Salle Info-2</small>
-                                                        <div class="mt-2">
-                                                            <a href="02_modifier_seance.html?id=9" class="btn btn-sm bg-success-light mr-1">
-                                                                <i class="fas fa-pen"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm bg-danger-light">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <span class="text-muted">Libre</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="schedule-item bg-success-light p-2 rounded">
-                                                        <h6 class="mb-1">Économie</h6>
-                                                        <small class="text-muted">Prof. Martin</small>
-                                                        <small class="d-block">Salle B-203</small>
-                                                        <div class="mt-2">
-                                                            <a href="02_modifier_seance.html?id=10" class="btn btn-sm bg-success-light mr-1">
-                                                                <i class="fas fa-pen"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm bg-danger-light">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="schedule-item bg-danger-light p-2 rounded">
-                                                        <h6 class="mb-1">Anglais</h6>
-                                                        <small class="text-muted">Prof. Johnson</small>
-                                                        <small class="d-block">Salle B-105</small>
-                                                        <div class="mt-2">
-                                                            <a href="02_modifier_seance.html?id=11" class="btn btn-sm bg-success-light mr-1">
-                                                                <i class="fas fa-pen"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm bg-danger-light">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center font-weight-bold bg-light">16:15 - 18:15</td>
-                                                <td class="text-center">
-                                                    <span class="text-muted">Libre</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="schedule-item bg-secondary-light p-2 rounded">
-                                                        <h6 class="mb-1">TD Statistiques</h6>
-                                                        <small class="text-muted">Prof. Dupont</small>
-                                                        <small class="d-block">Salle C-201</small>
-                                                        <div class="mt-2">
-                                                            <a href="02_modifier_seance.html?id=12" class="btn btn-sm bg-success-light mr-1">
-                                                                <i class="fas fa-pen"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm bg-danger-light">
-                                                                <i class="fas fa-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <span class="text-muted">Libre</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <span class="text-muted">Libre</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <span class="text-muted">Libre</span>
-                                                </td>
-                                            </tr>
+                                                {% endif %}
+                                            </td>
+                                            {% empty %}
+                                                <td class="text-center">Aucune séance</td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -380,11 +199,11 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="{%static 'responsable_classe/assets/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{%static 'responsable_classe/assets/js/popper.min.js' %}"></script>
+    <script src="{%static 'responsable_classe/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{%static 'responsable_classe/assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <script src="{%static 'responsable_classe/assets/js/script.js' %}"></script>
 
     <script>
         // Add some interactivity

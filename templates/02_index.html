@@ -62,15 +62,15 @@
           <ul>
             <li class="menu-title"><span>Menu</span></li>
             <li class="active">
-              <a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+              <a href="{% url 'dashboard_responsable_classe' %}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
             </li>
             <li><a href="{% url 'matieres_view' %}"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
-            <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
-            <li><a href="02_etudiants.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
+            <li><a href="{% url 'professeurs_view' %}"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
+            <li><a href="{% url 'etudiants_view' %}"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
             <li><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
             <li><a href="02_cahier_texte.html"><i class="fas fa-book"></i> <span>Cahier de texte</span></a></li>
-            <li><a href="02_devoir_projet.html"><i class="fas fa-clipboard-list"></i> <span>Devoirs & Projets</span></a></li>
-            <li><a href="02_emploi_temps.html"><i class="fas fa-calendar-alt"></i> <span>Emploi du temps</span></a></li>
+            <li><a href="{% url 'evenements_examens_view' %}"><i class="fas fa-clipboard-list"></i> <span>Devoirs & Projets</span></a></li>
+            <li><a href="{% url 'emploi_du_temps_view' %}"><i class="fas fa-calendar-alt"></i> <span>Emploi du temps</span></a></li>
           </ul>
         </div>
       </div>

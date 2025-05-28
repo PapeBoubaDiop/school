@@ -1,15 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ENSAE - Cahier de texte</title>
-  <link rel="shortcut icon" href="assets/img/favicon.png">
+  <link rel="shortcut icon" href="{% static 'responsable_classe/assets/img/favicon.png' %}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_classe/assets/css/style.css' %}">
   <style>
     .lesson-card { 
       border-left: 4px solid #007bff; 
@@ -148,135 +149,48 @@
         <!-- Liste des leçons -->
         <div class="row">
           <div class="col-12">
-            <!-- Leçon 1 -->
+            {% for lecon in lecons %}
             <div class="card lesson-card mb-3">
               <div class="card-body position-relative">
-                <span class="badge badge-primary date-badge">22 Mai 2025</span>
+                <span class="badge badge-primary date-badge">{{ lecon.seance.date|date:"d M Y" }}</span>
                 <div class="d-flex align-items-start mb-3">
-                  <span class="badge badge-success subject-badge mr-3">Mathématiques</span>
+                  <span class="badge badge-success subject-badge mr-3">{{ lecon.seance.matiere.nom }}</span>
                   <div class="flex-grow-1">
-                    <h5 class="mb-1">Fonctions logarithmiques et exponentielles</h5>
+                    <h5 class="mb-1">{{ lecon.titre }}</h5>
                     <small class="text-muted">
-                      <i class="fas fa-clock"></i> 08:00 - 10:00  | 
-                      <i class="fas fa-user"></i> M. Dupont  | 
-                      <i class="fas fa-map-marker-alt"></i> Salle 204
+                      <i class="fas fa-clock"></i> {{ lecon.seance.heure_debut|time:"H:i" }} - {{ lecon.seance.heure_fin|time:"H:i" }}  | 
+                      <i class="fas fa-user"></i> {{ lecon.seance.professeur.nom }}  | 
+                      <i class="fas fa-map-marker-alt"></i> {{ lecon.seance.salle }}
                     </small>
                   </div>
                   <div class="action-buttons">
-                    <a href="02_modifier_lecon.html" class="btn btn-sm btn-outline-primary mr-2" onclick="editLesson(1)">
+                    <a href="#" class="btn btn-sm btn-outline-info mr-2">
+                      <i class="fas fa-eye"></i> Voir
+                    </a>
+                    <a href="#" class="btn btn-sm btn-outline-primary mr-2">
                       <i class="fas fa-edit"></i> Modifier
                     </a>
-                    <button class="btn btn-sm btn-outline-danger" onclick="deleteLesson(1)">
+                    <a href="#" class="btn btn-sm btn-outline-danger">
                       <i class="fas fa-trash"></i> Supprimer
-                    </button>
+                    </a>
                   </div>
                 </div>
-                
                 <div class="lesson-content">
                   <h6><i class="fas fa-book-open text-primary"></i> Contenu de la leçon :</h6>
-                  <p class="mb-3">
-                    Introduction aux fonctions logarithmiques et exponentielles. Étude des propriétés fondamentales :
-                    continuité, dérivabilité, limites. Résolution d'équations et d'inéquations.
-                  </p>
-                  
+                  <p class="mb-3">{{ lecon.contenu|linebreaks }}</p>
                   <div class="homework-section">
                     <h6><i class="fas fa-clipboard-list text-warning"></i> Travail à faire :</h6>
-                    <ul class="mb-0">
-                      <li>Exercices 15 à 20 page 87 du manuel</li>
-                      <li>Apprendre les propriétés des logarithmes (cours)</li>
-                      <li>Préparer l'interrogation du 29 mai sur les dérivées</li>
-                    </ul>
+                    <p class="mb-0">{{ lecon.travail|linebreaks }}</p>
                   </div>
                 </div>
               </div>
             </div>
-
-            <!-- Leçon 2 -->
-            <div class="card lesson-card mb-3">
-              <div class="card-body position-relative">
-                <span class="badge badge-secondary date-badge">21 Mai 2025</span>
-                <div class="d-flex align-items-start mb-3">
-                  <span class="badge badge-info subject-badge mr-3">Statistiques</span>
-                  <div class="flex-grow-1">
-                    <h5 class="mb-1">Tests statistiques paramétriques</h5>
-                    <small class="text-muted">
-                      <i class="fas fa-clock"></i> 14:00 - 16:00  | 
-                      <i class="fas fa-user"></i> Mme Martin  | 
-                      <i class="fas fa-map-marker-alt"></i> Salle 105
-                    </small>
-                  </div>
-                  <div class="action-buttons">
-                    <a href="02_modifier_lecon.html" class="btn btn-sm btn-outline-primary mr-2" onclick="editLesson(2)">
-                      <i class="fas fa-edit"></i> Modifier
-                    </a>
-                    <button class="btn btn-sm btn-outline-danger" onclick="deleteLesson(2)">
-                      <i class="fas fa-trash"></i> Supprimer
-                    </button>
-                  </div>
-                </div>
-                
-                <div class="lesson-content">
-                  <h6><i class="fas fa-book-open text-primary"></i> Contenu de la leçon :</h6>
-                  <p class="mb-3">
-                    Révision des tests de Student, test de conformité et test de comparaison. 
-                    Application pratique avec le logiciel R sur des jeux de données réels.
-                  </p>
-                  
-                  <div class="homework-section">
-                    <h6><i class="fas fa-clipboard-list text-warning"></i> Travail à faire :</h6>
-                    <ul class="mb-0">
-                      <li>TD n°8 : analyse du dataset "ventes_automobiles.csv"</li>
-                      <li>Installer R et RStudio pour le prochain cours</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Leçon 3 -->
-            <div class="card lesson-card mb-3">
-              <div class="card-body position-relative">
-                <span class="badge badge-secondary date-badge">20 Mai 2025</span>
-                <div class="d-flex align-items-start mb-3">
-                  <span class="badge badge-danger subject-badge mr-3">Anglais</span>
-                  <div class="flex-grow-1">
-                    <h5 class="mb-1">Business English - Presentations</h5>
-                    <small class="text-muted">
-                      <i class="fas fa-clock"></i> 10:15 - 12:15  | 
-                      <i class="fas fa-user"></i> Mme Johnson  | 
-                      <i class="fas fa-map-marker-alt"></i> Salle 301
-                    </small>
-                  </div>
-                  <div class="action-buttons">
-                    <a href="02_modifier_lecon.html" class="btn btn-sm btn-outline-primary mr-2" onclick="editLesson(3)">
-                      <i class="fas fa-edit"></i> Modifier
-                    </a>
-                    <button class="btn btn-sm btn-outline-danger" onclick="deleteLesson(3)">
-                      <i class="fas fa-trash"></i> Supprimer
-                    </button>
-                  </div>
-                </div>
-                
-                <div class="lesson-content">
-                  <h6><i class="fas fa-book-open text-primary"></i> Contenu de la leçon :</h6>
-                  <p class="mb-3">
-                    Techniques de présentation orale en anglais professionnel. Structuration d'un exposé, 
-                    gestion du stress, interaction avec l'audience. Exercices pratiques en groupe.
-                  </p>
-                  
-                  <div class="homework-section">
-                    <h6><i class="fas fa-clipboard-list text-warning"></i> Travail à faire :</h6>
-                    <ul class="mb-0">
-                      <li>Préparer une présentation de 5 minutes sur un sujet libre</li>
-                      <li>Vocabulaire chapitre 7 : "Business communication"</li>
-                      <li>Reading comprehension p.95-97</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {% empty %}
+              <div class="alert alert-info">Aucune leçon enregistrée pour cette classe.</div>
+            {% endfor %}
           </div>
         </div>
+
 
         <!-- Pagination -->
         <div class="row mt-4">
@@ -303,7 +217,7 @@
           </div>
         </div>
       </div>
-
+      
       <!-- Footer -->
       <footer class="text-center mt-4 mb-3">
         <p>© 2025 ENSAE - Gestion classe Analyse Statistique</p>

@@ -1,15 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ENSAE - Ajouter une Leçon</title>
-  <link rel="shortcut icon" href="assets/img/favicon.png">
+  <link rel="shortcut icon" href="{% static 'responsable_classe/assets/img/favicon.png' %}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_classe/assets/css/style.css' %}">
   <style>
     .lesson-card { 
       border-left: 4px solid #007bff; 
@@ -142,69 +143,74 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-body">
-                <form id="addLessonForm">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="lessonDate" required>
-                        <label for="lessonDate">Date de la leçon</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <select class="form-control" id="lessonSubject" required>
-                          <option value="" disabled selected>Sélectionner une matière</option>
-                          <option value="maths">Mathématiques</option>
-                          <option value="stats">Statistiques</option>
-                          <option value="eco">Économie</option>
-                          <option value="anglais">Anglais</option>
-                          <option value="info">Informatique</option>
-                        </select>
-                        <label for="lessonSubject">Matière</label>
-                      </div>
+              <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <input type="date" class="form-control" name="date" id="lessonDate"
+                            value="{{ seance.date|date:'Y-m-d' }}" required>
+                      <label for="lessonDate">Date de la leçon</label>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-floating mb-3">
-                        <input type="time" class="form-control" id="lessonStartTime" required>
-                        <label for="lessonStartTime">Heure de début</label>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-floating mb-3">
-                        <input type="time" class="form-control" id="lessonEndTime" required>
-                        <label for="lessonEndTime">Heure de fin</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="lessonTeacher" placeholder="Ex: M. Dupont">
-                        <label for="lessonTeacher">Professeur</label>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="lessonTitle" placeholder="Ex: Les fonctions logarithmiques" required>
-                        <label for="lessonTitle">Titre de la leçon</label>
-                      </div>
+                  <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                      <select class="form-control" name="matiere_id" id="lessonSubject" required>
+                        <option value="" disabled>Sélectionner une matière</option>
+                        {% for matiere in matieres %}
+                          <option value="{{ matiere.id }}"
+                            {% if seance.matiere.id == matiere.id %}selected{% endif %}>
+                            {{ matiere.nom }}
+                          </option>
+                        {% endfor %}
+                      </select>
+                      <label for="lessonSubject">Matière</label>
                     </div>
                   </div>
-                  <div class="form-floating mb-3">
-                    <textarea class="form-control" id="lessonContent" style="height: 120px" placeholder="Décrivez le contenu de la leçon..." required></textarea>
-                    <label for="lessonContent">Contenu de la leçon</label>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                      <input type="time" class="form-control" name="heure_debut" id="lessonStartTime"
+                            value="{{ seance.heure_debut|time:'H:i' }}" required>
+                      <label for="lessonStartTime">Heure de début</label>
+                    </div>
                   </div>
-                  <div class="form-floating mb-3">
-                    <textarea class="form-control" id="lessonHomework" style="height: 100px" placeholder="Exercices, lectures, préparations..."></textarea>
-                    <label for="lessonHomework">Travail à faire (optionnel)</label>
+                  <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                      <input type="time" class="form-control" name="heure_fin" id="lessonEndTime"
+                            value="{{ seance.heure_fin|time:'H:i' }}" required>
+                      <label for="lessonEndTime">Heure de fin</label>
+                    </div>
                   </div>
-                  <div class="text-right">
-                    <button type="button" class="btn btn-outline-secondary mr-2" onclick="window.location.href='02_cahier_texte.html'">Annuler</button>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Enregistrer</button>
+                  <div class="col-md-4">
+                    <div class="form-floating mb-3">
+                      <select class="form-control" name="professeur_id" id="lessonTeacher" required>
+                        <option value="" disabled>Sélectionner un professeur</option>
+                        {% for prof in professeurs %}
+                          <option value="{{ prof.id }}"
+                            {% if seance.professeur.id == prof.id %}selected{% endif %}>
+                            {{ prof.nom }}
+                          </option>
+                        {% endfor %}
+                      </select>
+                      <label for="lessonTeacher">Professeur</label>
+                    </div>
                   </div>
-                </form>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" name="titre" id="lessonTitle" placeholder="Titre de la leçon" required>
+                  <label for="lessonTitle">Titre de la leçon</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <textarea class="form-control" name="contenu" id="lessonContent" style="height: 120px" placeholder="Décrivez le contenu de la leçon..." required></textarea>
+                  <label for="lessonContent">Contenu de la leçon</label>
+                </div>
+                <div class="text-right">
+                  <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Enregistrer</button>
+                  <a href="{% url 'cahier_texte' %}" class="btn btn-outline-secondary mr-2">Annuler</a>
+                </div>
+              </form>
               </div>
             </div>
           </div>
@@ -219,10 +225,10 @@
   </div>
 
   <!-- Scripts -->
-  <script src="assets/js/jquery-3.6.0.min.js"></script>
-  <script src="assets/js/popper.min.js"></script>
-  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/script.js"></script>
+  <script src="{% static 'responsable_filiere/assets/js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/js/popper.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/js/script.js' %}"></script>
   <script>
     // Initialisation
     $(document).ready(function() {
@@ -230,10 +236,10 @@
       document.getElementById('lessonDate').valueAsDate = new Date();
       
       // Auto-complétion des heures courantes
-      const now = new Date();
-      const currentHour = now.getHours().toString().padStart(2, '0');
-      document.getElementById('lessonStartTime').value = currentHour + ':00';
-      document.getElementById('lessonEndTime').value = (parseInt(currentHour) + 2).toString().padStart(2, '0') + ':00';
+      // const now = new Date();
+      // const currentHour = now.getHours().toString().padStart(2, '0');
+      // document.getElementById('lessonStartTime').value = currentHour + ':00';
+      // document.getElementById('lessonEndTime').value = (parseInt(currentHour) + 2).toString().padStart(2, '0') + ':00';
 
       // Gestion de la soumission du formulaire
       $('#addLessonForm').on('submit', function(e) {

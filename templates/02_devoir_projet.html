@@ -1,15 +1,16 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ENSAE - Gestion Devoirs & Projets</title>
-  <link rel="shortcut icon" href="assets/img/favicon.png">
+  <link rel="shortcut icon" href="{% static 'responsable_filiere/assets/img/favicon.png' %}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/plugins/fontawesome/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'responsable_filiere/assets/css/style.css' %}">
 </head>
 <body>
   <div class="main-wrapper">
@@ -60,7 +61,7 @@
           <ul>
             <li class="menu-title"><span>Menu</span></li>
             <li>
-              <a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+              <a href="{% url 'dashboard_responsable_classe' %}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
             </li>
             <li><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
             <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
@@ -112,101 +113,49 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <h6><a href="#">Analyse de série temporelle</a></h6>
-                          <p class="text-muted mb-0">Étude des données économiques françaises</p>
-                        </td>
-                        <td><span class="badge badge-primary">Projet</span></td>
-                        <td>Statistiques</td>
-                        <td class="text-danger font-weight-bold">24 Mai 2025</td>
-                        <td class="text-right">
-                          <div class="actions">
-                            <a href="02_modifier_devoir.html" class="btn btn-sm bg-success-light mr-1" title="Modifier">
-                              <i class="fas fa-pen"></i>
-                            </a>
-                            <a href="#" class="btn btn-sm bg-danger-light" title="Supprimer">
-                              <i class="fas fa-trash"></i>
-                            </a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <h6><a href="#">Devoir Mathématiques</a></h6>
-                          <p class="text-muted mb-0">Algèbre linéaire - Chapitre 5</p>
-                        </td>
-                        <td><span class="badge badge-info">Devoir Surveillé</span></td>
-                        <td>Mathématiques</td>
-                        <td class="text-success font-weight-bold">26 Mai 2025</td>
-                        <td class="text-right">
-                          <div class="actions">
-                            <a href="02_modifier_devoir.html" class="btn btn-sm bg-success-light mr-1" title="Modifier">
-                              <i class="fas fa-pen"></i>
-                            </a>
-                            <a href="#" class="btn btn-sm bg-danger-light" title="Supprimer">
-                              <i class="fas fa-trash"></i>
-                            </a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <h6><a href="#">Exposé Économie</a></h6>
-                          <p class="text-muted mb-0">Les théories keynésiennes</p>
-                        </td>
-                        <td><span class="badge badge-secondary">Exposé</span></td>
-                        <td>Économie</td>
-                        <td class="text-muted">22 Mai 2025</td>
-                        <td class="text-right">
-                          <div class="actions">
-                            <a href="02_modifier_devoir.html" class="btn btn-sm bg-success-light mr-1" title="Modifier">
-                              <i class="fas fa-pen"></i>
-                            </a>
-                            <a href="#" class="btn btn-sm bg-danger-light" title="Supprimer">
-                              <i class="fas fa-trash"></i>
-                            </a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <h6><a href="#">TP Informatique</a></h6>
-                          <p class="text-muted mb-0">Programmation Python - Pandas</p>
-                        </td>
-                        <td><span class="badge badge-warning">TP</span></td>
-                        <td>Informatique</td>
-                        <td class="text-danger font-weight-bold">23 Mai 2025</td>
-                        <td class="text-right">
-                          <div class="actions">
-                            <a href="02_modifier_devoir.html" class="btn btn-sm bg-success-light mr-1" title="Modifier">
-                              <i class="fas fa-pen"></i>
-                            </a>
-                            <a href="#" class="btn btn-sm bg-danger-light" title="Supprimer">
-                              <i class="fas fa-trash"></i>
-                            </a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <h6><a href="#">Devoir Maison Anglais</a></h6>
-                          <p class="text-muted mb-0">Essay on Economic Trends</p>
-                        </td>
-                        <td><span class="badge badge-success">Devoir Maison</span></td>
-                        <td>Anglais</td>
-                        <td class="text-primary font-weight-bold">28 Mai 2025</td>
-                        <td class="text-right">
-                          <div class="actions">
-                            <a href="02_modifier_devoir.html" class="btn btn-sm bg-success-light mr-1" title="Modifier">
-                              <i class="fas fa-pen"></i>
-                            </a>
-                            <a href="#" class="btn btn-sm bg-danger-light" title="Supprimer">
-                              <i class="fas fa-trash"></i>
-                            </a>
-                          </div>
-                        </td>
-                      </tr>
+                      {% for evt in evenements %}
+                        <tr>
+                          <td>
+                            <h6><a href="#">{{ evt.titre }}</a></h6>
+                            <p class="text-muted mb-0">{{ evt.description|truncatechars:60 }}</p>
+                          </td>
+                          <td>
+                            {% if evt.type_evenement == 'projet' %}
+                              <span class="badge badge-primary">Projet</span>
+                            {% elif evt.type_evenement == 'tp' %}
+                              <span class="badge badge-warning">TP</span>
+                            {% elif evt.type_evenement == 'dm' %}
+                              <span class="badge badge-success">Devoir Maison</span>
+                            {% elif evt.type_evenement == 'ds' %}
+                              <span class="badge badge-info">Devoir Surveillé</span>
+                            {% elif evt.type_evenement == 'expose' %}
+                              <span class="badge badge-secondary">Exposé</span>
+                            {% else %}
+                              <span class="badge badge-dark">{{ evt.type_evenement }}</span>
+                            {% endif %}
+                          </td>
+                          <td>
+                            {% if evt.examens %}
+                              {{ evt.examens.matiere.nom }}
+                            {% else %}
+                              <span class="text-muted">-</span>
+                            {% endif %}
+                          </td>
+                          <td>{{ evt.date|date:"d M Y" }}</td>
+                          <td class="text-right">
+                            <div class="actions">
+                              <a href="#" class="btn btn-sm bg-success-light mr-1" title="Modifier">
+                                <i class="fas fa-pen"></i>
+                              </a>
+                              <a href="#" class="btn btn-sm bg-danger-light" title="Supprimer">
+                                <i class="fas fa-trash"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+                      {% empty %}
+                        <tr><td colspan="5" class="text-center text-muted">Aucun devoir ou projet disponible</td></tr>
+                      {% endfor %}
                     </tbody>
                   </table>
                 </div>
@@ -306,10 +255,10 @@
   </div>
 
   <!-- Scripts -->
-  <script src="assets/js/popper.min.js"></script>
-  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-  <script src="assets/js/script.js"></script>
+  <script src="{% static 'responsable_filiere/assets/js/popper.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+  <script src="{% static 'responsable_filiere/assets/js/script.js' %}"></script>
 
   <script>
     // Fonctions de filtrage et recherche en JavaScript vanilla

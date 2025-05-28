@@ -1,500 +1,150 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ENSAE - Gestion des Absences</title>
-  <link rel="shortcut icon" href="assets/img/favicon.png">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-  <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-  <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENSAE - Gestion des Absences</title>
+    <link rel="shortcut icon" href="{% static 'responsable_classe/assets/img/favicon.png' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/css/style.css' %}">
 </head>
 <body>
-  <div class="main-wrapper">
-    <!-- Header -->
-    <div class="header">
-      <div class="header-left">
-        <a href="02_index.html" class="logo">
-          <img src="assets/img/logo.png" alt="Logo">
-        </a>
-        <a href="02_index.html" class="logo logo-small">
-          <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
-        </a>
-      </div>
-      <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
-      <div class="top-nav-search">
-        <form>
-          <input type="text" class="form-control" placeholder="Recherche...">
-          <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-        </form>
-      </div>
-      <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
-      <ul class="nav user-menu">
-        <li class="nav-item dropdown has-arrow">
-          <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-            <img class="rounded-circle" src="assets/img/profiles/avatar-01.jpg" width="31" alt="Admin">
-          </a>
-          <div class="dropdown-menu">
-            <div class="user-header">
-              <div class="avatar avatar-sm">
-                <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
-              </div>
-              <div class="user-text">
-                <h6>Responsable AS1</h6>
-                <p class="text-muted mb-0">Responsable de classe</p>
-              </div>
+    <div class="main-wrapper">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <a href="02_index.html" class="logo">
+                    <img src="{% static 'responsable_classe/assets/img/logo.png' %}" alt="Logo">
+                </a>
+                <a href="02_index.html" class="logo logo-small">
+                    <img src="{% static 'responsable_classe/assets/img/logo-small.png' %}" alt="Logo" width="30" height="30">
+                </a>
             </div>
-            <a class="dropdown-item" href="profile.html">Mon profil</a>
-            <a class="dropdown-item" href="login.html">Déconnexion</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-      <div class="sidebar-inner slimscroll">
-        <div id="sidebar-menu" class="sidebar-menu">
-          <ul>
-            <li class="menu-title"><span>Menu</span></li>
-            <li>
-              <a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
-            </li>
-            <li><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
-            <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
-            <li><a href="02_etudiants.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
-            <li class="active"><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
-            <li><a href="02_cahier_texte.html"><i class="fas fa-book"></i> <span>Cahier de texte</span></a></li>
-            <li><a href="02_devoir_projet.html"><i class="fas fa-clipboard-list"></i> <span>Devoirs & Projets</span></a></li>
-            <li><a href="02_emploi_temps.html"><i class="fas fa-calendar-alt"></i> <span>Emploi du temps</span></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Content -->
-    <div class="page-wrapper">
-      <div class="content container-fluid">
-        <div class="page-header">
-          <div class="row">
-            <div class="col-sm-12">
-              <h3 class="page-title">Gestion des Absences</h3>
-              <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="02_index.html">Dashboard</a></li>
-                <li class="breadcrumb-item active">Absences</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Statistiques des absences -->
-        <div class="row">
-          <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card bg-danger-light w-100">
-              <div class="card-body d-flex justify-content-between align-items-center">
-                <div class="db-icon text-danger"><i class="fas fa-user-times"></i></div>
-                <div class="db-info">
-                  <h3>5</h3><h6>Absences aujourd'hui</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card bg-warning-light w-100">
-              <div class="card-body d-flex justify-content-between align-items-center">
-                <div class="db-icon text-warning"><i class="fas fa-exclamation-triangle"></i></div>
-                <div class="db-info">
-                  <h3>23</h3><h6>Absences cette semaine</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card bg-info-light w-100">
-              <div class="card-body d-flex justify-content-between align-items-center">
-                <div class="db-icon text-info"><i class="fas fa-clock"></i></div>
-                <div class="db-info">
-                  <h3>8</h3><h6>Retards</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card bg-success-light w-100">
-              <div class="card-body d-flex justify-content-between align-items-center">
-                <div class="db-icon text-success"><i class="fas fa-percentage"></i></div>
-                <div class="db-info">
-                  <h3>87%</h3><h6>Taux de présence</h6>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Formulaire d'ajout d'absence -->
-        <div class="row mt-4">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-title">Enregistrer une absence</h5>
-              </div>
-              <div class="card-body">
-                <form class="row g-3">
-                  <div class="col-md-3">
-                    <label class="form-label">Date</label>
-                    <input type="date" class="form-control" value="2025-05-22">
-                  </div>
-                  <div class="col-md-3">
-                    <label class="form-label">Créneau</label>
-                    <select class="form-control">
-                      <option>08:00 - 10:00</option>
-                      <option>10:15 - 12:15</option>
-                      <option>14:00 - 16:00</option>
-                      <option>16:15 - 18:15</option>
-                    </select>
-                  </div>
-                  <div class="col-md-3">
-                    <label class="form-label">Matière</label>
-                    <select class="form-control">
-                      <option>Mathématiques</option>
-                      <option>Statistiques</option>
-                      <option>Économie</option>
-                      <option>Anglais</option>
-                      <option>Informatique</option>
-                    </select>
-                  </div>
-                  <div class="col-md-3">
-                    <label class="form-label">Type d'absence</label>
-                    <select class="form-control">
-                      <option>Absence injustifiée</option>
-                      <option>Absence justifiée</option>
-                      <option>Retard</option>
-                      <option>Maladie</option>
-                    </select>
-                  </div>
+            <a href="#" id="toggle_btn"><i class="fas fa-align-left"></i></a>
+            <div class="top-nav-search">
+                <form>
+                    <input type="text" class="form-control" placeholder="Recherche...">
+                    <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                 </form>
-                
-                <!-- Liste des étudiants pour marquer les absences -->
-                <div class="mt-4">
-                  <h6>Marquer les étudiants absents :</h6>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="etudiant1">
-                        <label class="form-check-label" for="etudiant1">DUPONT Marie - AS1001</label>
-                      </div>
-                      <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="etudiant2">
-                        <label class="form-check-label" for="etudiant2">MARTIN Pierre - AS1002</label>
-                      </div>
-                      <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="etudiant3">
-                        <label class="form-check-label" for="etudiant3">BERNARD Sophie - AS1003</label>
-                      </div>
-                      <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="etudiant4">
-                        <label class="form-check-label" for="etudiant4">LEROY Antoine - AS1004</label>
-                      </div>
-                      <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="etudiant5">
-                        <label class="form-check-label" for="etudiant5">PETIT Julie - AS1005</label>
-                      </div>
+            </div>
+            <a class="mobile_btn" id="mobile_btn"><i class="fas fa-bars"></i></a>
+            <ul class="nav user-menu">
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <img class="rounded-circle" src="{% static 'responsable_classe/assets/img/profiles/avatar-01.jpg' %}" width="31" alt="Admin">
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="user-header">
+                            <div class="avatar avatar-sm">
+                                <img src="{% static 'responsable_classe/assets/img/profiles/avatar-01.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
+                            </div>
+                            <div class="user-text">
+                                <h6>Responsable AS1</h6>
+                                <p class="text-muted mb-0">Responsable de classe</p>
+                            </div>
+                        </div>
+                        <a class="dropdown-item" href="profile.html">Mon profil</a>
+                        <a class="dropdown-item" href="login.html">Déconnexion</a>
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="etudiant6">
-                        <label class="form-check-label" for="etudiant6">MOREAU Lucas - AS1006</label>
-                      </div>
-                      <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="etudiant7">
-                        <label class="form-check-label" for="etudiant7">SIMON Emma - AS1007</label>
-                      </div>
-                      <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="etudiant8">
-                        <label class="form-check-label" for="etudiant8">MICHEL Thomas - AS1008</label>
-                      </div>
-                      <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="etudiant9">
-                        <label class="form-check-label" for="etudiant9">GARCIA Clara - AS1009</label>
-                      </div>
-                      <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" id="etudiant10">
-                        <label class="form-check-label" for="etudiant10">ROUX Alexandre - AS1010</label>
-                      </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title"><span>Menu</span></li>
+                        <li>
+                            <a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+                        </li>
+                        <li><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
+                        <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
+                        <li><a href="02_etudiants.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
+                        <li class="active"><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
+                        <li><a href="02_cahier_texte.html"><i class="fas fa-book"></i> <span>Cahier de texte</span></a></li>
+                        <li><a href="02_devoir_projet.html"><i class="fas fa-clipboard-list"></i> <span>Devoirs & Projets</span></a></li>
+                        <li><a href="02_emploi_temps.html"><i class="fas fa-calendar-alt"></i> <span>Emploi du temps</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+         <div class="page-wrapper">
+        <div class="container-fluid mt-4 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Enregistrer une absence</h5>
+                </div>
+                <div class="card-body">
+                <form class="row g-3" method="post">
+                    {% csrf_token %}
+                    <div class="col-md-3">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-control" name="date" required>
                     </div>
-                  </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Créneau</label>
+                        <select class="form-control" name="seance_id" required>
+                            {% for seance in seances %}
+                                <option value="{{ seance.id }}">
+                                    {{ seance.jour|title }} {{ seance.heure_debut|time:"H:i" }} - {{ seance.heure_fin|time:"H:i" }} ({{ seance.matiere.nom }})
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Type d'absence</label>
+                        <select class="form-control" name="type_absence" required>
+                            <option value="non_justifiee">Absence injustifiée</option>
+                            <option value="justifiee">Absence justifiée</option>
+                            <option value="retard">Retard</option>
+                            <option value="maladie">Maladie</option>
+                        </select>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <h6>Marquer les étudiants absents :</h6>
+                        <div class="row">
+                            {% for etudiant in etudiants %}
+                                <div class="col-md-6">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="etudiant{{ etudiant.id }}" name="absents" value="{{ etudiant.id }}">
+                                        <label class="form-check-label" for="etudiant{{ etudiant.id }}">
+                                            {{ etudiant.nom|upper }} {{ etudiant.prenom|title }} - {{ etudiant.matricule }}
+                                        </label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <label class="form-label">Commentaire (optionnel)</label>
+                        <textarea class="form-control" name="commentaire" rows="2" placeholder="Remarques sur les absences..."></textarea>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <button type="submit" class="btn btn-primary">Enregistrer les absences</button>
+                        <button type="button" class="btn btn-secondary ms-2">Annuler</button>
+                    </div>
+                </form>
                 </div>
-
-                <div class="mt-3">
-                  <label class="form-label">Commentaire (optionnel)</label>
-                  <textarea class="form-control" rows="2" placeholder="Remarques sur les absences..."></textarea>
-                </div>
-
-                <div class="mt-3">
-                  <button type="submit" class="btn btn-primary">Enregistrer les absences</button>
-                  <button type="button" class="btn btn-secondary ms-2">Annuler</button>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
 
-        <!-- Historique des absences -->
-        <div class="row mt-4">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title">Historique des absences</h5>
-                <div class="d-flex gap-2">
-                  <select class="form-control form-control-sm" style="width: auto;">
-                    <option>Tous les étudiants</option>
-                    <option>DUPONT Marie</option>
-                    <option>MARTIN Pierre</option>
-                    <option>BERNARD Sophie</option>
-                  </select>
-                  <select class="form-control form-control-sm" style="width: auto;">
-                    <option>Cette semaine</option>
-                    <option>Ce mois</option>
-                    <option>Ce semestre</option>
-                  </select>
-                  <button class="btn btn-sm btn-success">
-                    <i class="fas fa-file-excel"></i> Export Excel
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>Date</th>
-                        <th>Étudiant</th>
-                        <th>Créneau</th>
-                        <th>Matière</th>
-                        <th>Type</th>
-                        <th>Justification</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>22/05/2025</td>
-                        <td>DUPONT Marie</td>
-                        <td>08:00 - 10:00</td>
-                        <td>Mathématiques</td>
-                        <td><span class="badge badge-danger">Absence</span></td>
-                        <td><span class="text-danger">Non justifiée</span></td>
-                        <td>
-                          <button class="btn btn-sm btn-warning" title="Modifier">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                          <button class="btn btn-sm btn-danger" title="Supprimer">
-                            <i class="fas fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>22/05/2025</td>
-                        <td>MARTIN Pierre</td>
-                        <td>10:15 - 12:15</td>
-                        <td>Statistiques</td>
-                        <td><span class="badge badge-warning">Retard</span></td>
-                        <td><span class="text-success">Justifié</span></td>
-                        <td>
-                          <button class="btn btn-sm btn-warning" title="Modifier">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                          <button class="btn btn-sm btn-danger" title="Supprimer">
-                            <i class="fas fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>21/05/2025</td>
-                        <td>BERNARD Sophie</td>
-                        <td>14:00 - 16:00</td>
-                        <td>Économie</td>
-                        <td><span class="badge badge-info">Maladie</span></td>
-                        <td><span class="text-success">Justifié</span></td>
-                        <td>
-                          <button class="btn btn-sm btn-warning" title="Modifier">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                          <button class="btn btn-sm btn-danger" title="Supprimer">
-                            <i class="fas fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>21/05/2025</td>
-                        <td>LEROY Antoine</td>
-                        <td>08:00 - 10:00</td>
-                        <td>Anglais</td>
-                        <td><span class="badge badge-danger">Absence</span></td>
-                        <td><span class="text-danger">Non justifiée</span></td>
-                        <td>
-                          <button class="btn btn-sm btn-warning" title="Modifier">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                          <button class="btn btn-sm btn-danger" title="Supprimer">
-                            <i class="fas fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>20/05/2025</td>
-                        <td>PETIT Julie</td>
-                        <td>16:15 - 18:15</td>
-                        <td>Informatique</td>
-                        <td><span class="badge badge-warning">Retard</span></td>
-                        <td><span class="text-warning">En attente</span></td>
-                        <td>
-                          <button class="btn btn-sm btn-warning" title="Modifier">
-                            <i class="fas fa-edit"></i>
-                          </button>
-                          <button class="btn btn-sm btn-danger" title="Supprimer">
-                            <i class="fas fa-trash"></i>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <!-- Pagination -->
-                <nav aria-label="Navigation des pages">
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#" tabindex="-1">Précédent</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">Suivant</a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Récapitulatif par étudiant -->
-        <div class="row mt-4">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-title">Récapitulatif par étudiant</h5>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th>Étudiant</th>
-                        <th>Total absences</th>
-                        <th>Absences justifiées</th>
-                        <th>Retards</th>
-                        <th>Taux présence</th>
-                        <th>Statut</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>DUPONT Marie</td>
-                        <td>3</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>85%</td>
-                        <td><span class="badge badge-warning">Surveillance</span></td>
-                      </tr>
-                      <tr>
-                        <td>MARTIN Pierre</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>92%</td>
-                        <td><span class="badge badge-success">Correct</span></td>
-                      </tr>
-                      <tr>
-                        <td>BERNARD Sophie</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>0</td>
-                        <td>94%</td>
-                        <td><span class="badge badge-success">Correct</span></td>
-                      </tr>
-                      <tr>
-                        <td>LEROY Antoine</td>
-                        <td>5</td>
-                        <td>1</td>
-                        <td>3</td>
-                        <td>76%</td>
-                        <td><span class="badge badge-danger">Alerte</span></td>
-                      </tr>
-                      <tr>
-                        <td>PETIT Julie</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>90%</td>
-                        <td><span class="badge badge-success">Correct</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
+        <!-- Footer -->
+        <footer class="text-center mt-4 mb-3">
+            <p>&copy; 2025 ENSAE - Plateforme de gestion académique</p>
+        </footer>
     </div>
-  </div>
+    </div>
 
-  <!-- Scripts -->
-  <script src="assets/js/jquery-3.6.0.min.js"></script>
-  <script src="assets/js/popper.min.js"></script>
-  <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/script.js"></script>
-
-  <script>
-    // Script pour gérer les actions de la page
-    document.addEventListener('DOMContentLoaded', function() {
-      // Fonctionnalité de sélection/désélection de tous les étudiants
-      const selectAllBtn = document.createElement('button');
-      selectAllBtn.className = 'btn btn-sm btn-outline-primary mb-3';
-      selectAllBtn.innerHTML = '<i class="fas fa-check-square"></i> Tout sélectionner';
-      selectAllBtn.type = 'button';
-      
-      const checkboxContainer = document.querySelector('.row').parentNode;
-      checkboxContainer.insertBefore(selectAllBtn, document.querySelector('.row'));
-      
-      selectAllBtn.addEventListener('click', function() {
-        const checkboxes = document.querySelectorAll('.form-check-input');
-        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-        
-        checkboxes.forEach(cb => cb.checked = !allChecked);
-        selectAllBtn.innerHTML = allChecked ? 
-          '<i class="fas fa-check-square"></i> Tout sélectionner' : 
-          '<i class="fas fa-square"></i> Tout désélectionner';
-      });
-
-      // Confirmation pour les suppressions
-      document.querySelectorAll('.btn-danger[title="Supprimer"]').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          if (confirm('Êtes-vous sûr de vouloir supprimer cette absence ?')) {
-            // Ici, vous ajouteriez la logique de suppression
-            console.log('Suppression confirmée');
-          }
-        });
-      });
-    });
-  </script>
+    <script src="{% static 'responsable_classe/assets/plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'responsable_classe/assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'responsable_classe/assets/js/script.js' %}"></script>
 </body>
 </html>

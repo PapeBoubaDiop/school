@@ -1,15 +1,16 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENSAE - Professeurs</title>
-    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" href="{% static 'responsable_classe/assets/img/favicon.png' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/css/style.css' %}">
 </head>
 <body>
     <div class="main-wrapper">
@@ -59,10 +60,10 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li class="menu-title"><span>Menu</span></li>
-                        <li><a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
+                        <li><a href="{% url 'dashboard_responsable_classe' %}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
                         <li><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
-                        <li class="active"><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
-                        <li><a href="02_absences.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
+                        <li class="active"><a href="{% url 'professeurs_view' %}"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
+                        <li><a href="{% url 'etudiants_view' %}"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
                         <li><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
                         <li><a href="02_cahier_texte.html"><i class="fas fa-book"></i> <span>Cahier de texte</span></a></li>
                         <li><a href="02_devoir_projet.html"><i class="fas fa-clipboard-list"></i> <span>Devoirs & Projets</span></a></li>
@@ -102,158 +103,37 @@
                                     <table class="table table-hover table-center mb-0" id="professorsTable">
                                         <thead>
                                             <tr>
-                                                <th>Code</th>
+                                                <!-- <th>Code</th> -->
                                                 <th>Nom complet</th>
                                                 <th>Email</th>
                                                 <th>Téléphone</th>
-                                                <th>Spécialité</th>
+                                                <th>Matière(s) enseignée(s)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><strong>PROF-001</strong></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img class="rounded-circle mr-2" src="assets/img/profiles/avatar-06.jpg" width="35" height="35" alt="Photo">
-                                                        <div>
-                                                            <h6 class="mb-0">Dr. Moussa DIAGNE</h6>
-                                                            <small class="text-muted">Professeur Titulaire</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>moussa.diagne@ensae.edu</td>
-                                                <td>+221 77 111 2222</td>
-                                                <td>
-                                                    <span class="badge badge-info">Statistiques</span>
-                                                    <span class="badge badge-secondary">Économétrie</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>PROF-002</strong></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img class="rounded-circle mr-2" src="assets/img/profiles/avatar-07.jpg" width="35" height="35" alt="Photo">
-                                                        <div>
-                                                            <h6 class="mb-0">Dr. Awa THIAM</h6>
-                                                            <small class="text-muted">Maître de Conférences</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>awa.thiam@ensae.edu</td>
-                                                <td>+221 78 333 4444</td>
-                                                <td>
-                                                    <span class="badge badge-success">Mathématiques</span>
-                                                    <span class="badge badge-warning">Analyse</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>PROF-003</strong></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img class="rounded-circle mr-2" src="assets/img/profiles/avatar-08.jpg" width="35" height="35" alt="Photo">
-                                                        <div>
-                                                            <h6 class="mb-0">Pr. Ibrahima KANE</h6>
-                                                            <small class="text-muted">Professeur Associé</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>ibrahima.kane@ensae.edu</td>
-                                                <td>+221 76 555 6666</td>
-                                                <td>
-                                                    <span class="badge badge-primary">Informatique</span>
-                                                    <span class="badge badge-dark">Programmation</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>PROF-004</strong></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img class="rounded-circle mr-2" src="assets/img/profiles/avatar-09.jpg" width="35" height="35" alt="Photo">
-                                                        <div>
-                                                            <h6 class="mb-0">Dr. Khady SOW</h6>
-                                                            <small class="text-muted">Chargée de Cours</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>khady.sow@ensae.edu</td>
-                                                <td>+221 77 777 8888</td>
-                                                <td>
-                                                    <span class="badge badge-danger">Économie</span>
-                                                    <span class="badge badge-info">Finance</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>PROF-005</strong></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img class="rounded-circle mr-2" src="assets/img/profiles/avatar-10.jpg" width="35" height="35" alt="Photo">
-                                                        <div>
-                                                            <h6 class="mb-0">Dr. Amadou FALL</h6>
-                                                            <small class="text-muted">Maître Assistant</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>amadou.fall@ensae.edu</td>
-                                                <td>+221 78 999 0000</td>
-                                                <td>
-                                                    <span class="badge badge-success">Démographie</span>
-                                                    <span class="badge badge-warning">Sociologie</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>PROF-006</strong></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img class="rounded-circle mr-2" src="assets/img/profiles/avatar-11.jpg" width="35" height="35" alt="Photo">
-                                                        <div>
-                                                            <h6 class="mb-0">Dr. Mariama NDIAYE</h6>
-                                                            <small class="text-muted">Professeur Adjoint</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>mariama.ndiaye@ensae.edu</td>
-                                                <td>+221 76 111 3333</td>
-                                                <td>
-                                                    <span class="badge badge-primary">Data Science</span>
-                                                    <span class="badge badge-secondary">Machine Learning</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>PROF-007</strong></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img class="rounded-circle mr-2" src="assets/img/profiles/avatar-12.jpg" width="35" height="35" alt="Photo">
-                                                        <div>
-                                                            <h6 class="mb-0">Pr. Cheikh GUEYE</h6>
-                                                            <small class="text-muted">Professeur Émérite</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>cheikh.gueye@ensae.edu</td>
-                                                <td>+221 77 444 5555</td>
-                                                <td>
-                                                    <span class="badge badge-danger">Recherche Opérationnelle</span>
-                                                    <span class="badge badge-info">Optimisation</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>PROF-008</strong></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img class="rounded-circle mr-2" src="assets/img/profiles/avatar-13.jpg" width="35" height="35" alt="Photo">
-                                                        <div>
-                                                            <h6 class="mb-0">Dr. Fatou DIOUF</h6>
-                                                            <small class="text-muted">Maître de Conférences</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>fatou.diouf@ensae.edu</td>
-                                                <td>+221 78 666 7777</td>
-                                                <td>
-                                                    <span class="badge badge-success">Actuariat</span>
-                                                    <span class="badge badge-warning">Assurance</span>
-                                                </td>
-                                            </tr>
+                                        {% for prof in professeurs %}
+                                        <tr>
+                                            <td>
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                <h6 class="mb-0">{{ prof.nom }}</h6>
+                                                <small class="text-muted">Professeur</small>
+                                                </div>
+                                            </div>
+                                            </td>
+                                            <td>{{ prof.email }}</td>
+                                            <td>{{ prof.telephone }}</td>
+                                            <td>
+                                            {% for matiere in prof.matieres.all %}
+                                                <span class="badge badge-info">{{ matiere.nom }}</span>
+                                            {% empty %}
+                                                <span class="text-muted">Aucune matière</span>
+                                            {% endfor %}
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr><td colspan="5" class="text-center text-muted">Aucun professeur trouvé.</td></tr>
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -266,11 +146,11 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="{% static 'responsable_filiere/assets/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'responsable_filiere/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'responsable_filiere/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'responsable_filiere/assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'responsable_filiere/assets/js/script.js' %}"></script>
 
     <script>
         function exportProfessors() {

@@ -1,15 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENSAE - Étudiants AS1</title>
-    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" href="{% static 'responsable_classe/assets/img/favicon.png' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/plugins/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'responsable_classe/assets/css/style.css' %}">
+
 </head>
 <body>
     <div class="main-wrapper">
@@ -59,10 +61,12 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li class="menu-title"><span>Menu</span></li>
-                        <li><a href="02_index.html"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
+                        <li><a href="{% url 'dashboard_responsable_classe' %}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a></li>
                         <li><a href="02_matieres.html"><i class="fas fa-book-open"></i> <span>Matières</span></a></li>
                         <li><a href="02_professeurs.html"><i class="fas fa-chalkboard-teacher"></i> <span>Professeurs</span></a></li>
-                        <li class="active"><a href="02_etudiants.html"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a></li>
+                        <li class="active">
+                        <a href="{% url 'etudiants_view' %}"><i class="fas fa-user-graduate"></i> <span>Étudiants</span></a>
+                        </li>
                         <li><a href="02_absences.html"><i class="fas fa-user-times"></i> <span>Absences</span></a></li>
                         <li><a href="02_cahier_texte.html"><i class="fas fa-book"></i> <span>Cahier de texte</span></a></li>
                         <li><a href="02_devoir_projet.html"><i class="fas fa-clipboard-list"></i> <span>Devoirs & Projets</span></a></li>
@@ -109,76 +113,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><strong>AS1-001</strong></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img class="rounded-circle mr-2" src="assets/img/profiles/avatar-01.jpg" width="35" height="35" alt="Photo">
-                                                        <div>
-                                                            <h6 class="mb-0">Aminata DIALLO</h6>
-                                                            <small class="text-muted">1ère année AS</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>aminata.diallo@ensae.edu</td>
-                                                <td>+221 77 123 4567</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>AS1-002</strong></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img class="rounded-circle mr-2" src="assets/img/profiles/avatar-02.jpg" width="35" height="35" alt="Photo">
-                                                        <div>
-                                                            <h6 class="mb-0">Mamadou FALL</h6>
-                                                            <small class="text-muted">1ère année AS</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>mamadou.fall@ensae.edu</td>
-                                                <td>+221 78 234 5678</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>AS1-003</strong></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img class="rounded-circle mr-2" src="assets/img/profiles/avatar-03.jpg" width="35" height="35" alt="Photo">
-                                                        <div>
-                                                            <h6 class="mb-0">Fatou NDIAYE</h6>
-                                                            <small class="text-muted">1ère année AS</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>fatou.ndiaye@ensae.edu</td>
-                                                <td>+221 76 345 6789</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>AS1-004</strong></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img class="rounded-circle mr-2" src="assets/img/profiles/avatar-04.jpg" width="35" height="35" alt="Photo">
-                                                        <div>
-                                                            <h6 class="mb-0">Omar SARR</h6>
-                                                            <small class="text-muted">1ère année AS</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>omar.sarr@ensae.edu</td>
-                                                <td>+221 77 456 7890</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>AS1-005</strong></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img class="rounded-circle mr-2" src="assets/img/profiles/avatar-05.jpg" width="35" height="35" alt="Photo">
-                                                        <div>
-                                                            <h6 class="mb-0">Aïssatou BA</h6>
-                                                            <small class="text-muted">1ère année AS</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>aissatou.ba@ensae.edu</td>
-                                                <td>+221 78 567 8901</td>
-                                            </tr>
+                                        {% for etu in etudiants %}
+                                        <tr>
+                                            <td><strong>{{ etu.matricule }}</strong></td>
+                                            <td>
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                <h6 class="mb-0">{{ etu.prenom }} {{ etu.nom }}</h6>
+                                                <small class="text-muted">{{ etu.classe.nom }}</small>
+                                                </div>
+                                            </div>
+                                            </td>
+                                            <td>{{ etu.email }}</td>
+                                            <td>{{ etu.telephone }}</td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr><td colspan="4" class="text-center text-muted">Aucun étudiant trouvé.</td></tr>
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -191,11 +142,12 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="{% static 'responsable_classe/assets/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'responsable_classe/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'responsable_classe/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'responsable_classe/assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'responsable_classe/assets/js/script.js' %}"></script>
+
 
     <script>
         function exportStudents() {
